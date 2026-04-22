@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小星球宇宙基地</title>
+  <style>
+    :root {
+      --bg: #fff3fb;
+      --bg-soft: #f2edff;
+      --pink: #ff86c5;
+      --violet: #9d8dff;
+      --blue: #78c3ff;
+      --text: #4e4a76;
+      --card: rgba(255, 255, 255, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .stars::before,
+    .stars::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255, 183, 225, 0.85) 1.2px, transparent 2px),
+        radial-gradient(circle, rgba(148, 200, 255, 0.8) 1px, transparent 2px);
+      background-size: 160px 160px, 220px 220px, 260px 260px;
+      background-position: 0 0, 40px 60px, 100px 30px;
+      opacity: 0.45;
+    }
+
+    .stars::after {
+      transform: scale(1.08);
+      opacity: 0.28;
+    }
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 28px auto 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid rgba(157, 141, 255, 0.35);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 16px 30px rgba(125, 114, 188, 0.14);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      font-size: 26px;
+      color: rgba(157, 141, 255, 0.45);
+    }
+
+    .hero::before {
+      left: 18px;
+      top: 12px;
+    }
+
+    .hero::after {
+      right: 20px;
+      bottom: 12px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      color: #725feb;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: 0.06em;
+    }
+
+    .hero p {
+      margin: 0;
+      line-height: 1.8;
+      color: #655f93;
+    }
+
+    .board {
+      background: var(--card);
+      border: 1px solid rgba(120, 195, 255, 0.4);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 16px 30px rgba(125, 114, 188, 0.12);
+    }
+
+    .board-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .board-title {
+      margin: 0;
+      font-size: 20px;
+      color: #4f57d6;
+    }
+
+    .badge {
+      background: linear-gradient(90deg, #ff9bd1, #9ab2ff);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .rank-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .rank-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(157, 141, 255, 0.25);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 12px;
+      padding: 11px 12px;
+    }
+
+    .rank-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .rank-no {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f2ebff;
+      color: #7d6adb;
+      font-weight: 700;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .rank-name {
+      margin: 0;
+      font-size: 14px;
+      color: #59538a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank-vote {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ff6fb9;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>小星球宇宙基地</h1>
+      <p>欢迎来到小星球专属应援空间！这里是实时互动与应援数据聚合地，收集每一份心跳与热爱，让星光在宇宙中持续闪耀。</p>
+    </section>
+
+    <section class="board">
+      <div class="board-head">
+        <h2 class="board-title">CP 排名应援榜</h2>
+        <span class="badge">CP-Ranking</span>
+      </div>
+      <ul class="rank-list">
+        <li class="rank-item">
+          <div class="rank-left">
+            <span class="rank-no">1</span>
+            <p class="rank-name">Origa 星轨联动组</p>
+          </div>
+          <span class="rank-vote">12,860 票</span>
+        </li>
+        <li class="rank-item">
+          <div class="rank-left">
+            <span class="rank-no">2</span>
+            <p class="rank-name">Vega × Altair 光轨组</p>
+          </div>
+          <span class="rank-vote">10,442 票</span>
+        </li>
+        <li class="rank-item">
+          <div class="rank-left">
+            <span class="rank-no">3</span>
+            <p class="rank-name">Orion × Regulus 双核组</p>
+          </div>
+          <span class="rank-vote">9,031 票</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
