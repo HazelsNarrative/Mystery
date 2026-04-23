@@ -1,20 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1300" viewBox="0 0 900 1300" role="img" aria-label="âU*˛">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1300" viewBox="0 0 900 1300" role="img" aria-label="Fan order screenshot">
   <rect width="900" height="1300" fill="#eef2f8"/>
   <rect x="120" y="70" width="660" height="1160" rx="36" fill="#ffffff" stroke="#d7e0ee" stroke-width="4"/>
   <rect x="170" y="150" width="560" height="70" rx="14" fill="#f3f6fb"/>
-  <text x="190" y="196" font-size="34" font-family="Arial, sans-serif" fill="#38485f">¢UÊ≈</text>
+  <text x="190" y="196" font-size="34" font-family="Arial, sans-serif" fill="#38485f">Order Details</text>
   <rect x="170" y="260" width="560" height="280" rx="20" fill="#fafbfe" stroke="#e5eaf4" stroke-width="3"/>
   <rect x="200" y="300" width="180" height="180" rx="14" fill="#d6c9ff"/>
-  <text x="410" y="360" font-size="30" font-family="Arial, sans-serif" fill="#2f3e54">LUMIERE <“</text>
-  <text x="410" y="410" font-size="24" font-family="Arial, sans-serif" fill="#64758d">pœ x1</text>
-  <text x="410" y="455" font-size="24" font-family="Arial, sans-serif" fill="#64758d">/ Vega F°</text>
+  <text x="410" y="360" font-size="30" font-family="Arial, sans-serif" fill="#2f3e54">LUMIERE Gift Set</text>
+  <text x="410" y="410" font-size="24" font-family="Arial, sans-serif" fill="#64758d">Qty x1</text>
+  <text x="410" y="455" font-size="24" font-family="Arial, sans-serif" fill="#64758d">Support Vega Business</text>
   <line x1="170" y1="590" x2="730" y2="590" stroke="#e4eaf5" stroke-width="3"/>
-  <text x="170" y="660" font-size="30" font-family="Arial, sans-serif" fill="#2f3e54">/ÿ—ù</text>
-  <text x="640" y="660" font-size="34" font-family="Arial, sans-serif" fill="#1f2d3f" font-weight="700">•2,688</text>
+  <text x="170" y="660" font-size="30" font-family="Arial, sans-serif" fill="#2f3e54">Paid Amount</text>
+  <text x="640" y="660" font-size="34" font-family="Arial, sans-serif" fill="#1f2d3f" font-weight="700">CNY 2688</text>
   <rect x="170" y="720" width="560" height="120" rx="18" fill="#f4f7fc"/>
-  <text x="190" y="790" font-size="24" font-family="Arial, sans-serif" fill="#607087">UˆÙ2026-03-03 21:08</text>
+  <text x="190" y="790" font-size="24" font-family="Arial, sans-serif" fill="#607087">Order Time: 2026-03-03 21:08</text>
   <rect x="170" y="890" width="560" height="230" rx="18" fill="#f9fbff"/>
-  <text x="190" y="960" font-size="24" font-family="Arial, sans-serif" fill="#607087">¢U∂/ÿü</text>
-  <text x="190" y="1010" font-size="24" font-family="Arial, sans-serif" fill="#607087">iA∂Ú~6</text>
-  <text x="190" y="1060" font-size="24" font-family="Arial, sans-serif" fill="#607087">RUËò£S)Ù•U</text>
+  <text x="190" y="960" font-size="24" font-family="Arial, sans-serif" fill="#607087">Order Status: Paid</text>
+  <text x="190" y="1010" font-size="24" font-family="Arial, sans-serif" fill="#607087">Shipping: Delivered</text>
+  <text x="190" y="1060" font-size="24" font-family="Arial, sans-serif" fill="#607087">Note: Ordered on announcement day.</text>
 </svg>
