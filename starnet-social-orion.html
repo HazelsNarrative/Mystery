@@ -72,7 +72,12 @@
       <article class="post">
         <div class="post-head">Orion · 1 周前</div>
         <p>舞台返图存一下，感谢大家的支持。我们演唱会见。</p>
-        <img class="post-image zoomable" src="./assets/starnet-orion-stage.png" alt="Orion 舞台返图，球衣97号">
+        <img
+          class="post-image zoomable"
+          src="./assets/starnet-orion-stage.png"
+          data-fallback-srcs="./assets/starnet-orion-stage.png|assets/starnet-orion-stage.png|../assets/starnet-orion-stage.png"
+          alt="Orion 舞台返图，球衣97号"
+        >
         <div class="post-stats"><span>转发 3.2w</span><span>赞 11.8w</span><span>评论 9,406</span></div>
       </article>
       <article class="post">
@@ -86,6 +91,16 @@
   <div class="zoom-overlay" id="zoomOverlay"><img id="zoomImage" alt="放大预览"></div>
   <script>
     (function () {
+      document.querySelectorAll("img[data-fallback-srcs]").forEach(function (img) {
+        var candidates = (img.getAttribute("data-fallback-srcs") || "").split("|").filter(Boolean);
+        var idx = candidates.indexOf(img.getAttribute("src"));
+        if (idx < 0) idx = 0;
+        img.addEventListener("error", function () {
+          idx += 1;
+          if (idx < candidates.length) img.src = candidates[idx];
+        });
+      });
+
       var routes = {
         '@constell-orion': './starnet-social-orion.html',
         '@constell-vega': './starnet-social-vega.html',
