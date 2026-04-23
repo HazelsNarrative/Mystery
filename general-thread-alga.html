@@ -73,12 +73,25 @@
     }
     .lp-cmt--op .who { color: #5c4ed4; }
     .lp-cmt p { margin: 0; font-size: 13px; line-height: 1.65; color: #5a5678; }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <article class="wrap">
     <a class="nav-back" href="./general-board.html">← 返回主题列表</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
     <div class="thread-card">
       <p class="lp-thread-kicker">💬 CONSTELL 综合讨论区 · 帖子正文</p>
       <h1 class="lp-thread-title">Alga是真的！！！这次真的被感动了！！！</h1>
@@ -141,5 +154,17 @@
       </div>
     </div>
   </article>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
 </body>
 </html>

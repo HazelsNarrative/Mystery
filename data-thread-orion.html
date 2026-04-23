@@ -71,12 +71,25 @@
       font-size: 12px; font-weight: 800; color: #7d6adb; margin-bottom: 4px;
     }
     .lp-cmt p { margin: 0; font-size: 13px; line-height: 1.65; color: #5a5678; }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <article class="wrap">
     <a class="nav-back" href="./data-board.html">← 返回主题列表</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
     <div class="thread-card">
       <p class="lp-thread-kicker">📊 数据 &amp; 应援区 · 帖子正文</p>
       <h1 class="lp-thread-title">【数据汇总】Orion《RAP STAGE》合作舞台全平台数据整理（持续更新）</h1>
@@ -133,7 +146,24 @@
         <div class="who">小星球6670</div>
         <p>已经三连了！！切号切累了但值得，大家一起冲！！</p>
       </div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt">
+        <div class="who">小星球2419</div>
+        <p>歪个楼，楼主你的id野心很大hhh</p>
+      </div>
     </div>
   </article>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
 </body>
 </html>

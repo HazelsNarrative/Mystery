@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@CONSTELL-Orion | StarNet</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#1d9bf0; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .app { width:min(860px,94vw); margin:0 auto; padding:14px 0 28px; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+    .site-head { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .brand { margin:0; font-size:18px; font-weight:800; color:#243046; }
+    .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
+    .search-wrap { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center; }
+    .search-wrap input { flex:1; border:1px solid #d5deea; border-radius:999px; padding:8px 12px; font-size:13px; }
+    .search-wrap button { border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:#1d9bf0; cursor:pointer; }
+    .search-tip { margin:0; padding:0 16px 12px; font-size:12px; color:#6b7a8d; }
+    .cover { height:180px; position:relative; }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(28,76,161,.25); display:grid; place-items:center; font-weight:800; color:#24407d; }
+    .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); }
+    .name { margin:0; font-size:22px; font-weight:800; }
+    .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
+    .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; }
+    .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); }
+    .stats strong { color:#263a61; }
+    .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
+    .post { padding:14px 18px; border-bottom:1px solid var(--line); }
+    .post:last-child { border-bottom:none; }
+    .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; }
+    .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
+    .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .report-image { margin-top:10px; width:100%; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
+    .post-image { margin-top:10px; width:62%; max-width:360px; border:1px solid #d4ddee; border-radius:12px; display:block; }
+    .tag { color:var(--brand); }
+</style>
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <div class="site-head"><h1 class="brand">StarNet</h1><p class="url">https://starnet.social/CONSTELL-Orion</p></div>
+      <div class="search-wrap">
+        <input id="idSearch" type="search" placeholder="搜索ID（如 @CONSTELL-Vega）" autocomplete="off">
+        <button id="idSearchBtn" type="button">搜索</button>
+      </div>
+      <p class="search-tip" id="searchTip">可搜索：@CONSTELL-Orion / @CONSTELL-Vega / @CONSTELL-Altair / @CONSTELL-Regulus</p>
+
+      <div class="cover" style="background:linear-gradient(120deg,#77c5ff,#4c8fff 45%,#8a6dff)"><div class="avatar" style="background:radial-gradient(circle at 30% 30%,#fff,#a6d7ff 45%,#5f7bff)">O</div></div>
+      <div class="profile">
+        <h2 class="name">Orion</h2>
+        <p class="id">@CONSTELL-Orion</p>
+        <p class="bio">CONSTELL成员</p>
+        <div class="stats"><span><strong>214</strong> 关注</span><span><strong>326.8万</strong> 粉丝</span><span><strong>1,289</strong> 动态</span></div>
+      </div>
+      <h3 class="feed-title">公开动态</h3>
+      <article class="post">
+        <div class="post-head">Orion · 3 小时前</div>
+        <p>今天练习室先到这，大家早点睡。<span class="tag">#归辰倒计时</span></p>
+        <div class="post-stats"><span>转发 1.2w</span><span>赞 3.8w</span><span>评论 2,416</span></div>
+        
+      </article>
+      <article class="post">
+        <div class="post-head">Orion · 昨天</div>
+        <p>下楼买水路过宠物店，差点又把自己拐进去。青柠最近状态很好🐶</p>
+        <div class="post-stats"><span>转发 8,932</span><span>赞 2.6w</span><span>评论 1,209</span></div>
+        
+      </article>
+      <article class="post">
+        <div class="post-head">Orion · 1 周前</div>
+        <p>舞台返图存一下，感谢大家的支持。我们演唱会见。</p>
+        <img class="post-image zoomable" src="file:///Users/hazel/.cursor/projects/Users-hazel-Downloads/assets/image-050efbec-ba95-4300-85a1-b10042912a01.png" alt="Orion 舞台返图，球衣97号">
+        <div class="post-stats"><span>转发 3.2w</span><span>赞 11.8w</span><span>评论 9,406</span></div>
+      </article>
+      <article class="post">
+        <div class="post-head">Orion · 2 天前</div>
+        <p>新 demo 还在改，等我再磨一磨。谢谢一直在。</p>
+        <div class="post-stats"><span>转发 6,107</span><span>赞 1.9w</span><span>评论 836</span></div>
+        
+      </article>
+    </section>
+  </main>
+  <div class="zoom-overlay" id="zoomOverlay"><img id="zoomImage" alt="放大预览"></div>
+  <script>
+    (function () {
+      var routes = {
+        '@constell-orion': './starnet-social-orion.html',
+        '@constell-vega': './starnet-social-vega.html',
+        '@constell-altair': './starnet-social-altair.html',
+        '@constell-regulus': './starnet-social-regulus.html'
+      };
+      function norm(s) { return String(s || '').trim().toLowerCase(); }
+      function run() {
+        var input = document.getElementById('idSearch');
+        var tip = document.getElementById('searchTip');
+        var key = norm(input.value);
+        if (!key) { tip.textContent = '请输入要搜索的ID。'; return; }
+        if (key.indexOf('@') !== 0) key = '@' + key;
+        if (routes[key]) { window.location.href = routes[key]; return; }
+        tip.textContent = '未找到该ID，请检查拼写。';
+      }
+      document.getElementById('idSearchBtn').addEventListener('click', run);
+      document.getElementById('idSearch').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); run(); }
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var overlay = document.getElementById("zoomOverlay");
+      var zoomImage = document.getElementById("zoomImage");
+      if (!overlay || !zoomImage) return;
+      document.querySelectorAll("img.zoomable").forEach(function (img) {
+        img.addEventListener("click", function () {
+          zoomImage.src = img.src;
+          zoomImage.alt = img.alt || "图片放大预览";
+          overlay.classList.add("open");
+        });
+      });
+      overlay.addEventListener("click", function () {
+        overlay.classList.remove("open");
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") overlay.classList.remove("open");
+      });
+    })();
+  </script>
+</body>
+</html>

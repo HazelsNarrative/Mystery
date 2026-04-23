@@ -157,8 +157,14 @@
     .btn-primary {
       background: linear-gradient(90deg, #b8a6ff, #9d8dff);
       color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(157, 141, 255, 0.28);
+    }
+
+    .btn-primary:disabled {
       opacity: 0.55;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     .btn-guest {
@@ -183,11 +189,11 @@
       display: inline-block;
       padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid #d4d0e8;
-      color: #b8b4cf;
-      background: #f0eef9;
+      border: 1px solid #b8aef2;
+      color: #6a5bc0;
+      background: #f7f4ff;
       font-size: 13px;
-      cursor: not-allowed;
+      cursor: pointer;
       user-select: none;
     }
 
@@ -195,6 +201,50 @@
       margin: 8px 0 0;
       font-size: 12px;
       color: #a39ec0;
+    }
+
+    .auth-error {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #e04d7a;
+      min-height: 1.2em;
+    }
+
+    .guest-mode-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(200, 180, 255, 0.45);
+    }
+
+    .guest-mode-note {
+      margin: 0;
+      font-size: 12px;
+      color: #6a6588;
+      font-weight: 600;
+    }
+
+    .guest-mode-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .guest-mode-actions button {
+      border: 1px solid rgba(157, 141, 255, 0.45);
+      background: #fff;
+      color: #6457af;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .quiz-hint {
@@ -645,6 +695,29 @@
       border-color: var(--pink);
       color: #5a4ac4;
     }
+
+    .access-tip {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 120;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: rgba(58, 49, 108, 0.92);
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 10px 22px rgba(60, 50, 110, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .access-tip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -652,6 +725,7 @@
   <main class="wrap">
     <section id="loginPanel" class="panel active">
       <div class="card">
+        <button type="button" class="btn-back-login" id="btnBackForumFromLogin" hidden>← 返回论坛</button>
         <h1 class="site-title">小星球宇宙基地</h1>
         <p class="site-sub">Little Planets · 会员登录</p>
         <div class="form-row">
@@ -662,14 +736,41 @@
           <label for="loginPass">密码</label>
           <input id="loginPass" type="password" placeholder="请输入密码" autocomplete="current-password">
         </div>
+        <p class="auth-error" id="authError"></p>
         <div class="btn-row">
-          <button type="button" class="btn btn-primary" disabled>登录</button>
+          <button type="button" class="btn btn-primary" id="btnLogin">登录</button>
           <button type="button" class="btn btn-guest" id="btnGuest">以游客身份登录</button>
         </div>
         <div class="register-block">
-          <span class="register-btn">注册账号</span>
-          <p class="register-hint">还未开放邀请码注册</p>
+          <button type="button" class="register-btn" id="btnGoRegister">注册账号</button>
+          <p class="register-hint">支持邀请码注册，注册后可使用账号密码登录</p>
         </div>
+      </div>
+    </section>
+
+    <section id="registerPanel" class="panel">
+      <div class="card">
+        <button type="button" class="btn-back-login" id="btnBackFromRegister">← 返回登录</button>
+        <h1 class="site-title">账号注册</h1>
+        <p class="site-sub">填写邀请码后即可创建账号</p>
+        <p class="auth-error" id="registerError"></p>
+        <div class="form-row">
+          <label for="inviteCode">邀请码</label>
+          <input id="inviteCode" type="text" placeholder="请输入邀请码" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <label for="registerUser">用户名</label>
+          <input id="registerUser" type="text" placeholder="请输入用户名" autocomplete="username">
+        </div>
+        <div class="form-row">
+          <label for="registerPass">密码</label>
+          <input id="registerPass" type="password" placeholder="请输入密码" autocomplete="new-password">
+        </div>
+        <div class="form-row">
+          <label for="registerPass2">确认密码</label>
+          <input id="registerPass2" type="password" placeholder="请再次输入密码" autocomplete="new-password">
+        </div>
+        <button type="button" class="btn btn-submit" id="btnRegisterSubmit" style="width:100%">完成注册</button>
       </div>
     </section>
 
@@ -700,6 +801,14 @@
         <h1>小星球宇宙基地</h1>
         <p>✨ CONSTELL 粉丝论坛 · 同好集合地 ✨</p>
       </header>
+
+      <div class="guest-mode-bar" id="guestModeBar" hidden>
+        <p class="guest-mode-note">当前为访客模式：可先浏览社区，登录或注册后可解锁完整论坛功能。</p>
+        <div class="guest-mode-actions">
+          <button type="button" id="btnGuestToLogin">登录</button>
+          <button type="button" id="btnGuestToRegister">注册</button>
+        </div>
+      </div>
 
       <div class="cp-banner" role="region" aria-label="CP 总选活动">
         <span class="cp-sparkle s1" aria-hidden="true">✨</span>
@@ -784,7 +893,7 @@
       <section class="forum-zone">
         <h2 class="zone-title"><span aria-hidden="true">💞</span> 关系区</h2>
         <div class="single-tile-wrap">
-          <button type="button" class="board-tile board-tile--wide">
+          <button type="button" class="board-tile board-tile--wide" id="btnRelationZone">
             <span class="tile-ico" aria-hidden="true">💞</span>
             <span class="tile-body">
               <span class="tile-name">关系研究所（CP 专区）</span>
@@ -799,7 +908,7 @@
       <section class="forum-zone">
         <h2 class="zone-title"><span aria-hidden="true">🌙</span> 休息区</h2>
         <div class="single-tile-wrap">
-          <button type="button" class="board-tile board-tile--chill">
+          <button type="button" class="board-tile board-tile--chill" id="btnRestZone">
             <span class="tile-ico" aria-hidden="true">🌙</span>
             <span class="tile-body">
               <span class="tile-name">小星球休息区（水区）</span>
@@ -832,9 +941,15 @@
     </div>
   </div>
 
+  <div class="access-tip" id="accessTip" role="status" aria-live="polite"></div>
+
   <script>
     (function () {
       var STORAGE_KEY = "lp_forum_unlocked";
+      var MODE_KEY = "lp_forum_mode";
+      var USERS_KEY = "lp_forum_users";
+      var MEMBER_USER_KEY = "lp_forum_member_user";
+      var INVITE_CODE = "JY971208ZWLPX";
 
       var QUIZ = {
         debut: ["0820"],
@@ -885,17 +1000,81 @@
       var mzmClose = document.getElementById("mzmClose");
 
       var loginPanel = document.getElementById("loginPanel");
+      var registerPanel = document.getElementById("registerPanel");
       var quizPanel = document.getElementById("quizPanel");
       var forumPanel = document.getElementById("forumPanel");
+      var btnLogin = document.getElementById("btnLogin");
       var btnGuest = document.getElementById("btnGuest");
+      var btnGoRegister = document.getElementById("btnGoRegister");
+      var btnRegisterSubmit = document.getElementById("btnRegisterSubmit");
+      var btnBackFromRegister = document.getElementById("btnBackFromRegister");
       var btnQuizSubmit = document.getElementById("btnQuizSubmit");
       var btnBackLogin = document.getElementById("btnBackLogin");
+      var btnBackForumFromLogin = document.getElementById("btnBackForumFromLogin");
+      var btnGuestToLogin = document.getElementById("btnGuestToLogin");
+      var btnGuestToRegister = document.getElementById("btnGuestToRegister");
+      var authError = document.getElementById("authError");
+      var registerError = document.getElementById("registerError");
       var quizError = document.getElementById("quizError");
+      var guestModeBar = document.getElementById("guestModeBar");
+      var btnRelationZone = document.getElementById("btnRelationZone");
+      var btnRestZone = document.getElementById("btnRestZone");
+      var accessTip = document.getElementById("accessTip");
+      var accessTipTimer = null;
+      var authOpenedFromForum = false;
 
       function showPanel(id) {
-        [loginPanel, quizPanel, forumPanel].forEach(function (el) {
+        [loginPanel, registerPanel, quizPanel, forumPanel].forEach(function (el) {
           el.classList.toggle("active", el.id === id);
         });
+      }
+
+      function getUsers() {
+        try {
+          return JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function setUsers(users) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function setMode(mode) {
+        sessionStorage.setItem(MODE_KEY, mode);
+        localStorage.setItem(MODE_KEY, mode);
+        guestModeBar.hidden = mode !== "guest";
+      }
+
+      function setMemberUser(username) {
+        if (!username) {
+          sessionStorage.removeItem(MEMBER_USER_KEY);
+          localStorage.removeItem(MEMBER_USER_KEY);
+          return;
+        }
+        sessionStorage.setItem(MEMBER_USER_KEY, username);
+        localStorage.setItem(MEMBER_USER_KEY, username);
+      }
+
+      function showAccessTip(msg) {
+        accessTip.textContent = msg;
+        accessTip.classList.add("show");
+        clearTimeout(accessTipTimer);
+        accessTipTimer = setTimeout(function () {
+          accessTip.classList.remove("show");
+        }, 1800);
+      }
+
+      function refreshAuthBackControls() {
+        btnBackForumFromLogin.hidden = !authOpenedFromForum;
+        btnBackFromRegister.textContent = authOpenedFromForum ? "← 返回论坛" : "← 返回登录";
+      }
+
+      function openAuthPanel(panelId, fromForum) {
+        authOpenedFromForum = !!fromForum;
+        refreshAuthBackControls();
+        showPanel(panelId);
       }
 
       function normalize(s) {
@@ -1050,11 +1229,103 @@
 
       applyMemberUnlocked();
 
-      if (sessionStorage.getItem(STORAGE_KEY) === "1") {
+      if (sessionStorage.getItem(STORAGE_KEY) === "1" || localStorage.getItem(STORAGE_KEY) === "1") {
         showPanel("forumPanel");
+        if (sessionStorage.getItem(MEMBER_USER_KEY) || localStorage.getItem(MEMBER_USER_KEY)) {
+          setMode("member");
+        } else {
+          setMode("guest");
+        }
       }
+      refreshAuthBackControls();
+
+      btnLogin.addEventListener("click", function () {
+        var user = normalize(document.getElementById("loginUser").value);
+        var pass = document.getElementById("loginPass").value;
+        var users = getUsers();
+        authError.textContent = "";
+        if (!user || !pass) {
+          authError.textContent = "请输入用户名和密码。";
+          return;
+        }
+        if (!users[user] || users[user] !== pass) {
+          authError.textContent = "账号或密码错误，请重试。";
+          return;
+        }
+        sessionStorage.setItem(STORAGE_KEY, "1");
+        localStorage.setItem(STORAGE_KEY, "1");
+        setMemberUser(user);
+        setMode("member");
+        authOpenedFromForum = false;
+        refreshAuthBackControls();
+        showPanel("forumPanel");
+      });
+
+      btnGoRegister.addEventListener("click", function () {
+        registerError.textContent = "";
+        openAuthPanel("registerPanel", false);
+      });
+
+      btnBackForumFromLogin.addEventListener("click", function () {
+        authOpenedFromForum = false;
+        refreshAuthBackControls();
+        showPanel("forumPanel");
+      });
+
+      btnBackFromRegister.addEventListener("click", function () {
+        if (authOpenedFromForum) {
+          authOpenedFromForum = false;
+          refreshAuthBackControls();
+          showPanel("forumPanel");
+          return;
+        }
+        openAuthPanel("loginPanel", false);
+      });
+
+      btnRegisterSubmit.addEventListener("click", function () {
+        var invite = normalize(document.getElementById("inviteCode").value);
+        var user = normalize(document.getElementById("registerUser").value);
+        var pass = document.getElementById("registerPass").value;
+        var pass2 = document.getElementById("registerPass2").value;
+        var users = getUsers();
+        registerError.textContent = "";
+
+        if (!invite || !user || !pass || !pass2) {
+          registerError.textContent = "请完整填写注册信息。";
+          return;
+        }
+        if (invite !== INVITE_CODE) {
+          registerError.textContent = "邀请码错误，请检查后重试。";
+          return;
+        }
+        if (user.length < 2) {
+          registerError.textContent = "用户名至少 2 个字符。";
+          return;
+        }
+        if (pass.length < 4) {
+          registerError.textContent = "密码至少 4 位。";
+          return;
+        }
+        if (pass !== pass2) {
+          registerError.textContent = "两次输入的密码不一致。";
+          return;
+        }
+        if (users[user]) {
+          registerError.textContent = "该用户名已被注册。";
+          return;
+        }
+
+        users[user] = pass;
+        setUsers(users);
+        document.getElementById("loginUser").value = user;
+        document.getElementById("loginPass").value = "";
+        authError.textContent = "注册成功，请使用新账号登录。";
+        openAuthPanel("loginPanel", authOpenedFromForum);
+      });
 
       btnGuest.addEventListener("click", function () {
+        setMemberUser("");
+        setMode("guest");
         showPanel("quizPanel");
         quizError.textContent = "";
       });
@@ -1062,6 +1333,28 @@
       btnBackLogin.addEventListener("click", function () {
         showPanel("loginPanel");
         quizError.textContent = "";
+      });
+
+      btnGuestToLogin.addEventListener("click", function () {
+        openAuthPanel("loginPanel", true);
+      });
+
+      btnGuestToRegister.addEventListener("click", function () {
+        openAuthPanel("registerPanel", true);
+      });
+
+      btnRelationZone.addEventListener("click", function () {
+        if ((sessionStorage.getItem(MODE_KEY) || "guest") === "guest") {
+          showAccessTip("访客模式下暂不可查看关系区，请登录后访问。");
+          return;
+        }
+      });
+
+      btnRestZone.addEventListener("click", function () {
+        if ((sessionStorage.getItem(MODE_KEY) || "guest") === "guest") {
+          showAccessTip("访客模式下暂不可查看休息区，请登录后访问。");
+          return;
+        }
       });
 
       btnQuizSubmit.addEventListener("click", function () {
@@ -1088,6 +1381,9 @@
         }
 
         sessionStorage.setItem(STORAGE_KEY, "1");
+        localStorage.setItem(STORAGE_KEY, "1");
+        setMemberUser("");
+        setMode("guest");
         showPanel("forumPanel");
       });
     })();

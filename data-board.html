@@ -96,12 +96,25 @@
       font-size: 11px; color: #9b94c0; font-weight: 600;
     }
     .pin { color: #e07bb8; font-weight: 800; }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <a class="nav-back" href="./littleplanets.html">← 返回论坛首页</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
     <header class="board-head">
       <h1>📊 数据 &amp; 应援区</h1>
       <p>打投教程 · 实绩整理 · 联动控评</p>
@@ -113,7 +126,7 @@
     <div class="thread-list">
       <a class="thread-row" href="./data-thread-orion.html">
         <h2>【数据汇总】Orion《RAP STAGE》合作舞台全平台数据整理（持续更新）</h2>
-        <p class="thread-excerpt">《Pulse》合作舞台 · RAP STAGE 全平台战报一帖汇总。实时数据：音源 435.2 万+、直拍 768.4 万+、热搜 TOP1……</p>
+        <p class="thread-excerpt">《Pulse》合作舞台 · RAP STAGE 全平台战报一帖汇总，新粉可跟做～</p>
         <div class="thread-meta">
           <span>楼主：青柠的妈妈</span>
           <span>发帖 7/12 21:30</span>
@@ -124,5 +137,17 @@
       </a>
     </div>
   </div>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
 </body>
 </html>

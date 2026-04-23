@@ -107,12 +107,40 @@
       letter-spacing: 0.06em;
       vertical-align: middle;
     }
+    .member-only-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #8a6dff, #4f81df);
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+    }
+    .member-only-thread {
+      display: none;
+    }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <a class="nav-back" href="./littleplanets.html">← 返回论坛首页</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
     <header class="board-head">
       <h1>💬 CONSTELL 综合讨论区</h1>
       <p>闲聊 · 吐槽 · 团魂发电</p>
@@ -122,9 +150,29 @@
       <span class="board-latest">LATEST</span>
     </div>
     <div class="thread-list">
+      <a class="thread-row member-only-thread" href="./general-thread-members-only-silence.html">
+        <h2><span class="member-only-tag">会员可见</span>他们这周到底在干嘛？？已经一周没营业了吧？？？</h2>
+        <p class="thread-excerpt">有人注意到吗，CONSTELL这周完全没有营业……一周了吧？？一个人都没出现。</p>
+        <div class="thread-meta">
+          <span>楼主：小星球7132</span>
+          <span>发帖 8/12 22:18</span>
+          <span>回复 276</span>
+          <span>浏览 21.4w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="./general-thread-invite-62.html">
+        <h2>【限时开放】第62期注册邀请码发布（07.20-08.20）</h2>
+        <p class="thread-excerpt">第62期注册邀请码现已开放。本期邀请码为组合相关信息拼接，请按提示规则填写……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球0001（站务号）</span>
+          <span>发帖 7/20 09:30</span>
+          <span>回复 138</span>
+          <span>浏览 11.2w+</span>
+        </div>
+      </a>
       <a class="thread-row" href="./general-thread-job-brainstorm.html">
         <h2><span class="hot-tag">HOT</span>你们觉得CONSTELL如果不做偶像会去干嘛啊？</h2>
-        <p class="thread-excerpt">脑洞帖：宠物店、茶馆、舞室、建筑与温哥华王哥梗齐飞，笑点和情绪点都很密。</p>
+        <p class="thread-excerpt">突然在想，如果四子没有当爱豆的话，现在会在做什么啊？感觉他们性格都挺不一样的……</p>
         <div class="thread-meta">
           <span>楼主：小星球4721</span>
           <span>发帖 5/26 22:41</span>
@@ -134,7 +182,7 @@
       </a>
       <a class="thread-row" href="./general-thread-alga.html">
         <h2>Alga是真的！！！这次真的被感动了！！！</h2>
-        <p class="thread-excerpt">Altair 直播唱 Vega 个人单曲、纪念日细节……楼内对分区与节奏也有讨论，附楼主回应。</p>
+        <p class="thread-excerpt">我真的要说一句Alga这次太真了😭😭😭 刚刚Altair直播的时候唱了Vega那首个人单曲……</p>
         <div class="thread-meta">
           <span>楼主：小星球2147</span>
           <span>发帖 5/18 20:12</span>
@@ -144,5 +192,25 @@
       </a>
     </div>
   </div>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      var isMember = !!(sessionStorage.getItem("lp_forum_member_user") || localStorage.getItem("lp_forum_member_user"));
+      document.querySelectorAll(".member-only-thread").forEach(function (el) {
+        el.style.display = isMember ? "block" : "none";
+      });
+    })();
+  </script>
 </body>
 </html>

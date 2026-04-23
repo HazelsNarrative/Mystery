@@ -90,12 +90,25 @@
       display: flex; flex-wrap: wrap; gap: 10px;
       font-size: 11px; color: #9b94c0; font-weight: 600;
     }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <a class="nav-back" href="./littleplanets.html">← 返回论坛首页</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
     <header class="board-head">
       <h1>📢 官方公告区</h1>
       <p>行程 · 声明 · 重要通知</p>
@@ -107,7 +120,7 @@
     <div class="thread-list">
       <a class="thread-row" href="./notice-thread-regulus-drama.html">
         <h2>【公告】关于Regulus缺席电视剧《星际回响》发布会的说明</h2>
-        <p class="thread-excerpt">身体原因缺席发布会，官方称检查与恢复中；楼内现骨科爆料、练舞伤猜测与旧视频回忆向讨论。</p>
+        <p class="thread-excerpt">因身体原因，CONSTELL成员Regulus将缺席原定出席的电视剧《星际回响》发布会活动……</p>
         <div class="thread-meta">
           <span>楼主：小星球0001（站务号）</span>
           <span>发帖 9/15 11:20</span>
@@ -117,7 +130,7 @@
       </a>
       <a class="thread-row" href="./notice-thread-guichen.html">
         <h2>【汇总】CONSTELL五周年纪念演唱会《归辰》信息整理（持续更新）</h2>
-        <p class="thread-excerpt">开票、官方购票入口、演出时间地点与已知信息一站汇总，评论区同步蹲守五周年成员舞台。</p>
+        <p class="thread-excerpt">给大家整理一下目前已公开的《归辰》演唱会相关信息，方便统一查看📌</p>
         <div class="thread-meta">
           <span>楼主：小星球0001（站务号）</span>
           <span>发帖 6/22 20:10</span>
@@ -127,7 +140,7 @@
       </a>
       <a class="thread-row" href="./notice-thread-summer-games.html">
         <h2>【官方公告】CONSTELL确认担任亚洲夏季青少年运动会压轴表演嘉宾</h2>
-        <p class="thread-excerpt">闭幕式压轴舞台，宇宙叙事风格呈现；歌单与具体形式待官宣。楼内有 Altair 向讨论与站外焦虑。</p>
+        <p class="thread-excerpt">据官方消息，CONSTELL已确认将作为压轴表演嘉宾，出席本届亚洲夏季青少年运动会闭幕式舞台……</p>
         <div class="thread-meta">
           <span>楼主：小星球0001（站务号）</span>
           <span>发帖 8/2 10:18</span>
@@ -137,5 +150,17 @@
       </a>
     </div>
   </div>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
 </body>
 </html>
