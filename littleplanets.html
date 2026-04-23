@@ -415,6 +415,7 @@
     }
 
     .member-tile {
+      position: relative;
       border-radius: 16px;
       padding: 14px;
       text-align: center;
@@ -428,6 +429,122 @@
 
     .member-tile:hover {
       transform: scale(1.02);
+    }
+
+    .member-tile--unlocked {
+      box-shadow: 0 0 0 2px rgba(120, 255, 160, 0.55) inset, 0 4px 14px rgba(100, 200, 140, 0.2);
+    }
+
+    .member-tile--unlocked::after {
+      content: "✓";
+      position: absolute;
+      right: 8px;
+      top: 6px;
+      font-size: 12px;
+      color: #3cb371;
+      font-weight: 800;
+    }
+
+    .member-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(40, 35, 70, 0.45);
+    }
+
+    .member-modal.is-open {
+      display: flex;
+    }
+
+    .member-modal-content {
+      width: min(400px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: linear-gradient(180deg, #fff9fe, #f2f0ff);
+      border: 2px solid rgba(200, 160, 255, 0.6);
+      border-radius: 20px;
+      padding: 20px 20px 16px;
+      box-shadow: 0 20px 40px rgba(120, 90, 180, 0.25);
+    }
+
+    .member-modal-content h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #5c4db2;
+    }
+
+    .mzm-question {
+      margin: 0 0 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #5a5180;
+    }
+
+    .mzm-hint {
+      margin: 0 0 8px;
+      font-size: 12px;
+      color: #8b84a8;
+    }
+
+    .mzm-welcome {
+      margin: 0 0 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #4a4a6e;
+    }
+
+    .mzm-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(157, 141, 255, 0.5);
+      font-size: 14px;
+      font-family: inherit;
+      margin-bottom: 6px;
+    }
+
+    .mzm-error {
+      min-height: 1.2em;
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: #e04d7a;
+    }
+
+    .mzm-btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .mzm-btns button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .mzm-cancel {
+      background: #eee8ff;
+      color: #6a5a9a;
+    }
+
+    .mzm-ok {
+      background: linear-gradient(90deg, #ff9bd1, #9d8dff);
+      color: #fff;
+    }
+
+    .mzm-close {
+      width: 100%;
+      background: linear-gradient(90deg, #9d8dff, #78c3ff);
+      color: #fff;
     }
 
     .member-tile--orion {
@@ -484,6 +601,16 @@
     .board-tile--chill {
       border-color: rgba(120, 200, 255, 0.55);
       background: linear-gradient(180deg, #f6fcff, #eef8ff);
+    }
+
+    a.board-tile--link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @media (max-width: 520px) {
@@ -593,34 +720,34 @@
       <section class="forum-zone">
         <h2 class="zone-title"><span aria-hidden="true">🌠</span> 主区</h2>
         <div class="board-grid">
-          <button type="button" class="board-tile">
+          <a class="board-tile board-tile--link" href="./notice-board.html">
             <span class="tile-ico" aria-hidden="true">📢</span>
             <span class="tile-body">
               <span class="tile-name">官方公告区</span>
               <span class="tile-meta">行程 · 声明 · 重要通知</span>
             </span>
-          </button>
-          <button type="button" class="board-tile">
+          </a>
+          <a class="board-tile board-tile--link" href="./general-board.html">
             <span class="tile-ico" aria-hidden="true">💬</span>
             <span class="tile-body">
               <span class="tile-name">CONSTELL 综合讨论区</span>
               <span class="tile-meta">闲聊 · 吐槽 · 团魂发电</span>
             </span>
-          </button>
-          <button type="button" class="board-tile">
+          </a>
+          <a class="board-tile board-tile--link" href="./material-board.html">
             <span class="tile-ico" aria-hidden="true">🎬</span>
             <span class="tile-body">
               <span class="tile-name">官方物料整理区</span>
               <span class="tile-meta">直拍 · 图包 · 时间线</span>
             </span>
-          </button>
-          <button type="button" class="board-tile">
+          </a>
+          <a class="board-tile board-tile--link" href="./data-board.html">
             <span class="tile-ico" aria-hidden="true">📊</span>
             <span class="tile-body">
               <span class="tile-name">数据 &amp; 应援区</span>
               <span class="tile-meta">打投教程 · 实绩 · 联动</span>
             </span>
-          </button>
+          </a>
         </div>
       </section>
 
@@ -629,22 +756,22 @@
       <section class="forum-zone">
         <h2 class="zone-title"><span aria-hidden="true">🪐</span> 成员区</h2>
         <div class="member-grid">
-          <button type="button" class="member-tile member-tile--orion">
+          <button type="button" class="member-tile member-tile--orion" data-mzone="orion">
             <span class="m-emoji" aria-hidden="true">🎯</span>
             <span class="m-name">Orion</span>
             <span class="m-sub">星际猎手</span>
           </button>
-          <button type="button" class="member-tile member-tile--vega">
+          <button type="button" class="member-tile member-tile--vega" data-mzone="vega">
             <span class="m-emoji" aria-hidden="true">💫</span>
             <span class="m-name">Vega</span>
             <span class="m-sub">陨星王子</span>
           </button>
-          <button type="button" class="member-tile member-tile--altair">
+          <button type="button" class="member-tile member-tile--altair" data-mzone="altair">
             <span class="m-emoji" aria-hidden="true">✉️</span>
             <span class="m-name">Altair</span>
             <span class="m-sub">银河信使</span>
           </button>
-          <button type="button" class="member-tile member-tile--regulus">
+          <button type="button" class="member-tile member-tile--regulus" data-mzone="regulus">
             <span class="m-emoji" aria-hidden="true">⚡</span>
             <span class="m-name">Regulus</span>
             <span class="m-sub">寰宇异端</span>
@@ -684,6 +811,27 @@
     </section>
   </main>
 
+  <div id="memberZoneModal" class="member-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mzmTitle">
+    <div class="member-modal-content">
+      <h3 id="mzmTitle">分区验证</h3>
+      <p class="mzm-hint">👉 验证问题：</p>
+      <p id="mzmQuestion" class="mzm-question"></p>
+      <p class="mzm-hint" style="margin-top:10px;opacity:0.85">⸻</p>
+      <div id="mzmVerifyBlock">
+        <input id="mzmInput" class="mzm-input" type="text" autocomplete="off" placeholder="在此输入答案">
+        <p id="mzmError" class="mzm-error"></p>
+        <div class="mzm-btns">
+          <button type="button" class="mzm-cancel" id="mzmCancel">取消</button>
+          <button type="button" class="mzm-ok" id="mzmSubmit">提交</button>
+        </div>
+      </div>
+      <div id="mzmWelcomeBlock" hidden>
+        <p id="mzmWelcome" class="mzm-welcome"></p>
+        <button type="button" class="mzm-close" id="mzmClose">好哒</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
       var STORAGE_KEY = "lp_forum_unlocked";
@@ -693,6 +841,48 @@
         color: ["极光蓝紫"],
         title: ["StarlitDrift"]
       };
+
+      // 成员分区：请把 answers 改为你定的正确答案（可写多个同义词/写法）
+      var MEMBER_ZONE_CONFIG = {
+        orion: {
+          displayName: "Orion",
+          question: "Orion曾提到自己养过一只拉布拉多，它的名字是？",
+          inputMode: "text",
+          answers: ["青柠"]
+        },
+        vega: {
+          displayName: "Vega",
+          question: "Vega第一支个人单曲的发行日期是？（四位数字）",
+          inputMode: "fourDigits",
+          answers: ["0303"]
+        },
+        altair: {
+          displayName: "Altair",
+          question: "Altair在少年时期曾练习哪项运动，并获得过青少年运动会金牌？",
+          inputMode: "text",
+          answers: ["速度滑冰"]
+        },
+        regulus: {
+          displayName: "Regulus",
+          question: "Regulus最初在网络上走红时使用的网名是？",
+          inputMode: "text",
+          answers: ["wilder", "Wilder"]
+        }
+      };
+
+      var MZONE_KEY = "lp_mzone_";
+      var currentMzone = null;
+      var memberZoneModal = document.getElementById("memberZoneModal");
+      var mzmTitle = document.getElementById("mzmTitle");
+      var mzmQuestion = document.getElementById("mzmQuestion");
+      var mzmVerifyBlock = document.getElementById("mzmVerifyBlock");
+      var mzmWelcomeBlock = document.getElementById("mzmWelcomeBlock");
+      var mzmInput = document.getElementById("mzmInput");
+      var mzmError = document.getElementById("mzmError");
+      var mzmWelcome = document.getElementById("mzmWelcome");
+      var mzmCancel = document.getElementById("mzmCancel");
+      var mzmSubmit = document.getElementById("mzmSubmit");
+      var mzmClose = document.getElementById("mzmClose");
 
       var loginPanel = document.getElementById("loginPanel");
       var quizPanel = document.getElementById("quizPanel");
@@ -723,6 +913,142 @@
           return normalize(a) === v || normalizeLoose(a) === loose;
         });
       }
+
+      function mzoneStorageKey(id) {
+        return MZONE_KEY + id;
+      }
+
+      function isMzoneUnlocked(id) {
+        return sessionStorage.getItem(mzoneStorageKey(id)) === "1";
+      }
+
+      function setMzoneUnlocked(id) {
+        sessionStorage.setItem(mzoneStorageKey(id), "1");
+        applyMemberUnlocked();
+      }
+
+      function applyMemberUnlocked() {
+        document.querySelectorAll("[data-mzone]").forEach(function (btn) {
+          var id = btn.getAttribute("data-mzone");
+          btn.classList.toggle("member-tile--unlocked", isMzoneUnlocked(id));
+        });
+      }
+
+      function memberZoneUrl(id) {
+        return "./member-zone-" + id + ".html";
+      }
+
+      function openMzoneModal(id) {
+        var cfg = MEMBER_ZONE_CONFIG[id];
+        if (!cfg) {
+          return;
+        }
+        if (isMzoneUnlocked(id)) {
+          window.location.href = memberZoneUrl(id);
+          return;
+        }
+        currentMzone = id;
+        mzmTitle.textContent = cfg.displayName + " 分区";
+        mzmQuestion.textContent = cfg.question;
+        mzmError.textContent = "";
+        mzmInput.value = "";
+        mzmInput.removeAttribute("maxlength");
+        mzmInput.removeAttribute("inputmode");
+        mzmInput.placeholder = "在此输入答案";
+        if (cfg.inputMode === "fourDigits") {
+          mzmInput.setAttribute("maxlength", "4");
+          mzmInput.setAttribute("inputmode", "numeric");
+          mzmInput.placeholder = "四位数字，如 0101";
+        }
+        if (isMzoneUnlocked(id)) {
+          mzmVerifyBlock.hidden = true;
+          mzmWelcomeBlock.hidden = false;
+          mzmWelcome.textContent =
+            "你已通过 " +
+            cfg.displayName +
+            " 分区的身份验证。可在此继续浏览本区示意内容～";
+        } else {
+          mzmVerifyBlock.hidden = false;
+          mzmWelcomeBlock.hidden = true;
+        }
+        memberZoneModal.classList.add("is-open");
+        memberZoneModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        if (isMzoneUnlocked(id)) {
+          mzmClose.focus();
+        } else {
+          mzmInput.focus();
+        }
+      }
+
+      function closeMzoneModal() {
+        memberZoneModal.classList.remove("is-open");
+        memberZoneModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        currentMzone = null;
+        mzmError.textContent = "";
+      }
+
+      function trySubmitMzone() {
+        if (!currentMzone) {
+          return;
+        }
+        var cfg = MEMBER_ZONE_CONFIG[currentMzone];
+        var raw = mzmInput.value;
+        var ok = false;
+        if (cfg.inputMode === "fourDigits") {
+          var d = normalizeLoose(raw).replace(/\D/g, "");
+          if (d.length !== 4) {
+            mzmError.textContent = "请填写四位数字，例如 0101。";
+            return;
+          }
+          ok = cfg.answers.some(function (a) {
+            return normalizeLoose(a).replace(/\D/g, "") === d;
+          });
+        } else {
+          ok = checkAnswer(raw, cfg.answers);
+        }
+        if (!ok) {
+          mzmError.textContent = "答案不正确，请再试一次。";
+          return;
+        }
+        var targetZone = currentMzone;
+        setMzoneUnlocked(targetZone);
+        closeMzoneModal();
+        window.location.href = memberZoneUrl(targetZone);
+      }
+
+      mzmCancel.addEventListener("click", closeMzoneModal);
+      mzmClose.addEventListener("click", closeMzoneModal);
+      mzmSubmit.addEventListener("click", trySubmitMzone);
+      mzmInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && mzmVerifyBlock && !mzmVerifyBlock.hidden) {
+          e.preventDefault();
+          trySubmitMzone();
+        }
+      });
+
+      memberZoneModal.addEventListener("click", function (e) {
+        if (e.target === memberZoneModal) {
+          closeMzoneModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "Escape" || !memberZoneModal.classList.contains("is-open")) {
+          return;
+        }
+        e.preventDefault();
+        closeMzoneModal();
+      });
+
+      document.querySelectorAll("[data-mzone]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          openMzoneModal(btn.getAttribute("data-mzone"));
+        });
+      });
+
+      applyMemberUnlocked();
 
       if (sessionStorage.getItem(STORAGE_KEY) === "1") {
         showPanel("forumPanel");

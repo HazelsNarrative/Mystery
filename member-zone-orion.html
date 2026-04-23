@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orion个人论坛 - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+    .nav-back {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #6b5bd4;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .card {
+      border-radius: 18px;
+      border: 2px solid rgba(200, 170, 255, 0.55);
+      background: linear-gradient(180deg, #fffdf9, #f6f0ff);
+      box-shadow: 0 12px 32px rgba(100, 80, 160, 0.15);
+      padding: 22px 18px;
+    }
+    h1 { margin: 0 0 8px; font-size: 22px; color: #4a3d7a; }
+    p { margin: 0; line-height: 1.8; color: #5a5678; }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="wrap">
+    <a class="nav-back" href="./littleplanets.html">← 返回小星球宇宙基地</a>
+    <section class="card">
+      <h1>Orion 个人论坛</h1>
+      <p>验证通过，已进入 Orion 分区。<br>本区内容建设中，敬请期待。</p>
+    </section>
+  </main>
+</body>
+</html>

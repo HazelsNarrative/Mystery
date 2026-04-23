@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONSTELL 官网</title>
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-soft: #0c1020;
+      --text: #eef2ff;
+      --gold: #d5c29a;
+      --gold-soft: #8d7a54;
+      --line: rgba(213, 194, 154, 0.3);
+      --card: rgba(255, 255, 255, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(139, 122, 84, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 0%, rgba(122, 147, 188, 0.12), transparent 35%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .site-header {
+      padding: 22px 28px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand {
+      margin: 0;
+      letter-spacing: 0.22em;
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 20px;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .tabs-wrap {
+      width: min(1100px, 92vw);
+      margin: 0 auto 16px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .tab {
+      color: var(--text);
+      border: 1px solid rgba(213, 194, 154, 0.35);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .tab:hover,
+    .tab.active {
+      color: #111;
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      width: min(1100px, 92vw);
+      margin: 28px auto 22px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.42);
+      position: relative;
+    }
+
+    .hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 6, 10, 0.5), transparent 40%);
+      pointer-events: none;
+    }
+
+    .content-stage {
+      width: min(1100px, 92vw);
+      margin: 0 auto 40px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 22px;
+      display: none;
+      min-height: 170px;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    .panel p {
+      margin: 0;
+      color: #c3c8d4;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .notice-title {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(213, 194, 154, 0.28);
+    }
+
+    .notice-body p {
+      margin-top: 0;
+      margin-bottom: 16px;
+      line-height: 1.95;
+      color: #d6dbea;
+      font-size: 15px;
+    }
+
+    .notice-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .signature {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(213, 194, 154, 0.35);
+      text-align: right;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      font-size: 13px;
+    }
+
+    .updates-tools {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .search-wrap {
+      width: min(640px, 92%);
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(213, 194, 154, 0.28);
+      border-radius: 999px;
+      padding: 8px;
+    }
+
+    .search-wrap input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-wrap input::placeholder {
+      color: #97a0b6;
+    }
+
+    .search-wrap button {
+      border: none;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #1c1c1c;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .news-item {
+      border: 1px solid rgba(213, 194, 154, 0.26);
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .news-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(213, 194, 154, 0.6);
+    }
+
+    .news-item h4 {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .news-item p {
+      margin: 0;
+      color: #aeb6cb;
+      font-size: 13px;
+    }
+
+    .updates-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .news-item.is-hidden {
+      display: none;
+    }
+
+    .news-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 30;
+    }
+
+    .news-modal.open {
+      display: flex;
+    }
+
+    .news-modal-content {
+      width: min(820px, 94vw);
+      max-height: 82vh;
+      overflow: auto;
+      background: linear-gradient(180deg, #101523 0%, #0a0d16 100%);
+      border: 1px solid rgba(213, 194, 154, 0.35);
+      border-radius: 14px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 26px 44px rgba(0, 0, 0, 0.48);
+    }
+
+    .news-modal-content h3 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      color: var(--gold);
+      line-height: 1.5;
+    }
+
+    .news-modal-content p {
+      margin: 0 0 14px;
+      color: #d6dbea;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .modal-close {
+      margin-top: 10px;
+      border: 1px solid rgba(213, 194, 154, 0.45);
+      background: transparent;
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .calendar-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      border: 1px solid rgba(213, 194, 154, 0.28);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      padding: 16px;
+    }
+
+    .calendar-head {
+      text-align: center;
+      margin-bottom: 14px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .calendar-week,
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .calendar-week span {
+      text-align: center;
+      color: #aeb6cb;
+      font-size: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .day {
+      position: relative;
+      min-height: 92px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      background: rgba(9, 12, 22, 0.65);
+      padding: 7px 8px 8px;
+      color: #d7dded;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .day-num {
+      font-size: 14px;
+      font-weight: 600;
+      color: #eef2ff;
+      line-height: 1.2;
+    }
+
+    .day-events {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .evt {
+      font-size: 10px;
+      line-height: 1.35;
+      padding: 3px 5px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      word-break: break-all;
+    }
+
+    .evt-prep {
+      color: #aeb6cb;
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .evt-concert {
+      color: #f0dcb0;
+      background: rgba(213, 194, 154, 0.12);
+      border-color: rgba(213, 194, 154, 0.35);
+      font-weight: 600;
+    }
+
+    .evt-cancelled-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 3px 5px;
+      border-radius: 4px;
+      background: rgba(180, 80, 90, 0.12);
+      border: 1px dashed rgba(232, 120, 130, 0.45);
+    }
+
+    .evt-cancelled {
+      font-size: 10px;
+      color: #e8a0a8;
+      text-decoration: line-through;
+      text-decoration-color: rgba(232, 140, 150, 0.85);
+    }
+
+    .evt-cancel-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #ffb4bc;
+      align-self: flex-start;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(120, 30, 40, 0.55);
+      border: 1px solid rgba(255, 150, 160, 0.35);
+    }
+
+    .day.empty {
+      border-color: transparent;
+      background: transparent;
+      min-height: 0;
+      padding: 0;
+    }
+
+    .day.marked::after {
+      content: "✦";
+      position: absolute;
+      right: 6px;
+      top: 5px;
+      color: var(--gold);
+      font-size: 12px;
+      text-shadow: 0 0 8px rgba(213, 194, 154, 0.65);
+      pointer-events: none;
+    }
+
+    .day--concert {
+      border-color: rgba(213, 194, 154, 0.22);
+      background: rgba(213, 194, 154, 0.06);
+    }
+
+    .shop-title {
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(213, 194, 154, 0.3);
+      font-size: 19px;
+      letter-spacing: 0.04em;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      position: relative;
+      border: 1px solid rgba(213, 194, 154, 0.26);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      border: 1px dashed rgba(213, 194, 154, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #95a0b8;
+      font-size: 13px;
+      margin-bottom: 12px;
+      background: rgba(11, 14, 26, 0.7);
+    }
+
+    .product-name {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .product-price {
+      margin: auto 0 0;
+      color: #f0dcb0;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(213, 194, 154, 0.42);
+      padding: 8px 11px;
+      letter-spacing: 0.04em;
+      background: rgba(10, 14, 24, 0.86);
+      border-radius: 8px;
+      width: fit-content;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-points {
+      margin: 0;
+      padding-left: 18px;
+      color: #d0d7e9;
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 110px;
+    }
+
+    .cart-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(213, 194, 154, 0.45);
+      background: rgba(10, 14, 24, 0.82);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .about-intro {
+      margin-bottom: 30px;
+    }
+
+    .member-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .member-card {
+      max-width: 760px;
+      margin: 0;
+      border: 1px solid rgba(213, 194, 154, 0.28);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 18px;
+    }
+
+    .member-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border: 1px dashed rgba(213, 194, 154, 0.5);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ba6be;
+      font-size: 13px;
+      background: rgba(9, 12, 22, 0.72);
+    }
+
+    .member-name {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-size: 26px;
+      letter-spacing: 0.04em;
+    }
+
+    .member-tagline {
+      margin: 0 0 14px;
+      color: #d7def0;
+      line-height: 1.9;
+      font-size: 15px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(213, 194, 154, 0.26);
+    }
+
+    .member-meta {
+      margin: 0;
+      color: #cfd7ea;
+      line-height: 1.95;
+      font-size: 14px;
+    }
+
+    .member-meta strong {
+      color: var(--gold);
+      font-weight: 600;
+      margin-right: 8px;
+      display: inline-block;
+      min-width: 86px;
+    }
+
+    .community-wrap {
+      border: 1px solid rgba(213, 194, 154, 0.26);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+    }
+
+    .community-boardbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: #9ca8c2;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 11, 20, 0.45);
+    }
+
+    .community-boardbar .board-name {
+      color: #d7def0;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .community-boardbar .board-latest {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .thread-list {
+      padding: 8px 0;
+    }
+
+    .thread-item {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .thread-item:last-child {
+      border-bottom: none;
+    }
+
+    .thread-meta {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      color: #9ca8c2;
+      font-size: 12px;
+    }
+
+    .thread-user {
+      color: #f6e4be;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(213, 194, 154, 0.45);
+      background: rgba(213, 194, 154, 0.12);
+    }
+
+    .thread-body p {
+      margin: 0 0 8px;
+      color: #d3daec;
+      line-height: 1.8;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    .thread-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .thread-body a {
+      color: #8fb4ff;
+      text-decoration: none;
+    }
+
+    .thread-body a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 860px) {
+      .site-header {
+        padding: 18px 14px 6px;
+      }
+
+      .tabs {
+        justify-content: flex-start;
+      }
+
+      .shop-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">CONSTELL OFFICIAL</h1>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="./concert-poster.png" alt="CONSTELL 演唱会海报">
+    </section>
+
+    <section class="tabs-wrap">
+      <nav class="tabs">
+        <button class="tab active" data-tab="tickets">购票入口 (Tickets)</button>
+        <button class="tab" data-tab="about">组合介绍 (About)</button>
+        <button class="tab" data-tab="updates">组合动态 (Updates)</button>
+        <button class="tab" data-tab="community">粉丝留言 (Community)</button>
+        <button class="tab" data-tab="schedule">行程安排 (Schedule)</button>
+        <button class="tab" data-tab="shop">官方商城 (Shop)</button>
+      </nav>
+    </section>
+
+    <section class="content-stage">
+      <article class="panel active" id="tickets">
+        <h3 class="notice-title">CONSTELL五周年纪念演唱会门票售罄公告</h3>
+        <div class="notice-body">
+          <p>CONSTELL“归辰”五周年纪念演唱会门票已于今日正式开启预售。本次演唱会共计开放 188,000 张门票，开票后热度持续攀升，全数门票已于开售 10 秒内售罄。</p>
+          <p>感谢每一位“小星球”的热情守候，你们的到来与等待，构成了CONSTELL此刻所抵达的全部意义。</p>
+          <p>五周年，是一次回望，也是一次归航。<br>愿我们在同一片星空之下，再次相遇。</p>
+          <p class="signature">CONSTELL｜06.20</p>
+        </div>
+      </article>
+      <article class="panel" id="about">
+        <div class="notice-body about-intro">
+          <p>CONSTELL，是由星河娱乐集团倾力打造的男子偶像组合。</p>
+          <p>以“在星际中自在遨游的少年们”为核心概念，CONSTELL自出道以来，始终以音乐为载体，在无限延展的宇宙意象中，传递属于他们的情感、能量与联结。</p>
+          <p>他们将青春的悸动与未知的探索融入旋律，在星轨交汇之处，与每一位聆听者产生共振。在这片广阔无垠的宇宙之中，CONSTELL用属于他们的方式，记录时间、回应爱意，也不断寻找自我与彼此的坐标。</p>
+          <p>五年来，他们终于从初始的微光，成长为照亮整片星域的存在。</p>
+        </div>
+        <section class="member-list">
+          <article class="member-card">
+            <div class="member-photo"></div>
+            <div>
+              <h4 class="member-name">Orion</h4>
+              <p class="member-tagline">游走于星际边界的猎手，以意志锁定方向，以本能追逐命运。</p>
+              <p class="member-meta"><strong>年龄：</strong>24</p>
+              <p class="member-meta"><strong>星座：</strong>射手座</p>
+              <p class="member-meta"><strong>定位：</strong>队长 / Rap</p>
+              <p class="member-meta"><strong>最喜欢：</strong>狗狗、吉他、架子鼓</p>
+              <p class="member-meta"><strong>最讨厌：</strong>迟到、香菜</p>
+              <p class="member-meta"><strong>座右铭：</strong>没有迷路，只有前行。</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="member-photo"></div>
+            <div>
+              <h4 class="member-name">Regulus</h4>
+              <p class="member-tagline">被命运标记的叛逆王者，在秩序与崩坏之间，选择定义规则本身。</p>
+              <p class="member-meta"><strong>年龄：</strong>24</p>
+              <p class="member-meta"><strong>星座：</strong>狮子座</p>
+              <p class="member-meta"><strong>定位：</strong>主舞</p>
+              <p class="member-meta"><strong>最喜欢：</strong>舞台、健身、睡觉</p>
+              <p class="member-meta"><strong>最讨厌：</strong>熬夜</p>
+              <p class="member-meta"><strong>座右铭：</strong>……</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="member-photo"></div>
+            <div>
+              <h4 class="member-name">Vega</h4>
+              <p class="member-tagline">来自已然消逝的星域，于寂静与光芒之间独自存在的王子。</p>
+              <p class="member-meta"><strong>年龄：</strong>23</p>
+              <p class="member-meta"><strong>星座：</strong>天秤座</p>
+              <p class="member-meta"><strong>定位：</strong>门面 / 领舞 / 领唱</p>
+              <p class="member-meta"><strong>最喜欢：</strong>海岛、摄影、休假</p>
+              <p class="member-meta"><strong>最讨厌：</strong>疼痛、分离</p>
+              <p class="member-meta"><strong>座右铭：</strong>如果世界注定崩塌，那就让它停在最美的一刻。</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="member-photo"></div>
+            <div>
+              <h4 class="member-name">Altair</h4>
+              <p class="member-tagline">不停穿梭于星轨之间的旅行者，将每一次相遇都当作唯一的奇迹。</p>
+              <p class="member-meta"><strong>年龄：</strong>21</p>
+              <p class="member-meta"><strong>星座：</strong>双子座</p>
+              <p class="member-meta"><strong>定位：</strong>主唱 / 领舞</p>
+              <p class="member-meta"><strong>最喜欢：</strong>音乐、风、列车、陌生的城市</p>
+              <p class="member-meta"><strong>最讨厌：</strong>数学</p>
+              <p class="member-meta"><strong>座右铭：</strong>在真正的终点之前，一切都只是经过。</p>
+            </div>
+          </article>
+        </section>
+      </article>
+      <article class="panel" id="updates">
+        <div class="updates-tools">
+          <div class="search-wrap">
+            <input id="updatesSearchInput" type="search" placeholder="搜索关键词（如歌曲名称等）" autocomplete="off" spellcheck="false">
+            <button type="button" id="updatesSearchBtn">搜索</button>
+          </div>
+        </div>
+        <div class="updates-feed">
+          <div class="news-item" id="openPressRelease">
+            <h4>CONSTELL五周年纪念演唱会《归辰》开票秒空，再创现象级热度</h4>
+            <p>近日，星河娱乐集团旗下男子组合CONSTELL五周年纪念演唱会《归辰》正式开启售票。开票瞬间，平台访问量迅速突破历史峰值，相关关键词同步登上多平台热搜榜单……</p>
+          </div>
+          <div class="news-item is-hidden" id="harmonicsNewsItem">
+            <h4>CONSTELL携第三张正规专辑《Harmonics》回归，奏响宇宙之声</h4>
+            <p>近日，星河娱乐集团旗下男子组合CONSTELL正式携第三张正规专辑《Harmonics》回归乐坛。距离上一张作品发行已过去一年零二个月，此次回归不仅延续了团队一贯的音乐美学，也在声音表达上进行了更具层次感的探索……</p>
+          </div>
+          <div class="news-item is-hidden" id="stayWithYouNewsItem">
+            <h4>CONSTELL成员Vega发行首支个人单曲《Stay With You》，以音乐诉说温柔守护</h4>
+            <p>近日，星河娱乐集团旗下男子组合CONSTELL成员Vega正式发行个人首支单曲《Stay With You》，标志着其个人音乐表达的全新开启。作为组合内最后一位推出个人单曲的成员，Vega的首次Solo作品也因此备受关注。</p>
+          </div>
+        </div>
+      </article>
+      <article class="panel" id="community">
+        <section class="community-wrap">
+          <div class="community-boardbar">
+            <span class="board-name">粉丝留言区</span>
+            <span class="board-latest">LATEST</span>
+          </div>
+          <div class="thread-list">
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球9088</span>
+              </div>
+              <div class="thread-body">
+                <p>不是吧？？8.15那个品牌站台怎么说没就没啊？？？我妆造都脑补完了你跟我说取消？？？死星河你到底会不会运营啊😅又想得罪品牌方又想拖CONSTELL后腿是吧？？？我们五周年热度好不容易拉满，你就这么搞？？求求了别阻碍CONSTELL飞升行吗🙏🙏🙏小星球真的会疯</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球7741</span>
+              </div>
+              <div class="thread-body">
+                <p>演唱会筹备就可以不营业？演唱会筹备就可以不营业？演唱会筹备就可以不营业？？
+筹备期不是你们躲镜头的免死金牌好吗💢物料呢？直播呢？Orion老公呢？？？
+星河你是不是还没原谅我们小星球啊😭😭😭😭😭放我老公出来跟我见一面会怎样啊会怎样啊😭😭😭我真的要闹了</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球1027</span>
+              </div>
+              <div class="thread-body">
+                <p>星群不离，星球不散！五周年我们一直都在！演唱会大麦！！！✨</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球3398</span>
+              </div>
+              <div class="thread-body">
+                <p>Regulus唯一主舞💥拒绝模糊定位❗️
+Harmonics活动期间直拍播放量断层第一📈数据摆在这别装看不见🔥
+舞台直拍播放量全团TOP📈个人舞台cut破千万🔥
+杂志销量断层第一📚品牌代言转化率全线领跑💎
+请公司停止弱化个人标签，Regulus值得最明确的位置！👑</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球8841</span>
+              </div>
+              <div class="thread-body">
+                <p>10秒售罄真的太夸张了…我连页面都没加载出来😭但没关系，小星球永远陪着你们！</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球4471</span>
+              </div>
+              <div class="thread-body">
+                <p>我来拉票了，Origa给我冲啊啊啊啊啊！！🔥
+<a href="./littleplanets.html">https://littleplanets.com/cp-ranking</a>
+你一票我一票，Origa今天就登顶榜一位！！💙✨</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球3006</span>
+              </div>
+              <div class="thread-body">
+                <p>Vega看谁都冷，就看Altair会笑，这还不明显？？？你们自己品🙂</p>
+              </div>
+            </article>
+
+            <article class="thread-item">
+              <div class="thread-meta">
+                <span class="thread-user">小星球6204</span>
+              </div>
+              <div class="thread-body">
+                <p>有些人别再蹭主唱tag了好吗🙂看看直拍清醒一下🙂</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </article>
+      <article class="panel" id="schedule">
+        <div class="calendar-wrap">
+          <div class="calendar-head">2026 AUGUST</div>
+          <div class="calendar-week">
+            <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+          </div>
+          <div class="calendar-days">
+            <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
+            <div class="day"><span class="day-num">1</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">2</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">3</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">4</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">5</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">6</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">7</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">8</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">9</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">10</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">11</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">12</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">13</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">14</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day">
+              <span class="day-num">15</span>
+              <div class="day-events">
+                <span class="evt evt-prep">演唱会筹备</span>
+                <div class="evt-cancelled-wrap">
+                  <span class="evt evt-cancelled">品牌站台</span>
+                  <span class="evt-cancel-badge">已取消</span>
+                </div>
+              </div>
+            </div>
+            <div class="day"><span class="day-num">16</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">17</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">18</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day"><span class="day-num">19</span><div class="day-events"><span class="evt evt-prep">演唱会筹备</span></div></div>
+            <div class="day day--concert marked"><span class="day-num">20</span><div class="day-events"><span class="evt evt-concert">演唱会</span></div></div>
+            <div class="day day--concert marked"><span class="day-num">21</span><div class="day-events"><span class="evt evt-concert">演唱会</span></div></div>
+            <div class="day day--concert marked"><span class="day-num">22</span><div class="day-events"><span class="evt evt-concert">演唱会</span></div></div>
+            <div class="day day--concert marked"><span class="day-num">23</span><div class="day-events"><span class="evt evt-concert">演唱会</span></div></div>
+            <div class="day"><span class="day-num">24</span></div>
+            <div class="day"><span class="day-num">25</span></div>
+            <div class="day"><span class="day-num">26</span></div>
+            <div class="day"><span class="day-num">27</span></div>
+            <div class="day"><span class="day-num">28</span></div>
+            <div class="day"><span class="day-num">29</span></div>
+            <div class="day"><span class="day-num">30</span></div>
+            <div class="day"><span class="day-num">31</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="panel" id="shop">
+        <h3 class="shop-title">《归辰》五周年纪念演唱会 官方周边</h3>
+        <div class="shop-grid">
+          <article class="product-card">
+            <div class="product-image">商品图片预留区</div>
+            <h4 class="product-name">《归辰》限定应援棒（Starlight Ver.）</h4>
+            <ul class="product-points">
+              <li>支持多色变光，还原「极光蓝紫」渐变光效</li>
+              <li>支持蓝牙联动演唱会现场灯控系统</li>
+              <li>内置CONSTELL专属启动音效</li>
+            </ul>
+            <p class="product-price">188元</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">商品图片预留区</div>
+            <h4 class="product-name">《归辰》纪念应援T恤</h4>
+            <ul class="product-points">
+              <li>黑/白双色可选</li>
+              <li>胸前印有CONSTELL星轨标识</li>
+              <li>背面为本次演唱会主题「归辰」特别设计</li>
+            </ul>
+            <p class="product-price">108元</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">商品图片预留区</div>
+            <h4 class="product-name">「星球联盟」应援手幅套装</h4>
+            <ul class="product-points">
+              <li>成员个人应援标语手幅</li>
+              <li>官方统一设计版本</li>
+              <li>含夜光材质</li>
+            </ul>
+            <p class="product-price">58元</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">商品图片预留区</div>
+            <h4 class="product-name">CONSTELL官方拍立得纪念套组</h4>
+            <ul class="product-points">
+              <li>成员幕后花絮拍立得复刻</li>
+              <li>含隐藏款（概率掉落）</li>
+            </ul>
+            <p class="product-price">48元 / 3pc</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="news-modal" id="harmonicsModal">
+    <div class="news-modal-content">
+      <h3>CONSTELL携第三张正规专辑《Harmonics》回归，奏响宇宙之声</h3>
+      <p>近日，星河娱乐集团旗下男子组合CONSTELL正式携第三张正规专辑《Harmonics》回归乐坛。距离上一张作品发行已过去一年零二个月，此次回归不仅延续了团队一贯的音乐美学，也在声音表达上进行了更具层次感的探索。</p>
+      <p>本张专辑以“少年以音乐拨动宇宙的琴弦”为核心概念，通过不同风格的旋律与编曲结构，构建出一个充满张力与流动感的声场空间。CONSTELL在保留自身标志性POP基底的同时，进一步拓展音乐边界，使整体听感更加立体且富有叙事性。</p>
+      <p>先行曲 《Pulse》 融入大量House元素，以富有律动感的节拍与层层递进的电子音色，迅速抓住听众注意力。歌曲一经发布，便连续登顶当日多平台收听榜单，展现出强劲的市场反响与话题热度。</p>
+      <p>主打曲 《Starlit Drift》 则回归CONSTELL一贯轻盈浪漫的流行乐风格，以流畅旋律与细腻情绪刻画为主线，在柔和与律动之间取得平衡，呈现出更具延展性的音乐表达。</p>
+      <p>除此之外，专辑中多首收录曲亦展现出不同维度的音乐尝试。其中，正统R&B取向的 《Afterglow》 以克制的编曲与富有层次的声线处理，营造出更为私密而沉浸的听觉体验，进一步拓宽了团队的风格边界。</p>
+      <p>值得关注的是，本张专辑中每位成员均收录个人Solo曲目，从不同角度呈现个体音乐色彩，也让CONSTELL整体的“共振结构”更加丰富与完整。</p>
+      <p>作为CONSTELL出道以来的重要阶段性作品，《Harmonics》不仅是一张延续既有风格的专辑，更是一次关于声音、情绪与存在方式的重新探索。在不断变化的音乐环境中，CONSTELL正以更加成熟的姿态，持续拓展属于他们的声场边界。</p>
+      <button class="modal-close" id="closeHarmonicsModal" type="button">关闭</button>
+    </div>
+  </div>
+
+  <div class="news-modal" id="stayWithYouModal" aria-hidden="true">
+    <div class="news-modal-content" role="document">
+      <h3>CONSTELL成员Vega发行首支个人单曲《Stay With You》，以音乐诉说温柔守护</h3>
+      <p>近日，星河娱乐集团旗下男子组合CONSTELL成员Vega正式发行个人首支单曲《Stay With You》，标志着其个人音乐表达的全新开启。作为组合内最后一位推出个人单曲的成员，Vega的首次Solo作品也因此备受关注。</p>
+      <p>据悉，《Stay With You》由Vega深度参与创作与概念构建，以&ldquo;守护与陪伴&rdquo;为核心情感主题，通过克制而细腻的表达方式，将个人情绪融入旋律之中。值得一提的是，这首单曲特别选择在Vega已故母亲的生日当天发布，对他而言具有极为重要的纪念意义。</p>
+      <p>在音乐风格上，《Stay With You》延续了CONSTELL一贯的流行音乐基底，同时融入轻柔富有律动感的编曲设计，并加入复古蓝调元素，使整体听感在温暖与节奏之间取得微妙平衡。歌曲通过层层递进的旋律结构与克制的情绪铺陈，营造出一种既亲密又略带距离感的氛围。</p>
+      <p>自出道以来，Vega以稳定的舞台表现力与独特的个人气质赢得广泛关注，而此次个人单曲的发布，则进一步展现了其在音乐表达上的多面潜力。《Stay With You》不仅是一首关于爱与守护的作品，也是一段被音乐所记录下来的时间与记忆。</p>
+      <p>随着单曲的上线，《Stay With You》在多个平台获得良好反馈，相关话题持续引发讨论。Vega也通过这首作品，向外界呈现出更为内敛而深刻的自我表达。</p>
+      <button class="modal-close" id="closeStayWithYouModal" type="button">关闭</button>
+    </div>
+  </div>
+
+  <div class="news-modal" id="pressModal">
+    <div class="news-modal-content">
+      <h3>CONSTELL五周年纪念演唱会《归辰》开票秒空，再创现象级热度</h3>
+      <p>近日，星河娱乐集团旗下男子组合CONSTELL五周年纪念演唱会《归辰》正式开启售票。开票瞬间，平台访问量迅速突破历史峰值，相关关键词同步登上多平台热搜榜单。</p>
+      <p>据官方数据显示，本次演唱会共计释出188,000张门票，于开售后10秒内全部售罄，再次印证CONSTELL强大的市场号召力与持续攀升的国民关注度。</p>
+      <p>据悉，本次五周年纪念演唱会《归辰》将于CONSTELL出道五周年纪念日当天正式举行，以多场具有纪念意义的舞台，与粉丝共同回望过往旅程。</p>
+      <p>自出道以来，CONSTELL凭借稳定的音乐品质与独特的宇宙叙事风格，积累了庞大且高度活跃的粉丝群体“小星球”。在此次售票过程中，粉丝自发组织应援、数据支持及多平台联动宣传，展现出极强的凝聚力与执行力。</p>
+      <p>值得一提的是，本次五周年纪念演唱会《归辰》不仅是CONSTELL阶段性的重要节点，也被业内视为其内容表达与舞台呈现全面升级的重要标志。</p>
+      <p>关于演唱会舞美设计、曲目编排及特别环节，目前官方尚未完整披露，引发外界持续关注与讨论。</p>
+      <p>CONSTELL将于演唱会现场，为所有等待他们的人，带来一场星空之下的再度相遇。</p>
+      <button class="modal-close" id="closePressModal" type="button">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".panel");
+    const openPressRelease = document.getElementById("openPressRelease");
+    const pressModal = document.getElementById("pressModal");
+    const closePressModal = document.getElementById("closePressModal");
+    const updatesSearchInput = document.getElementById("updatesSearchInput");
+    const updatesSearchBtn = document.getElementById("updatesSearchBtn");
+    const harmonicsNewsItem = document.getElementById("harmonicsNewsItem");
+    const harmonicsModal = document.getElementById("harmonicsModal");
+    const closeHarmonicsModal = document.getElementById("closeHarmonicsModal");
+    const stayWithYouNewsItem = document.getElementById("stayWithYouNewsItem");
+    const stayWithYouModal = document.getElementById("stayWithYouModal");
+    const closeStayWithYouModal = document.getElementById("closeStayWithYouModal");
+
+    function updatesSearchKey(s) {
+      return String(s || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "");
+    }
+
+    function runUpdatesSearch() {
+      const key = updatesSearchKey(updatesSearchInput.value);
+      if (key === "harmonics") {
+        openPressRelease.classList.add("is-hidden");
+        harmonicsNewsItem.classList.remove("is-hidden");
+        stayWithYouNewsItem.classList.add("is-hidden");
+      } else if (key === "staywithyou") {
+        openPressRelease.classList.add("is-hidden");
+        harmonicsNewsItem.classList.add("is-hidden");
+        stayWithYouNewsItem.classList.remove("is-hidden");
+      } else {
+        openPressRelease.classList.remove("is-hidden");
+        harmonicsNewsItem.classList.add("is-hidden");
+        stayWithYouNewsItem.classList.add("is-hidden");
+      }
+    }
+
+    updatesSearchBtn.addEventListener("click", runUpdatesSearch);
+    updatesSearchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        runUpdatesSearch();
+      }
+    });
+
+    harmonicsNewsItem.addEventListener("click", () => {
+      harmonicsModal.classList.add("open");
+    });
+
+    closeHarmonicsModal.addEventListener("click", () => {
+      harmonicsModal.classList.remove("open");
+    });
+
+    harmonicsModal.addEventListener("click", (event) => {
+      if (event.target === harmonicsModal) {
+        harmonicsModal.classList.remove("open");
+      }
+    });
+
+    function setSwyModalOpen(isOpen) {
+      stayWithYouModal.classList.toggle("open", isOpen);
+      stayWithYouModal.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    }
+
+    stayWithYouNewsItem.addEventListener("click", () => {
+      setSwyModalOpen(true);
+    });
+
+    closeStayWithYouModal.addEventListener("click", () => {
+      setSwyModalOpen(false);
+    });
+
+    stayWithYouModal.addEventListener("click", (event) => {
+      if (event.target === stayWithYouModal) {
+        setSwyModalOpen(false);
+      }
+    });
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+
+        tabs.forEach((item) => item.classList.remove("active"));
+        panels.forEach((panel) => panel.classList.remove("active"));
+
+        tab.classList.add("active");
+        document.getElementById(target).classList.add("active");
+      });
+    });
+
+    openPressRelease.addEventListener("click", () => {
+      pressModal.classList.add("open");
+    });
+
+    closePressModal.addEventListener("click", () => {
+      pressModal.classList.remove("open");
+    });
+
+    pressModal.addEventListener("click", (event) => {
+      if (event.target === pressModal) {
+        pressModal.classList.remove("open");
+      }
+    });
+  </script>
+</body>
+</html>
