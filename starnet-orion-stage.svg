@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Orion ðÔþ">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2a6c"/>
+      <stop offset="50%" stop-color="#2b4fb0"/>
+      <stop offset="100%" stop-color="#5b8dff"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="50%" cy="10%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#spot)"/>
+  <circle cx="600" cy="390" r="160" fill="#0f1e4f" opacity="0.55"/>
+  <rect x="510" y="250" width="180" height="280" rx="24" fill="#1f3d86" stroke="#8ab2ff" stroke-width="6"/>
+  <text x="600" y="430" text-anchor="middle" font-size="120" font-family="Arial, sans-serif" fill="#f7fbff" font-weight="700">97</text>
+  <text x="600" y="660" text-anchor="middle" font-size="44" font-family="Arial, sans-serif" fill="#eaf2ff">ORION STAGE PHOTO</text>
+</svg>
