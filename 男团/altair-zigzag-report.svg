@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101624"/>
+      <stop offset="1" stop-color="#1f2f5a"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a2238"/>
+      <stop offset="1" stop-color="#121a2b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ee6d6"/>
+      <stop offset="1" stop-color="#6a8dff"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1125" fill="url(#bg)"/>
+  <rect x="64" y="72" width="772" height="981" rx="28" fill="url(#card)" stroke="#2c3d67"/>
+  <text x="110" y="142" fill="#a7b6d8" font-size="24" font-family="Arial">Music Daily Report</text>
+  <text x="110" y="198" fill="#ffffff" font-size="46" font-weight="700" font-family="Arial">Altair 《Zig-Zag》</text>
+  <text x="110" y="248" fill="#7de0d6" font-size="34" font-weight="700" font-family="Arial">22个日榜冠军</text>
+
+  <rect x="110" y="288" width="220" height="220" rx="16" fill="#2a3c66"/>
+  <text x="180" y="400" fill="#c8d6f6" font-size="26" font-family="Arial">封面图</text>
+
+  <rect x="356" y="300" width="430" height="88" rx="14" fill="#213157"/>
+  <text x="386" y="352" fill="#d7e3ff" font-size="28" font-family="Arial">Daily #1 × 22</text>
+
+  <rect x="356" y="408" width="430" height="88" rx="14" fill="#1f2c4e"/>
+  <text x="386" y="460" fill="#d7e3ff" font-size="28" font-family="Arial">Peak Rank: #1</text>
+
+  <rect x="356" y="516" width="430" height="88" rx="14" fill="#1f2c4e"/>
+  <text x="386" y="568" fill="#d7e3ff" font-size="28" font-family="Arial">Consecutive Days: 113</text>
+
+  <rect x="110" y="634" width="676" height="300" rx="14" fill="#10192e" stroke="#2a3c66"/>
+  <polyline fill="none" stroke="url(#accent)" stroke-width="8" points="140,840 200,810 260,770 320,790 380,730 440,690 500,700 560,640 620,620 680,600 740,560"/>
+  <text x="132" y="678" fill="#9bb0d7" font-size="22" font-family="Arial">近期趋势</text>
+
+  <text x="110" y="1002" fill="#7f95bf" font-size="20" font-family="Arial">Source: StarNet Music Tracker (Mock Data)</text>
+</svg>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@CONSTELL-Altair | StarNet</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#1d9bf0; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .app { width:min(860px,94vw); margin:0 auto; padding:14px 0 28px; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+    .site-head { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .brand { margin:0; font-size:18px; font-weight:800; color:#243046; }
+    .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
+    .search-wrap { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center; }
+    .search-wrap input { flex:1; border:1px solid #d5deea; border-radius:999px; padding:8px 12px; font-size:13px; }
+    .search-wrap button { border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:#1d9bf0; cursor:pointer; }
+    .search-tip { margin:0; padding:0 16px 12px; font-size:12px; color:#6b7a8d; }
+    .cover { height:180px; position:relative; }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(28,76,161,.25); display:grid; place-items:center; font-weight:800; color:#24407d; }
+    .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); }
+    .name { margin:0; font-size:22px; font-weight:800; }
+    .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
+    .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; }
+    .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); }
+    .stats strong { color:#263a61; }
+    .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
+    .post { padding:14px 18px; border-bottom:1px solid var(--line); }
+    .post:last-child { border-bottom:none; }
+    .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; }
+    .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
+    .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .report-image { margin:10px auto 0; width:62%; max-width:360px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; cursor: zoom-in; }
+    .zoom-overlay { position:fixed; inset:0; background:rgba(10,16,28,0.82); display:none; align-items:center; justify-content:center; padding:20px; z-index:9999; }
+    .zoom-overlay.open { display:flex; }
+    .zoom-overlay img { max-width:min(92vw,980px); max-height:90vh; border-radius:12px; box-shadow:0 14px 40px rgba(0,0,0,0.45); }
+    .tag { color:var(--brand); }
+</style>
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <div class="site-head"><h1 class="brand">StarNet</h1><p class="url">https://starnet.social/CONSTELL-Altair</p></div>
+      <div class="cover" style="background:linear-gradient(120deg,#bce9ff,#72bcff 45%,#66a5ff)"><div class="avatar" style="background:radial-gradient(circle at 30% 30%,#fff,#b7e7ff 45%,#62b2ff)">A</div></div>
+      <div class="profile">
+        <h2 class="name">Altair</h2>
+        <p class="id">@CONSTELL-Altair</p>
+        <p class="bio">CONSTELL成员</p>
+        <div class="stats"><span><strong>176</strong> 关注</span><span><strong>241.1万</strong> 粉丝</span><span><strong>1,142</strong> 动态</span></div>
+      </div>
+      <h3 class="feed-title">公开动态</h3>
+      <article class="post">
+        <div class="post-head">Altair · 昨天</div>
+        <p>最近在把旧demo重新编排，挺有意思。</p>
+        <div class="post-stats"><span>转发 1.1w</span><span>赞 3.2w</span><span>评论 1,945</span></div>
+        
+      </article>
+      <article class="post">
+        <div class="post-head">Altair · 2 天前</div>
+        <p>每次上台都还是会紧张。</p>
+        <div class="post-stats"><span>转发 7,804</span><span>赞 2.4w</span><span>评论 1,103</span></div>
+        
+      </article>
+      <article class="post">
+        <div class="post-head">Altair · 1 个月前</div>
+        <p>谢谢大家一直以来的支持！《Zig-Zag》能走到现在，真的离不开每一位在听歌和转发的你们🤍</p>
+        <img class="report-image zoomable" src="./assets/altair-zigzag-report.png" alt="Altair《Zig-Zag》22个日榜冠军战报图">
+        <div class="post-stats"><span>转发 2.7w</span><span>赞 9.4w</span><span>评论 8,231</span></div>
+        <div class="comments">
+          <p class="comment"><strong>小星球7712：</strong>这是目前为止最好的成绩了！！我们Altair以后都走花路啊啊啊🌸</p>
+          <p class="comment"><strong>小星球3021：</strong>真的太争气了呜呜呜，22个日冠太能打了！Altair一定一路开花✨</p>
+        </div>
+      </article>
+    </section>
+  </main>
+  <div class="zoom-overlay" id="zoomOverlay"><img id="zoomImage" alt="放大预览"></div>
+  <script>
+    (function () {
+      var overlay = document.getElementById("zoomOverlay");
+      var zoomImage = document.getElementById("zoomImage");
+      if (!overlay || !zoomImage) return;
+      document.querySelectorAll("img.zoomable").forEach(function (img) {
+        img.addEventListener("click", function () {
+          zoomImage.src = img.src;
+          zoomImage.alt = img.alt || "图片放大预览";
+          overlay.classList.add("open");
+        });
+      });
+      overlay.addEventListener("click", function () {
+        overlay.classList.remove("open");
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") overlay.classList.remove("open");
+      });
+    })();
+  </script>
+</body>
+</html>

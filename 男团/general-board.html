@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONSTELL 综合讨论区 - 小星球宇宙基地</title>
+  <style>
+    :root {
+      --text: #4e4a76;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b5bd4;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .board-head {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .board-head h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      background: linear-gradient(120deg, #6b9dff, #b06bff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .board-head p { margin: 0; font-size: 12px; color: #8b84a8; }
+    .community-boardbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; margin-bottom: 12px;
+      border-radius: 12px; border: 1px solid rgba(200, 180, 255, 0.45);
+      background: rgba(255, 255, 255, 0.75);
+    }
+    .board-name { color: #4a3d6e; font-weight: 700; font-size: 13px; }
+    .board-latest { color: #9d7fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .thread-list { display: flex; flex-direction: column; gap: 0; }
+    .thread-row {
+      display: block;
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .thread-row:first-of-type { border-radius: 12px 12px 0 0; }
+    .thread-row:last-of-type { border-radius: 0 0 12px 12px; border-bottom: none; }
+    .thread-row:only-of-type { border-radius: 12px; }
+    .thread-row:hover { background: rgba(255, 255, 255, 0.92); }
+    .thread-row h2 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.5;
+      color: #4a3d7a;
+    }
+    .thread-excerpt {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #6a6588;
+    }
+    .thread-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: 11px; color: #9b94c0; font-weight: 600;
+    }
+    .hot-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #ff6fae, #ff9b6b);
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+    }
+    .member-only-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #8a6dff, #4f81df);
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+    }
+    .member-only-thread {
+      display: none;
+    }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="nav-back" href="./littleplanets.html">← 返回论坛首页</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
+    <header class="board-head">
+      <h1>💬 CONSTELL 综合讨论区</h1>
+      <p>闲聊 · 吐槽 · 团魂发电</p>
+    </header>
+    <div class="community-boardbar">
+      <span class="board-name">主题列表</span>
+      <span class="board-latest">LATEST</span>
+    </div>
+    <div class="thread-list">
+      <a class="thread-row member-only-thread" href="./general-thread-members-only-silence.html">
+        <h2><span class="member-only-tag">会员可见</span>他们这周到底在干嘛？？已经一周没营业了吧？？？</h2>
+        <p class="thread-excerpt">有人注意到吗，CONSTELL这周完全没有营业……一周了吧？？一个人都没出现。</p>
+        <div class="thread-meta">
+          <span>楼主：小星球7132</span>
+          <span>发帖 8/12 22:18</span>
+          <span>回复 276</span>
+          <span>浏览 21.4w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="./general-thread-invite-62.html">
+        <h2>【限时开放】第62期注册邀请码发布（07.20-08.20）</h2>
+        <p class="thread-excerpt">第62期注册邀请码现已开放。本期邀请码为组合相关信息拼接，请按提示规则填写……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球0001（站务号）</span>
+          <span>发帖 7/20 09:30</span>
+          <span>回复 138</span>
+          <span>浏览 11.2w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="./general-thread-job-brainstorm.html">
+        <h2><span class="hot-tag">HOT</span>你们觉得CONSTELL如果不做偶像会去干嘛啊？</h2>
+        <p class="thread-excerpt">突然在想，如果四子没有当爱豆的话，现在会在做什么啊？感觉他们性格都挺不一样的……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球4721</span>
+          <span>发帖 5/26 22:41</span>
+          <span>回复 128</span>
+          <span>浏览 5.8w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="./general-thread-alga.html">
+        <h2>Alga是真的！！！这次真的被感动了！！！</h2>
+        <p class="thread-excerpt">我真的要说一句Alga这次太真了😭😭😭 刚刚Altair直播的时候唱了Vega那首个人单曲……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球2147</span>
+          <span>发帖 5/18 20:12</span>
+          <span>回复 96</span>
+          <span>浏览 3.4k+</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      var isMember = !!(sessionStorage.getItem("lp_forum_member_user") || localStorage.getItem("lp_forum_member_user"));
+      document.querySelectorAll(".member-only-thread").forEach(function (el) {
+        el.style.display = isMember ? "block" : "none";
+      });
+    })();
+  </script>
+</body>
+</html>
