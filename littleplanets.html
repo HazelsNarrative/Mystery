@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小星球宇宙基地</title>
+  <style>
+    :root {
+      --bg: #fff3fb;
+      --bg-soft: #f2edff;
+      --pink: #ff86c5;
+      --violet: #9d8dff;
+      --blue: #78c3ff;
+      --text: #4e4a76;
+      --card: rgba(255, 255, 255, 0.88);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .stars::before,
+    .stars::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255, 183, 225, 0.85) 1.2px, transparent 2px),
+        radial-gradient(circle, rgba(148, 200, 255, 0.8) 1px, transparent 2px);
+      background-size: 160px 160px, 220px 220px, 260px 260px;
+      background-position: 0 0, 40px 60px, 100px 30px;
+      opacity: 0.45;
+    }
+
+    .stars::after {
+      transform: scale(1.08);
+      opacity: 0.28;
+    }
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 28px auto 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(157, 141, 255, 0.35);
+      border-radius: 20px;
+      padding: 26px 24px;
+      box-shadow: 0 16px 30px rgba(125, 114, 188, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before,
+    .card::after {
+      content: "✦";
+      position: absolute;
+      font-size: 22px;
+      color: rgba(157, 141, 255, 0.4);
+    }
+
+    .card::before {
+      left: 16px;
+      top: 10px;
+    }
+
+    .card::after {
+      right: 18px;
+      bottom: 10px;
+    }
+
+    .site-title {
+      margin: 0 0 6px;
+      color: #725feb;
+      font-size: clamp(22px, 3.6vw, 30px);
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    .site-sub {
+      margin: 0 0 22px;
+      text-align: center;
+      color: #7a739f;
+      font-size: 13px;
+    }
+
+    .form-row {
+      margin-bottom: 14px;
+    }
+
+    .form-row label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #5c5688;
+      font-weight: 600;
+    }
+
+    .form-row input {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(157, 141, 255, 0.45);
+      background: rgba(255, 255, 255, 0.95);
+      font-size: 14px;
+      color: #4e4a76;
+    }
+
+    .form-row input:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(255, 134, 197, 0.2);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #b8a6ff, #9d8dff);
+      color: #fff;
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-guest {
+      background: linear-gradient(90deg, #ff9bd1, #78c3ff);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(255, 134, 197, 0.35);
+    }
+
+    .btn-guest:hover {
+      filter: brightness(1.05);
+    }
+
+    .register-block {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(157, 141, 255, 0.35);
+      text-align: center;
+    }
+
+    .register-btn {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid #d4d0e8;
+      color: #b8b4cf;
+      background: #f0eef9;
+      font-size: 13px;
+      cursor: not-allowed;
+      user-select: none;
+    }
+
+    .register-hint {
+      margin: 8px 0 0;
+      font-size: 12px;
+      color: #a39ec0;
+    }
+
+    .quiz-hint {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: #6b6590;
+      line-height: 1.7;
+    }
+
+    .quiz-error {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #e04d7a;
+      min-height: 1.3em;
+    }
+
+    .btn-submit {
+      background: linear-gradient(90deg, #9d8dff, #78c3ff);
+      color: #fff;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      filter: brightness(1.05);
+    }
+
+    .forum-home {
+      padding-bottom: 32px;
+    }
+
+    .forum-top {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .forum-top h1 {
+      margin: 0 0 4px;
+      font-size: clamp(24px, 4vw, 32px);
+      background: linear-gradient(120deg, #ff6eb9, #9d8dff, #5ec8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.8));
+    }
+
+    .forum-top p {
+      margin: 0;
+      font-size: 13px;
+      color: #8b84b8;
+      font-weight: 600;
+    }
+
+    .cp-banner {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      box-shadow: 0 12px 28px rgba(255, 120, 180, 0.25), 0 0 0 3px rgba(255, 255, 255, 0.65);
+      background: linear-gradient(135deg, #ff9bd8 0%, #c4a8ff 45%, #7ecbff 100%);
+      position: relative;
+      cursor: default;
+    }
+
+    .cp-banner-inner {
+      padding: 20px 22px 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cp-banner h2 {
+      margin: 0 0 6px;
+      font-size: clamp(18px, 3.2vw, 22px);
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(120, 60, 120, 0.35);
+      letter-spacing: 0.04em;
+    }
+
+    .cp-banner p {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.55;
+      max-width: 36em;
+    }
+
+    .cp-banner-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .cp-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      color: #5a3d7a;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .cp-sparkle {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .cp-sparkle.s1 {
+      right: 14px;
+      top: 10px;
+    }
+
+    .cp-sparkle.s2 {
+      left: 12px;
+      bottom: 8px;
+      font-size: 20px;
+    }
+
+    .forum-rule {
+      text-align: center;
+      margin: 22px 0 16px;
+      font-size: 13px;
+      color: #c4b8e8;
+      letter-spacing: 0.25em;
+      font-weight: 600;
+    }
+
+    .forum-zone {
+      margin-bottom: 4px;
+    }
+
+    .zone-title {
+      margin: 0 0 12px;
+      font-size: 17px;
+      font-weight: 800;
+      color: #5c4db2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .board-tile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid rgba(200, 190, 255, 0.65);
+      box-shadow: 0 4px 0 rgba(180, 160, 230, 0.2);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      width: 100%;
+    }
+
+    .board-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(157, 141, 255, 0.2);
+    }
+
+    .board-tile:active {
+      transform: translateY(0);
+    }
+
+    .tile-ico {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: linear-gradient(145deg, #ffe8f7, #e8e4ff);
+    }
+
+    .tile-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .tile-name {
+      display: block;
+      margin: 0 0 2px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #534a8a;
+    }
+
+    .tile-meta {
+      display: block;
+      margin: 0;
+      font-size: 11px;
+      color: #9b94c0;
+      font-weight: 600;
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .member-tile {
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      font: inherit;
+      color: inherit;
+      width: 100%;
+    }
+
+    .member-tile:hover {
+      transform: scale(1.02);
+    }
+
+    .member-tile--orion {
+      background: linear-gradient(180deg, #fff8ff, #ffe8f4);
+      border-color: #ffb8dc;
+    }
+
+    .member-tile--vega {
+      background: linear-gradient(180deg, #f8f6ff, #ebe4ff);
+      border-color: #c4b5ff;
+    }
+
+    .member-tile--altair {
+      background: linear-gradient(180deg, #f4fbff, #dff3ff);
+      border-color: #8fd4ff;
+    }
+
+    .member-tile--regulus {
+      background: linear-gradient(180deg, #fffbf4, #fff0d8);
+      border-color: #ffd48a;
+    }
+
+    .member-tile .m-emoji {
+      font-size: 26px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .member-tile .m-name {
+      display: block;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      color: #5a4a8a;
+    }
+
+    .member-tile .m-sub {
+      display: block;
+      margin: 4px 0 0;
+      font-size: 11px;
+      color: #9a90c0;
+      font-weight: 600;
+    }
+
+    .single-tile-wrap {
+      max-width: 100%;
+    }
+
+    .board-tile--wide {
+      border-color: rgba(255, 150, 190, 0.55);
+      background: linear-gradient(180deg, #fff9fc, #fff0f6);
+    }
+
+    .board-tile--chill {
+      border-color: rgba(120, 200, 255, 0.55);
+      background: linear-gradient(180deg, #f6fcff, #eef8ff);
+    }
+
+    @media (max-width: 520px) {
+      .board-grid,
+      .member-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #quizPanel .card {
+      position: relative;
+    }
+
+    .btn-back-login {
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      z-index: 2;
+      border: 1px solid rgba(157, 141, 255, 0.5);
+      background: rgba(255, 255, 255, 0.92);
+      color: #6b5bd4;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-back-login:hover {
+      background: #fff;
+      border-color: var(--pink);
+      color: #5a4ac4;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <main class="wrap">
+    <section id="loginPanel" class="panel active">
+      <div class="card">
+        <h1 class="site-title">小星球宇宙基地</h1>
+        <p class="site-sub">Little Planets · 会员登录</p>
+        <div class="form-row">
+          <label for="loginUser">用户名</label>
+          <input id="loginUser" type="text" placeholder="请输入用户名" autocomplete="username">
+        </div>
+        <div class="form-row">
+          <label for="loginPass">密码</label>
+          <input id="loginPass" type="password" placeholder="请输入密码" autocomplete="current-password">
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" disabled>登录</button>
+          <button type="button" class="btn btn-guest" id="btnGuest">以游客身份登录</button>
+        </div>
+        <div class="register-block">
+          <span class="register-btn">注册账号</span>
+          <p class="register-hint">还未开放邀请码注册</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quizPanel" class="panel">
+      <div class="card">
+        <button type="button" class="btn-back-login" id="btnBackLogin">← 返回登录</button>
+        <h1 class="site-title">访客验证</h1>
+        <p class="site-sub">回答下列问题后即可进入论坛</p>
+        <p class="quiz-error" id="quizError"></p>
+        <div class="form-row">
+          <label for="qDebut">CONSTELL 的出道纪念日是？（格式：0101）</label>
+          <input id="qDebut" type="text" inputmode="numeric" maxlength="4" placeholder="" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <label for="qColor">CONSTELL 的应援色是？</label>
+          <input id="qColor" type="text" placeholder="" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <label for="qTitle">CONSTELL 最近一次发行的正规专辑的主打曲是？（不含空格）</label>
+          <input id="qTitle" type="text" placeholder="" autocomplete="off">
+        </div>
+        <button type="button" class="btn btn-submit" id="btnQuizSubmit" style="width:100%">进入论坛</button>
+      </div>
+    </section>
+
+    <section id="forumPanel" class="panel forum-home">
+      <header class="forum-top">
+        <h1>小星球宇宙基地</h1>
+        <p>✨ CONSTELL 粉丝论坛 · 同好集合地 ✨</p>
+      </header>
+
+      <div class="cp-banner" role="region" aria-label="CP 总选活动">
+        <span class="cp-sparkle s1" aria-hidden="true">✨</span>
+        <span class="cp-sparkle s2" aria-hidden="true">💫</span>
+        <div class="cp-banner-inner">
+          <h2>🗳 CP 总选活动</h2>
+          <p>第三届「小星球 CP 总选」火热开投中！为你锁死的星轨组合疯狂打 call，冲榜解锁限定头衔、成就勋章与应援彩蛋～</p>
+          <div class="cp-banner-tags">
+            <span class="cp-tag">🔥 HOT</span>
+            <span class="cp-tag">今日已投 12.8w+</span>
+            <span class="cp-tag">榜单实时刷新</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="forum-rule" aria-hidden="true">✨ ⸻ ✨</p>
+
+      <section class="forum-zone">
+        <h2 class="zone-title"><span aria-hidden="true">🌠</span> 主区</h2>
+        <div class="board-grid">
+          <button type="button" class="board-tile">
+            <span class="tile-ico" aria-hidden="true">📢</span>
+            <span class="tile-body">
+              <span class="tile-name">官方公告区</span>
+              <span class="tile-meta">行程 · 声明 · 重要通知</span>
+            </span>
+          </button>
+          <button type="button" class="board-tile">
+            <span class="tile-ico" aria-hidden="true">💬</span>
+            <span class="tile-body">
+              <span class="tile-name">CONSTELL 综合讨论区</span>
+              <span class="tile-meta">闲聊 · 吐槽 · 团魂发电</span>
+            </span>
+          </button>
+          <button type="button" class="board-tile">
+            <span class="tile-ico" aria-hidden="true">🎬</span>
+            <span class="tile-body">
+              <span class="tile-name">官方物料整理区</span>
+              <span class="tile-meta">直拍 · 图包 · 时间线</span>
+            </span>
+          </button>
+          <button type="button" class="board-tile">
+            <span class="tile-ico" aria-hidden="true">📊</span>
+            <span class="tile-body">
+              <span class="tile-name">数据 &amp; 应援区</span>
+              <span class="tile-meta">打投教程 · 实绩 · 联动</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <p class="forum-rule" aria-hidden="true">✨ ⸻ ✨</p>
+
+      <section class="forum-zone">
+        <h2 class="zone-title"><span aria-hidden="true">🪐</span> 成员区</h2>
+        <div class="member-grid">
+          <button type="button" class="member-tile member-tile--orion">
+            <span class="m-emoji" aria-hidden="true">🎯</span>
+            <span class="m-name">Orion</span>
+            <span class="m-sub">星际猎手</span>
+          </button>
+          <button type="button" class="member-tile member-tile--vega">
+            <span class="m-emoji" aria-hidden="true">💫</span>
+            <span class="m-name">Vega</span>
+            <span class="m-sub">陨星王子</span>
+          </button>
+          <button type="button" class="member-tile member-tile--altair">
+            <span class="m-emoji" aria-hidden="true">✉️</span>
+            <span class="m-name">Altair</span>
+            <span class="m-sub">银河信使</span>
+          </button>
+          <button type="button" class="member-tile member-tile--regulus">
+            <span class="m-emoji" aria-hidden="true">⚡</span>
+            <span class="m-name">Regulus</span>
+            <span class="m-sub">寰宇异端</span>
+          </button>
+        </div>
+      </section>
+
+      <p class="forum-rule" aria-hidden="true">✨ ⸻ ✨</p>
+
+      <section class="forum-zone">
+        <h2 class="zone-title"><span aria-hidden="true">💞</span> 关系区</h2>
+        <div class="single-tile-wrap">
+          <button type="button" class="board-tile board-tile--wide">
+            <span class="tile-ico" aria-hidden="true">💞</span>
+            <span class="tile-body">
+              <span class="tile-name">关系研究所（CP 专区）</span>
+              <span class="tile-meta">糖点考古 · 互动分析 · 同人粮仓</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <p class="forum-rule" aria-hidden="true">✨ ⸻ ✨</p>
+
+      <section class="forum-zone">
+        <h2 class="zone-title"><span aria-hidden="true">🌙</span> 休息区</h2>
+        <div class="single-tile-wrap">
+          <button type="button" class="board-tile board-tile--chill">
+            <span class="tile-ico" aria-hidden="true">🌙</span>
+            <span class="tile-body">
+              <span class="tile-name">小星球休息区（水区）</span>
+              <span class="tile-meta">今日份碎碎念 · 树洞 · 贴贴</span>
+            </span>
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "lp_forum_unlocked";
+
+      var QUIZ = {
+        debut: ["0820"],
+        color: ["极光蓝紫"],
+        title: ["StarlitDrift"]
+      };
+
+      var loginPanel = document.getElementById("loginPanel");
+      var quizPanel = document.getElementById("quizPanel");
+      var forumPanel = document.getElementById("forumPanel");
+      var btnGuest = document.getElementById("btnGuest");
+      var btnQuizSubmit = document.getElementById("btnQuizSubmit");
+      var btnBackLogin = document.getElementById("btnBackLogin");
+      var quizError = document.getElementById("quizError");
+
+      function showPanel(id) {
+        [loginPanel, quizPanel, forumPanel].forEach(function (el) {
+          el.classList.toggle("active", el.id === id);
+        });
+      }
+
+      function normalize(s) {
+        return String(s || "").trim();
+      }
+
+      function normalizeLoose(s) {
+        return normalize(s).toLowerCase().replace(/\s+/g, "");
+      }
+
+      function checkAnswer(input, accepted) {
+        var v = normalize(input);
+        var loose = normalizeLoose(input);
+        return accepted.some(function (a) {
+          return normalize(a) === v || normalizeLoose(a) === loose;
+        });
+      }
+
+      if (sessionStorage.getItem(STORAGE_KEY) === "1") {
+        showPanel("forumPanel");
+      }
+
+      btnGuest.addEventListener("click", function () {
+        showPanel("quizPanel");
+        quizError.textContent = "";
+      });
+
+      btnBackLogin.addEventListener("click", function () {
+        showPanel("loginPanel");
+        quizError.textContent = "";
+      });
+
+      btnQuizSubmit.addEventListener("click", function () {
+        var debut = document.getElementById("qDebut").value;
+        var color = document.getElementById("qColor").value;
+        var title = document.getElementById("qTitle").value;
+
+        var d = normalizeLoose(debut).replace(/\D/g, "");
+        if (d.length !== 4) {
+          quizError.textContent = "出道纪念日请填写四位数字，例如 0101。";
+          return;
+        }
+        if (!QUIZ.debut.some(function (x) { return normalizeLoose(x) === d; })) {
+          quizError.textContent = "答案不正确，请再试一次。";
+          return;
+        }
+        if (!checkAnswer(color, QUIZ.color)) {
+          quizError.textContent = "答案不正确，请再试一次。";
+          return;
+        }
+        if (!checkAnswer(title, QUIZ.title)) {
+          quizError.textContent = "答案不正确，请再试一次。";
+          return;
+        }
+
+        sessionStorage.setItem(STORAGE_KEY, "1");
+        showPanel("forumPanel");
+      });
+    })();
+  </script>
+</body>
+</html>
