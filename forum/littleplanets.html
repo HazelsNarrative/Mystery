@@ -222,6 +222,10 @@
       border: 1px solid rgba(200, 180, 255, 0.45);
     }
 
+    .guest-mode-bar[hidden] {
+      display: none !important;
+    }
+
     .guest-mode-note {
       margin: 0;
       font-size: 12px;
@@ -1024,6 +1028,9 @@
       var authOpenedFromForum = false;
 
       function showPanel(id) {
+        if (id === "forumPanel") {
+          syncForumModeByUser();
+        }
         [loginPanel, registerPanel, quizPanel, forumPanel].forEach(function (el) {
           el.classList.toggle("active", el.id === id);
         });
@@ -1045,6 +1052,14 @@
         sessionStorage.setItem(MODE_KEY, mode);
         localStorage.setItem(MODE_KEY, mode);
         guestModeBar.hidden = mode !== "guest";
+      }
+
+      function getCurrentMemberUser() {
+        return normalize(sessionStorage.getItem(MEMBER_USER_KEY) || localStorage.getItem(MEMBER_USER_KEY));
+      }
+
+      function syncForumModeByUser() {
+        setMode(getCurrentMemberUser() ? "member" : "guest");
       }
 
       function setMemberUser(username) {
@@ -1231,11 +1246,7 @@
 
       if (sessionStorage.getItem(STORAGE_KEY) === "1" || localStorage.getItem(STORAGE_KEY) === "1") {
         showPanel("forumPanel");
-        if (sessionStorage.getItem(MEMBER_USER_KEY) || localStorage.getItem(MEMBER_USER_KEY)) {
-          setMode("member");
-        } else {
-          setMode("guest");
-        }
+        syncForumModeByUser();
       }
       refreshAuthBackControls();
 
