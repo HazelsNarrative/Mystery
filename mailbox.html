@@ -14,11 +14,26 @@
     .header {
       background: linear-gradient(90deg, #2c3e50, #314b66);
       color: white;
-      padding: 16px 20px;
-      font-size: 20px;
-      font-weight: 700;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       box-shadow: 0 6px 18px rgba(22, 40, 66, 0.2);
     }
+    .header-title { font-size: 20px; font-weight: 700; }
+    .logout-btn {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .logout-btn:hover { background: rgba(255, 255, 255, 0.2); }
     .container {
       display: grid;
       grid-template-columns: 170px minmax(0, 1fr);
@@ -51,6 +66,22 @@
       cursor: pointer;
       border: 1px solid #dce4f0;
       box-shadow: 0 4px 12px rgba(41, 69, 106, 0.08);
+    }
+    .mail-from {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: #516580;
+    }
+    .mail-subject {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2a4066;
+    }
+    .mail-time {
+      margin: 0;
+      font-size: 12px;
+      color: #7b8ca5;
     }
     .mail-item:hover {
       background: #f8fbff;
@@ -104,7 +135,10 @@
   </style>
 </head>
 <body>
-  <div class="header">我的邮箱</div>
+  <div class="header">
+    <div class="header-title">我的邮箱</div>
+    <button class="logout-btn" type="button" onclick="logoutMailbox()">登出</button>
+  </div>
   <div class="container">
     <div class="sidebar">
       <div>📥 收件箱</div>
@@ -116,15 +150,10 @@
 
   <div class="mail-detail" id="mailDetail">
     <div class="mail-detail-content">
-      <h2>紧急委托</h2>
-      <p>我们公司的当家男团 CONSTELL 在筹备演唱会期间突然失联。演出在即，事态紧急，请你尽快介入调查并确认成员去向。</p>
-      <p>建议你先去粉丝论坛看看，那里可能已经有一些零散但关键的情报。</p>
-      <p>落款：星河文娱集团</p>
-      <p>联系电话：138-xxx-7621</p>
-      <p>
-        官网：
-        <a href="./site/constell-official.html" title="本仓库官网页">https://www.constell-official.com/</a>
-      </p>
+      <h2 id="detailSubject">邮件标题</h2>
+      <p id="detailFrom"></p>
+      <p id="detailDate"></p>
+      <div id="detailBody"></div>
       <button class="close-btn" onclick="closeMailDetail()">关闭</button>
     </div>
   </div>
@@ -132,21 +161,91 @@
   <script>
     (function initMail() {
       var mailList = document.getElementById("mailList");
-      var mail = document.createElement("div");
-      mail.className = "mail-item";
-      mail.innerHTML = "<strong>来自：某娱乐公司</strong><br>主题：紧急委托";
-      mail.onclick = function () {
-        openMailDetail();
-      };
-      mailList.appendChild(mail);
+      var mails = [
+        {
+          from: "哥哥",
+          date: "10 天前",
+          subject: "最近太忙了，等演唱会结束带你去玩",
+          body: [
+            "对不起呀，最近真的太忙了，这段时间我几乎都在陪着他们筹备演唱会。",
+            "不过你放心，等演唱会圆满结束就能稍微休息一阵子了。",
+            "到时候哥哥一定带你出去玩，你想去哪里都可以，我们慢慢挑。"
+          ]
+        },
+        {
+          from: "哥哥",
+          date: "2 周前",
+          subject: "给你寄了点东西，记得看看",
+          body: [
+            "最近发奖金了，又可以给你花钱啦，哈哈。",
+            "他们知道我的情况之后，其实都挺照顾我的，人也都很好。这次出的新周边，我也一起放在里面寄给你了，你穿穿看？质量还挺好的，平时大家都会穿。",
+            "小小抱怨一下，最近工作好累啊啊啊，哎，这个圈子真的……很复杂，麻烦事也很多，不过哥哥都会想办法处理好的，你不用担心。",
+            "也不知道这样说能不能让你安心一点，但不管发生什么，哥哥都会在你这边的。",
+            "要天天开心啦！"
+          ]
+        },
+        {
+          from: "哥哥",
+          date: "更早",
+          subject: "刚才那封发错账号了",
+          body: [
+            "抱歉，切错邮箱账号了，因为两个账号密码是一样的，一下没注意就弄混了，以后要改一下。",
+            "刚才那封你别多想，我只是想把话说清楚一点。",
+            "你也别总是自己闷着，有什么就说出来，开心一点，比什么都重要。",
+            "还有，CONSTELL这次演唱会真的会很精彩，你可以期待一下。"
+          ]
+        },
+        {
+          from: "constell.manager@stargalaxy-ent.com",
+          date: "更早",
+          subject: "前几天的事，对不起",
+          body: [
+            "你是不是还在生气。",
+            "前几天那件事，是哥哥说得太重了。对不起。",
+            "你也知道我这段时间一直很忙，有时候顾不上你的感受，但那不是理由。你不高兴，是应该的。",
+            "不管发生什么，你都不用一个人扛。哥哥一直都会在你这边。",
+            "这些话当面说可能会更好一点，但我最近确实走不开，只能先这样跟你说。",
+            "另外，下个月CONSTELL演唱会首场我已经给你留好门票了。当天我会很忙，会安排人去接你，你不用担心。",
+            "等这阵子结束，我们再好好聊，好吗。",
+            "",
+            "——",
+            "CONSTELL 经纪人 / 星河文娱集团艺人管理中心",
+            "联系方式：constell.manager@stargalaxy-ent.com",
+            "官网：<a href=\"./site/constell-official.html\" title=\"本仓库官网页\">https://www.constell-official.com/</a>"
+          ]
+        }
+      ];
+
+      mails.forEach(function (item) {
+        var mail = document.createElement("div");
+        mail.className = "mail-item";
+        mail.innerHTML =
+          '<p class="mail-from">来自：' + item.from + '</p>' +
+          '<p class="mail-subject">主题：' + item.subject + '</p>' +
+          '<p class="mail-time">' + item.date + "</p>";
+        mail.onclick = function () {
+          openMailDetail(item);
+        };
+        mailList.appendChild(mail);
+      });
     })();
 
-    function openMailDetail() {
+    function openMailDetail(mail) {
+      document.getElementById("detailSubject").textContent = mail.subject;
+      document.getElementById("detailFrom").textContent = "来自：" + mail.from;
+      document.getElementById("detailDate").textContent = "时间：" + mail.date;
+      document.getElementById("detailBody").innerHTML = mail.body
+        .map(function (line) { return "<p>" + line + "</p>"; })
+        .join("");
       document.getElementById("mailDetail").style.display = "flex";
     }
 
     function closeMailDetail() {
       document.getElementById("mailDetail").style.display = "none";
+    }
+
+    function logoutMailbox() {
+      window.location.href = "./mailbox-login.html";
     }
   </script>
 </body>

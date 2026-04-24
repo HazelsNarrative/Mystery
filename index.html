@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CONSTELL 失联事件 · 游戏说明</title>
+  <title>当红男团集体失踪事件</title>
   <style>
     body {
       margin: 0;
@@ -15,59 +15,7 @@
         #f4f7fd;
       min-height: 100vh;
     }
-    .wrap {
-      width: min(980px, 94vw);
-      margin: 0 auto;
-      padding: 34px 0 42px;
-    }
-    .hero {
-      border: 1px solid #e3e9f4;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 16px 28px rgba(68, 91, 132, 0.1);
-      padding: 28px 24px;
-    }
-    .kicker {
-      margin: 0 0 10px;
-      font-size: 12px;
-      color: #6f7f9a;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(28px, 4vw, 40px);
-      color: #263753;
-    }
-    .lead {
-      margin: 0 0 16px;
-      line-height: 1.8;
-      font-size: 15px;
-      color: #3a4b64;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .card {
-      border: 1px solid #e5ebf5;
-      border-radius: 14px;
-      background: #fff;
-      padding: 12px 14px;
-    }
-    .card h2 {
-      margin: 0 0 6px;
-      font-size: 14px;
-      color: #2b4268;
-    }
-    .card p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.7;
-      color: #4a5f7e;
-    }
+    .wrap { min-height: 100vh; }
     .modal {
       position: fixed;
       inset: 0;
@@ -80,7 +28,7 @@
       background: white;
       padding: 30px;
       border-radius: 10px;
-      text-align: center;
+      text-align: left;
       width: 300px;
     }
     .modal button {
@@ -92,40 +40,26 @@
       cursor: pointer;
     }
     .modal button:hover { background: #34495e; }
-    @media (max-width: 700px) {
-      .grid { grid-template-columns: 1fr; }
-    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <p class="kicker">INTERACTIVE STORY GAME</p>
-      <h1>CONSTELL 失联事件调查档案</h1>
-      <p class="lead">你将扮演一名侦探，接手一起发生在演唱会前夕的突发委托：当红男团 CONSTELL 全员失联。你需要在有限线索中还原真相，判断每条信息背后的动机与关联。</p>
-      <div class="grid">
-        <article class="card">
-          <h2>调查方式</h2>
-          <p>通过邮件、官网、粉丝论坛与社交平台逐步收集信息，拼接时间线与人物关系。</p>
-        </article>
-        <article class="card">
-          <h2>目标</h2>
-          <p>在混杂的公开信息与传闻中锁定可信情报，确认成员去向与事件核心。</p>
-        </article>
-      </div>
-    </section>
-  </main>
+  <main class="wrap"></main>
 
   <div class="modal" id="modal">
     <div class="modal-content">
-      <p>你是一个侦探，今天你接到了来自某知名娱乐公司的委托</p>
-      <button onclick="startGame()">开始游戏</button>
+      <p>你已经一周没有联系上你的哥哥了。</p>
+      <p>他是当红男团CONSTELL的经纪人，一直都很忙，你们平时联系并不算频繁。</p>
+      <p>但这一次不太一样。</p>
+      <p>这一周里，你试过打电话、发消息，都没有任何回应。</p>
+      <p>你开始意识到，这可能不是单纯的忙碌。</p>
+      <p>你只能回头去翻你们之前的邮件记录，试图从中找到一些线索。</p>
+      <button onclick="startGame()">开始调查</button>
     </div>
   </div>
 
   <script>
     function startGame() {
-      window.location.href = "./mailbox.html";
+      window.open("./mailbox.html", "_blank");
     }
   </script>
 </body>

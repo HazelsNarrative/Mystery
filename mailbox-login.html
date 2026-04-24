@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>邮箱登录</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background: radial-gradient(circle at 20% 10%, rgba(180, 200, 255, 0.22), transparent 36%), #f4f7fd;
+      color: #21324a;
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(860px, 94vw);
+      margin: 0 auto;
+      padding: 26px 0 40px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 14px;
+      text-decoration: none;
+      color: #516a94;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .card {
+      border: 1px solid #dfe7f4;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 26px rgba(40, 65, 98, 0.1);
+      padding: 24px;
+      width: min(460px, 100%);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: #2a4066;
+    }
+    .desc {
+      margin: 0 0 14px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #49607f;
+    }
+    .hint {
+      margin: 0 0 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #5a6f8d;
+      background: #f6f9ff;
+      border: 1px solid #e4ecf9;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .field { margin-bottom: 10px; }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #486081;
+    }
+    .field input {
+      width: 100%;
+      border: 1px solid #d2deee;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      color: #233651;
+      font-family: inherit;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #5876a8, #3b5f96);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #edf3ff;
+      color: #425e8e;
+    }
+    .feedback {
+      margin: 10px 0 0;
+      min-height: 1.2em;
+      font-size: 12px;
+      color: #6b547f;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back-link" href="./mailbox.html">← 返回（回到我的邮箱）</a>
+    <section class="card">
+      <h1>邮箱登录</h1>
+      <p class="desc">你已退出当前邮箱。你可以尝试输入其他账号查看不同邮箱记录。</p>
+      <p class="hint">目前你手上还没有可验证的账号线索，先回到“我的邮箱”继续调查也许更稳妥。</p>
+      <div class="field">
+        <label for="mailUser">邮箱账号</label>
+        <input id="mailUser" type="text" placeholder="请输入邮箱账号">
+      </div>
+      <div class="field">
+        <label for="mailPass">密码</label>
+        <input id="mailPass" type="password" placeholder="请输入密码">
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" type="button" onclick="attemptLogin()">登录</button>
+        <button class="btn btn-secondary" type="button" onclick="window.location.href='./mailbox.html'">回到我的邮箱</button>
+      </div>
+      <p class="feedback" id="loginFeedback"></p>
+    </section>
+  </main>
+
+  <script>
+    function attemptLogin() {
+      var feedback = document.getElementById("loginFeedback");
+      feedback.textContent = "登录失败：账号或密码无效（暂未获得可用邮箱线索）。";
+    }
+  </script>
+</body>
+</html>
