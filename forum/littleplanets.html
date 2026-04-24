@@ -1050,12 +1050,11 @@
 
       function setMode(mode) {
         sessionStorage.setItem(MODE_KEY, mode);
-        localStorage.setItem(MODE_KEY, mode);
         guestModeBar.hidden = mode !== "guest";
       }
 
       function getCurrentMemberUser() {
-        return normalize(sessionStorage.getItem(MEMBER_USER_KEY) || localStorage.getItem(MEMBER_USER_KEY));
+        return normalize(sessionStorage.getItem(MEMBER_USER_KEY));
       }
 
       function syncForumModeByUser() {
@@ -1065,11 +1064,9 @@
       function setMemberUser(username) {
         if (!username) {
           sessionStorage.removeItem(MEMBER_USER_KEY);
-          localStorage.removeItem(MEMBER_USER_KEY);
           return;
         }
         sessionStorage.setItem(MEMBER_USER_KEY, username);
-        localStorage.setItem(MEMBER_USER_KEY, username);
       }
 
       function showAccessTip(msg) {
@@ -1244,7 +1241,7 @@
 
       applyMemberUnlocked();
 
-      if (sessionStorage.getItem(STORAGE_KEY) === "1" || localStorage.getItem(STORAGE_KEY) === "1") {
+      if (sessionStorage.getItem(STORAGE_KEY) === "1") {
         showPanel("forumPanel");
         syncForumModeByUser();
       }
@@ -1264,7 +1261,6 @@
           return;
         }
         sessionStorage.setItem(STORAGE_KEY, "1");
-        localStorage.setItem(STORAGE_KEY, "1");
         setMemberUser(user);
         setMode("member");
         authOpenedFromForum = false;
@@ -1392,7 +1388,6 @@
         }
 
         sessionStorage.setItem(STORAGE_KEY, "1");
-        localStorage.setItem(STORAGE_KEY, "1");
         setMemberUser("");
         setMode("guest");
         showPanel("forumPanel");
