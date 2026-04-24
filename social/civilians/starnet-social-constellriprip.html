@@ -18,15 +18,54 @@
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
+    .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
+    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
+    .modal.show { display:flex; }
+    .modal-card { width:min(360px,92vw); background:#fff; border-radius:14px; border:1px solid #e1e8f4; padding:16px; }
+    .modal-title { margin:0 0 8px; font-size:15px; color:#2c3f63; font-weight:800; }
+    .modal-question { margin:0 0 10px; font-size:13px; color:#5f6f89; }
+    .modal-input { width:100%; border:1px solid #d6dfef; border-radius:10px; padding:9px 10px; font-size:13px; margin-bottom:8px; }
+    .modal-error { min-height:1.2em; margin:0 0 8px; font-size:12px; color:#d44c72; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:8px; }
+    .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
+    .btn-cancel { background:#eef2fb; color:#5f6f89; }
+    .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/constellriprip</p></div><div class="cover"><div class="avatar">C</div></div>
-    <div class="profile"><h2 class="name">全都是骗子</h2><p class="id">@constellriprip</p><p class="bio">你们不想看见的东西，我来发。</p><div class="stats"><span><strong>134</strong> 关注</span><span><strong>1,098</strong> 粉丝</span><span><strong>82</strong> 动态</span></div></div>
-    <h3 class="feed-title">公开动态</h3>
-    <article class="post"><div class="post-head">constellriprip · 3 小时前</div><p>又是保姆车 + 黑伞 + 封路，谁在躲谁心里有数。</p><div class="post-stats"><span>转发 10</span><span>赞 137</span><span>评论 9</span></div></article>
-    <article class="post"><div class="post-head">constellriprip · 1 周前</div><p>最近那组楼道图别问来源，懂的人自然懂。<span class="tag">#你细品</span></p><div class="post-stats"><span>转发 7</span><span>赞 105</span><span>评论 6</span></div></article>
+    <div class="profile"><h2 class="name">全都是骗子</h2><p class="id">@constellriprip</p><p class="bio">CONSTELL CON'S TELL</p><p class="private-note">🔒 非公开账户，关注并通过验证后可查看内容</p><button class="follow-btn" id="followBtn">关注</button><div class="stats"><span><strong>134</strong> 关注</span><span><strong>1,098</strong> 粉丝</span><span><strong>82</strong> 动态</span></div></div>
+    <p class="locked-tip" id="lockedTip">该账号已开启隐私保护，当前内容不可见。</p>
+    <div id="protectedContent" hidden>
+      <h3 class="feed-title">公开动态</h3>
+      <article class="post"><div class="post-head">constellriprip · 3 小时前</div><p>又是保姆车 + 黑伞 + 封路，谁在躲谁心里有数。</p><div class="post-stats"><span>转发 10</span><span>赞 137</span><span>评论 9</span></div></article>
+      <article class="post"><div class="post-head">constellriprip · 1 周前</div><p>最近那组楼道图别问来源，懂的人自然懂。<span class="tag">#你细品</span></p><div class="post-stats"><span>转发 7</span><span>赞 105</span><span>评论 6</span></div></article>
+    </div>
   </section></main>
+  <div class="modal" id="followModal"><div class="modal-card"><p class="modal-title">关注验证</p><p class="modal-question">问题</p><input class="modal-input" id="answerInput" type="text" placeholder="请输入答案"><p class="modal-error" id="answerError"></p><div class="modal-actions"><button class="btn-cancel" type="button" id="btnCancel">取消</button><button class="btn-ok" type="button" id="btnSubmit">提交</button></div></div></div>
+  <script>
+    (function () {
+      var followBtn = document.getElementById("followBtn");
+      var followModal = document.getElementById("followModal");
+      var answerInput = document.getElementById("answerInput");
+      var answerError = document.getElementById("answerError");
+      var btnCancel = document.getElementById("btnCancel");
+      var btnSubmit = document.getElementById("btnSubmit");
+      var protectedContent = document.getElementById("protectedContent");
+      var lockedTip = document.getElementById("lockedTip");
+      var expected = "答案";
+      function closeModal() { followModal.classList.remove("show"); answerInput.value = ""; answerError.textContent = ""; }
+      followBtn.addEventListener("click", function () { followModal.classList.add("show"); answerInput.focus(); });
+      btnCancel.addEventListener("click", closeModal);
+      btnSubmit.addEventListener("click", function () {
+        if (String(answerInput.value || "").trim() !== expected) { answerError.textContent = "答案错误，请重试。"; return; }
+        closeModal(); followBtn.hidden = true; lockedTip.hidden = true; protectedContent.hidden = false;
+      });
+      followModal.addEventListener("click", function (e) { if (e.target === followModal) closeModal(); });
+    })();
+  </script>
 </body>
 </html>
