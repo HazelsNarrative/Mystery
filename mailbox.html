@@ -44,18 +44,22 @@
       padding: 10px 8px;
       border-right: 1px solid #dce6f2;
     }
-    .sidebar div {
+    .sidebar .folder-item {
       padding: 8px 10px;
       border-radius: 10px;
-      cursor: default;
+      cursor: pointer;
       font-weight: 600;
       font-size: 13px;
       color: #3d4f69;
       margin-bottom: 6px;
+      transition: background 0.15s ease, color 0.15s ease;
     }
-    .sidebar div:first-child {
+    .sidebar .folder-item.active {
       background: #dde9fb;
       color: #2a4370;
+    }
+    .sidebar .folder-item:hover {
+      background: #e5eefc;
     }
     .mail-list { padding: 22px 24px; }
     .mail-item {
@@ -141,9 +145,9 @@
   </div>
   <div class="container">
     <div class="sidebar">
-      <div>📥 收件箱</div>
-      <div>📤 已发送</div>
-      <div>🗑 垃圾箱</div>
+      <div class="folder-item active" data-folder="inbox">📥 收件箱</div>
+      <div class="folder-item" data-folder="sent">📤 已发送</div>
+      <div class="folder-item" data-folder="trash">🗑 垃圾箱</div>
     </div>
     <div class="mail-list" id="mailList"></div>
   </div>
@@ -161,6 +165,7 @@
   <script>
     (function initMail() {
       var mailList = document.getElementById("mailList");
+      var folderItems = document.querySelectorAll(".folder-item");
       var mails = [
         {
           from: "哥哥",
@@ -209,25 +214,61 @@
             "等这阵子结束，我们再好好聊，好吗。",
             "",
             "——",
-            "CONSTELL 经纪人 / 星河文娱集团艺人管理中心",
-            "联系方式：constell.manager@stargalaxy-ent.com",
-            "官网：<a href=\"./site/constell-official.html\" title=\"本仓库官网页\">https://www.constell-official.com/</a>"
+            "CONSTELL 经纪人",
+            "星河文娱集团｜艺人管理中心",
+            "",
+            "邮箱：constell.manager@stargalaxy-ent.com",
+            "官网：<a href=\"./site/constell-official.html\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"本仓库官网页\">https://www.constell-official.com/</a>"
           ]
         }
       ];
 
-      mails.forEach(function (item) {
-        var mail = document.createElement("div");
-        mail.className = "mail-item";
-        mail.innerHTML =
-          '<p class="mail-from">来自：' + item.from + '</p>' +
-          '<p class="mail-subject">主题：' + item.subject + '</p>' +
-          '<p class="mail-time">' + item.date + "</p>";
-        mail.onclick = function () {
-          openMailDetail(item);
-        };
-        mailList.appendChild(mail);
+      var folders = {
+        inbox: mails,
+        sent: [],
+        trash: []
+      };
+
+      function renderMailList(folderKey) {
+        var list = folders[folderKey] || [];
+        mailList.innerHTML = "";
+
+        if (!list.length) {
+          return;
+        }
+
+        list.forEach(function (item) {
+          var mail = document.createElement("div");
+          mail.className = "mail-item";
+          mail.innerHTML =
+            '<p class="mail-from">来自：' + item.from + '</p>' +
+            '<p class="mail-subject">主题：' + item.subject + '</p>' +
+            '<p class="mail-time">' + item.date + "</p>";
+          mail.onclick = function () {
+            openMailDetail(item);
+          };
+          mailList.appendChild(mail);
+        });
+      }
+
+      function setActiveFolder(folderKey) {
+        folderItems.forEach(function (el) {
+          if (el.dataset.folder === folderKey) {
+            el.classList.add("active");
+          } else {
+            el.classList.remove("active");
+          }
+        });
+        renderMailList(folderKey);
+      }
+
+      folderItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          setActiveFolder(item.dataset.folder);
+        });
       });
+
+      setActiveFolder("inbox");
     })();
 
     function openMailDetail(mail) {
