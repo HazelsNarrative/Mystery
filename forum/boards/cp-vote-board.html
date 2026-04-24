@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小星球宇宙基地｜第五届星轨 CP 总选举</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b5bd4;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .vote-card {
+      background: linear-gradient(180deg, #fff9fe, #f2f0ff);
+      border: 2px solid rgba(200, 160, 255, 0.5);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 12px 30px rgba(118, 98, 188, 0.16);
+    }
+    .vote-title {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: #5c4db2;
+      font-weight: 800;
+    }
+    .vote-note {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: #6b6590;
+      line-height: 1.65;
+    }
+    .vote-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .vote-item {
+      display: block;
+      border: 1px solid rgba(157, 141, 255, 0.35);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 10px 12px;
+      cursor: pointer;
+      color: #4a3d7a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .vote-item input { margin-right: 8px; }
+    .vote-error {
+      min-height: 1.2em;
+      margin: 0 0 8px;
+      font-size: 12px;
+      color: #e04d7a;
+    }
+    .vote-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .vote-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .vote-btn-submit {
+      background: linear-gradient(90deg, #ff9bd1, #9d8dff);
+      color: #fff;
+    }
+    .vote-btn-reset {
+      background: #eee8ff;
+      color: #6a5a9a;
+    }
+    .blocked {
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #6a6588;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="wrap">
+    <a class="nav-back" href="../asterbase.html">← 返回论坛首页</a>
+
+    <section class="vote-card" id="voteCard" hidden>
+      <h1 class="vote-title">第五届星轨 CP 总选举</h1>
+      <p class="vote-note">左右位按年龄顺序排序。</p>
+      <p class="vote-note">会员每天可投一票。</p>
+      <div class="vote-list">
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="re_o">Regulus × Orion：禁猎组</label>
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="re_ra">Regulus × Rasal：坠光组</label>
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="re_a">Regulus × Altair：偏轨组</label>
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="o_ra">Orion × Rasal：猎星组</label>
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="o_a">Orion × Altair：巡航组</label>
+        <label class="vote-item"><input type="radio" name="cpVotePair" value="ra_a">Rasal × Altair：双星组</label>
+      </div>
+      <p class="vote-error" id="voteError"></p>
+      <div class="vote-actions">
+        <button type="button" class="vote-btn vote-btn-reset" id="btnClearChoice">清空选择</button>
+        <button type="button" class="vote-btn vote-btn-submit" id="btnSubmitVote">提交投票</button>
+      </div>
+    </section>
+
+    <section class="blocked" id="blockedTip" hidden>
+      访客模式下暂不可参与CP总选投票，请登录后访问。
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var MODE_KEY = "lp_forum_mode";
+      var MEMBER_USER_KEY = "lp_forum_member_user";
+      var CP_VOTE_KEY = "lp_cp_vote_counts";
+      var CP_VOTE_DAILY_KEY = "lp_cp_vote_daily";
+      var pairs = ["re_o", "re_ra", "re_a", "o_ra", "o_a", "ra_a"];
+
+      var voteCard = document.getElementById("voteCard");
+      var blockedTip = document.getElementById("blockedTip");
+      var voteError = document.getElementById("voteError");
+      var btnSubmitVote = document.getElementById("btnSubmitVote");
+      var btnClearChoice = document.getElementById("btnClearChoice");
+
+      var mode = sessionStorage.getItem(MODE_KEY) || "guest";
+      var memberUser = sessionStorage.getItem(MEMBER_USER_KEY) || "";
+      if (mode !== "member" || !memberUser) {
+        blockedTip.hidden = false;
+        return;
+      }
+      voteCard.hidden = false;
+
+      function todayKey() {
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, "0");
+        var day = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + day;
+      }
+
+      function getCounts() {
+        var base = { re_o: 0, re_ra: 0, re_a: 0, o_ra: 0, o_a: 0, ra_a: 0 };
+        try {
+          var raw = JSON.parse(localStorage.getItem(CP_VOTE_KEY) || "{}");
+          pairs.forEach(function (k) {
+            if (typeof raw[k] !== "number" || raw[k] < 0) {
+              raw[k] = 0;
+            }
+          });
+          return Object.assign(base, raw);
+        } catch (e) {
+          return base;
+        }
+      }
+
+      function setCounts(counts) {
+        localStorage.setItem(CP_VOTE_KEY, JSON.stringify(counts));
+      }
+
+      function getDailyLog() {
+        try {
+          return JSON.parse(localStorage.getItem(CP_VOTE_DAILY_KEY) || "{}");
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function setDailyLog(log) {
+        localStorage.setItem(CP_VOTE_DAILY_KEY, JSON.stringify(log));
+      }
+
+      btnClearChoice.addEventListener("click", function () {
+        var checked = document.querySelector('input[name="cpVotePair"]:checked');
+        if (checked) {
+          checked.checked = false;
+        }
+        voteError.textContent = "";
+      });
+
+      btnSubmitVote.addEventListener("click", function () {
+        var selected = document.querySelector('input[name="cpVotePair"]:checked');
+        if (!selected) {
+          voteError.textContent = "请先选择 1 组再投票。";
+          return;
+        }
+
+        var log = getDailyLog();
+        var dailyId = memberUser + "::" + todayKey();
+        if (log[dailyId]) {
+          voteError.textContent = "你今天已经投过票了，明天再来吧。";
+          return;
+        }
+
+        var counts = getCounts();
+        counts[selected.value] += 1;
+        setCounts(counts);
+        log[dailyId] = selected.value;
+        setDailyLog(log);
+        voteError.textContent = "投票成功！你今天的 1 票已生效。";
+      });
+    })();
+  </script>
+</body>
+</html>

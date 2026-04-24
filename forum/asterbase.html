@@ -346,6 +346,35 @@
       align-items: center;
     }
 
+    .cp-vote-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #5a3d7a;
+      background: rgba(255, 255, 255, 0.88);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .cp-vote-btn:hover {
+      background: #fff;
+    }
+
+    .cp-banner-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .cp-banner-bottom .cp-banner-tags {
+      margin: 0;
+      flex: 1;
+    }
+
     .cp-tag {
       font-size: 11px;
       font-weight: 700;
@@ -606,7 +635,7 @@
       border-color: #ffb8dc;
     }
 
-    .member-tile--vega {
+    .member-tile--rasal {
       background: linear-gradient(180deg, #f8f6ff, #ebe4ff);
       border-color: #c4b5ff;
     }
@@ -722,6 +751,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
   </style>
 </head>
 <body>
@@ -819,11 +849,14 @@
         <span class="cp-sparkle s2" aria-hidden="true">💫</span>
         <div class="cp-banner-inner">
           <h2>🗳 CP 总选活动</h2>
-          <p>第三届「小星球 CP 总选」火热开投中！为你锁死的星轨组合疯狂打 call，冲榜解锁限定头衔、成就勋章与应援彩蛋～</p>
-          <div class="cp-banner-tags">
-            <span class="cp-tag">🔥 HOT</span>
-            <span class="cp-tag">今日已投 12.8w+</span>
-            <span class="cp-tag">榜单实时刷新</span>
+          <p>第五届「星轨CP总选」火热开投中！为你锁死的组合疯狂打 call，冲榜解锁限定头衔、成就勋章与应援彩蛋～</p>
+          <div class="cp-banner-bottom">
+            <div class="cp-banner-tags">
+              <span class="cp-tag">🔥 HOT</span>
+              <span class="cp-tag">今日已投 12.8w+</span>
+              <span class="cp-tag">榜单实时刷新</span>
+            </div>
+            <button type="button" class="cp-vote-btn" id="btnOpenCpVote">进入投票</button>
           </div>
         </div>
       </div>
@@ -869,25 +902,25 @@
       <section class="forum-zone">
         <h2 class="zone-title"><span aria-hidden="true">🪐</span> 成员区</h2>
         <div class="member-grid">
+          <button type="button" class="member-tile member-tile--regulus" data-mzone="regulus">
+            <span class="m-emoji" aria-hidden="true">⚡</span>
+            <span class="m-name">Regulus</span>
+            <span class="m-sub">寰宇异客</span>
+          </button>
           <button type="button" class="member-tile member-tile--orion" data-mzone="orion">
             <span class="m-emoji" aria-hidden="true">🎯</span>
             <span class="m-name">Orion</span>
             <span class="m-sub">星际猎手</span>
           </button>
-          <button type="button" class="member-tile member-tile--vega" data-mzone="vega">
+          <button type="button" class="member-tile member-tile--rasal" data-mzone="rasal">
             <span class="m-emoji" aria-hidden="true">💫</span>
-            <span class="m-name">Vega</span>
+            <span class="m-name">Rasal</span>
             <span class="m-sub">陨星王子</span>
           </button>
           <button type="button" class="member-tile member-tile--altair" data-mzone="altair">
             <span class="m-emoji" aria-hidden="true">✉️</span>
             <span class="m-name">Altair</span>
             <span class="m-sub">银河信使</span>
-          </button>
-          <button type="button" class="member-tile member-tile--regulus" data-mzone="regulus">
-            <span class="m-emoji" aria-hidden="true">⚡</span>
-            <span class="m-name">Regulus</span>
-            <span class="m-sub">寰宇异客</span>
           </button>
         </div>
       </section>
@@ -969,9 +1002,9 @@
           inputMode: "text",
           answers: ["青柠"]
         },
-        vega: {
-          displayName: "Vega",
-          question: "Vega第一支个人单曲的发行日期是？（四位数字）",
+        rasal: {
+          displayName: "Rasal",
+          question: "Rasal第一支个人单曲的发行日期是？（四位数字）",
           inputMode: "fourDigits",
           answers: ["0303"]
         },
@@ -1024,6 +1057,7 @@
       var btnRelationZone = document.getElementById("btnRelationZone");
       var btnRestZone = document.getElementById("btnRestZone");
       var accessTip = document.getElementById("accessTip");
+      var btnOpenCpVote = document.getElementById("btnOpenCpVote");
       var accessTipTimer = null;
       var authOpenedFromForum = false;
 
@@ -1364,6 +1398,14 @@
           return;
         }
         window.location.href = "./boards/rest-board.html";
+      });
+
+      btnOpenCpVote.addEventListener("click", function () {
+        if ((sessionStorage.getItem(MODE_KEY) || "guest") === "guest") {
+          showAccessTip("访客模式下暂不可参与CP总选投票，请登录后访问。");
+          return;
+        }
+        window.location.href = "./boards/cp-vote-board.html";
       });
 
       btnQuizSubmit.addEventListener("click", function () {
