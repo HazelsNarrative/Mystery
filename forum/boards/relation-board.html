@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关系研究所（CP 专区） - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b5bd4;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .board-head { text-align: center; margin-bottom: 20px; }
+    .board-head h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      background: linear-gradient(120deg, #ff6eb9, #9d8dff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .board-head p { margin: 0; font-size: 12px; color: #8b84a8; }
+    .community-boardbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; margin-bottom: 12px;
+      border-radius: 12px; border: 1px solid rgba(200, 180, 255, 0.45);
+      background: rgba(255, 255, 255, 0.75);
+    }
+    .board-name { color: #4a3d6e; font-weight: 700; font-size: 13px; }
+    .board-latest { color: #9d7fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .thread-list { display: flex; flex-direction: column; gap: 0; }
+    .thread-row {
+      display: block;
+      padding: 16px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      color: #7b75a0;
+      font-size: 13px;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="nav-back" href="../littleplanets.html">← 返回论坛首页</a>
+    <header class="board-head">
+      <h1>💞 关系研究所（CP 专区）</h1>
+      <p>糖点考古 · 互动分析 · 同人粮仓</p>
+    </header>
+    <div class="community-boardbar">
+      <span class="board-name">主题列表</span>
+      <span class="board-latest">LATEST</span>
+    </div>
+    <div class="thread-list">
+      <div class="thread-row"></div>
+    </div>
+  </div>
+</body>
+</html>

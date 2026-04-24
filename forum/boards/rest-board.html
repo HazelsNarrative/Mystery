@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小星球休息区（水区） - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b5bd4;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .board-head { text-align: center; margin-bottom: 20px; }
+    .board-head h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      background: linear-gradient(120deg, #78c3ff, #9d8dff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .board-head p { margin: 0; font-size: 12px; color: #8b84a8; }
+    .community-boardbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; margin-bottom: 12px;
+      border-radius: 12px; border: 1px solid rgba(200, 180, 255, 0.45);
+      background: rgba(255, 255, 255, 0.75);
+    }
+    .board-name { color: #4a3d6e; font-weight: 700; font-size: 13px; }
+    .board-latest { color: #9d7fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .thread-list { display: flex; flex-direction: column; gap: 0; }
+    .thread-row {
+      display: block;
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .thread-row:first-of-type { border-radius: 12px 12px 0 0; }
+    .thread-row:last-of-type { border-radius: 0 0 12px 12px; border-bottom: none; }
+    .thread-row:only-of-type { border-radius: 12px; }
+    .thread-row:hover { background: rgba(255, 255, 255, 0.92); }
+    .thread-row h2 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.5;
+      color: #4a3d7a;
+    }
+    .thread-excerpt {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #6a6588;
+    }
+    .thread-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: 11px; color: #9b94c0; font-weight: 600;
+    }
+    .member-only-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #8a6dff, #4f81df);
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+    }
+    .member-only-thread {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="nav-back" href="../littleplanets.html">← 返回论坛首页</a>
+    <header class="board-head">
+      <h1>🌙 小星球休息区（水区）</h1>
+      <p>今日份碎碎念 · 树洞 · 贴贴</p>
+    </header>
+    <div class="community-boardbar">
+      <span class="board-name">主题列表</span>
+      <span class="board-latest">LATEST</span>
+    </div>
+    <div class="thread-list">
+      <a class="thread-row member-only-thread" href="../threads/rest/rest-thread-report-accounts.html">
+        <h2><span class="member-only-tag">会员可见</span>有人吗，来反黑了！！！</h2>
+        <p class="thread-excerpt">最近又有一批黑粉在 StarNet 上散播低俗和造谣内容，大家看到直接举报 + 拉黑，别给热度。</p>
+        <div class="thread-meta">
+          <span>楼主：小星球8431</span>
+          <span>发帖 刚刚</span>
+          <span>回复 12</span>
+          <span>浏览 1.1k+</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var isMember = !!sessionStorage.getItem("lp_forum_member_user");
+      document.querySelectorAll(".member-only-thread").forEach(function (el) {
+        el.style.display = isMember ? "block" : "none";
+      });
+    })();
+  </script>
+</body>
+</html>

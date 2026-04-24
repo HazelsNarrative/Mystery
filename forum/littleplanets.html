@@ -887,7 +887,7 @@
           <button type="button" class="member-tile member-tile--regulus" data-mzone="regulus">
             <span class="m-emoji" aria-hidden="true">⚡</span>
             <span class="m-name">Regulus</span>
-            <span class="m-sub">寰宇异端</span>
+            <span class="m-sub">寰宇异客</span>
           </button>
         </div>
       </section>
@@ -1355,6 +1355,7 @@
           showAccessTip("访客模式下暂不可查看关系区，请登录后访问。");
           return;
         }
+        window.location.href = "./boards/relation-board.html";
       });
 
       btnRestZone.addEventListener("click", function () {
@@ -1362,6 +1363,7 @@
           showAccessTip("访客模式下暂不可查看休息区，请登录后访问。");
           return;
         }
+        window.location.href = "./boards/rest-board.html";
       });
 
       btnQuizSubmit.addEventListener("click", function () {
