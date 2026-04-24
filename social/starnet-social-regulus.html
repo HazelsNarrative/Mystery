@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@CONSTELL-Regulus | StarNet</title>
+  <style>
+    :root { --bg:#f8f9fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#6f77ff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .app { width:min(900px,94vw); margin:0 auto; padding:20px 0 30px; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 10px 24px rgba(63,77,110,0.08); }
+    .site-head { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .brand-wrap { display:flex; align-items:center; gap:4px; }
+    .brand-logo { width:100px; height:auto; display:block; transform: scale(1.62); transform-origin: left center; margin-left: -10px; }
+    .brand { margin:0; font-size:18px; font-weight:800; color:#243046; }
+    .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
+    .search-wrap { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center; }
+    .search-wrap input { flex:1; border:1px solid #d5deea; border-radius:999px; padding:8px 12px; font-size:13px; }
+    .search-wrap button { border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:#1d9bf0; cursor:pointer; }
+    .search-tip { margin:0; padding:0 16px 12px; font-size:12px; color:#6b7a8d; }
+    .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(255,217,176,0.7), rgba(255,185,135,0.7) 45%, rgba(247,149,93,0.7)), url("../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(28,76,161,.25); display:grid; place-items:center; font-weight:800; color:#24407d; background:radial-gradient(circle at 30% 30%,#fff,#ffe0c2 45%,#ffad70); }
+    .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); }
+    .name { margin:0; font-size:22px; font-weight:800; }
+    .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
+    .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; }
+    .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); }
+    .stats strong { color:#263a61; }
+    .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
+    .post { padding:14px 18px; border-bottom:1px solid var(--line); }
+    .post:last-child { border-bottom:none; }
+    .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; }
+    .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
+    .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .report-image { margin-top:10px; width:100%; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
+    .tag { color:var(--brand); }
+</style>
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <div class="site-head">
+        <div class="brand-wrap">
+          <img class="brand-logo" src="../assets/starnet-logo.png" alt="StarNet logo">
+        </div>
+        <p class="url">https://starnet.social/CONSTELL-Regulus</p>
+      </div>
+      <div class="cover"><div class="avatar">R</div></div>
+      <div class="profile">
+        <h2 class="name">Regulus</h2>
+        <p class="id">@CONSTELL-Regulus</p>
+        <p class="bio">CONSTELL成员</p>
+        <div class="stats"><span><strong>92</strong> 关注</span><span><strong>205.7万</strong> 粉丝</span><span><strong>861</strong> 动态</span></div>
+      </div>
+      <h3 class="feed-title">公开动态</h3>
+      <article class="post"><div class="post-head">Regulus · 1 小时前</div><p>今天复盘了上周的舞台版本。</p><div class="post-stats"><span>转发 7,221</span><span>赞 2.3w</span><span>评论 1,095</span></div></article>
+      <article class="post"><div class="post-head">Regulus · 昨天</div><p>状态恢复中，别担心。</p><div class="post-stats"><span>转发 1.9w</span><span>赞 5.8w</span><span>评论 4,417</span></div></article>
+      <article class="post"><div class="post-head">Regulus · 2 天前</div><p>谢谢每一条认真留言。</p><div class="post-stats"><span>转发 6,884</span><span>赞 2.1w</span><span>评论 972</span></div></article>
+      <article class="post">
+        <div class="post-head">Regulus · 1 年前</div>
+        <p>入驻 StarNet，之后在这里和大家见面。<a href="./starnet-home.html">starnet.social</a></p>
+        <div class="post-stats"><span>转发 5.2w</span><span>赞 18.6w</span><span>评论 2.1w</span></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

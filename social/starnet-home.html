@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarNet | 搜索</title>
+  <style>
+    :root {
+      --bg: #f8f9fb;
+      --card: #ffffff;
+      --line: #e5e9f2;
+      --text: #1f2a3a;
+      --sub: #73839c;
+      --brand: #6f77ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image: url("../assets/starnet-home-bg.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .app {
+      width: min(980px, 94vw);
+      margin: 0 auto;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 0;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      overflow: hidden;
+    }
+    .search-page {
+      width: min(900px, 94vw);
+      padding: 42px 24px 26px;
+      text-align: center;
+    }
+    .logo-wrap { margin-bottom: 18px; }
+    .logo {
+      width: min(420px, 72vw);
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border-radius: 10px;
+    }
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #e4e9f3;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #fff;
+      box-shadow: 0 8px 16px rgba(90, 105, 138, 0.08);
+      width: min(700px, 92%);
+      margin: 0 auto;
+    }
+    .search-wrap input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      color: #203049;
+      outline: none;
+      min-width: 0;
+    }
+    .search-wrap button {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: linear-gradient(90deg, #8a92ff, #7f83ff);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .results-wrap {
+      text-align: left;
+      width: min(760px, 92%);
+      margin: 18px auto 0;
+      min-height: 120px;
+    }
+    .section-title { margin: 2px 0 10px; font-size: 13px; color: #5d6f87; font-weight: 700; }
+    .card-link {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #e6ebf6;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #fff;
+    }
+    .card-link:hover { border-color: #cdd8ff; background: #fbfcff; }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .name { margin: 0 0 2px; font-size: 14px; font-weight: 800; color: #1b2940; }
+    .id, .bio { margin: 0; font-size: 12px; color: #607188; }
+    .news-card {
+      border: 1px solid #e6ebf6;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #fff;
+    }
+    .news-title { margin: 0 0 6px; font-size: 14px; color: #21395d; font-weight: 800; }
+    .news-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; }
+    .empty { margin: 0; font-size: 13px; color: #74859a; padding-top: 6px; }
+    @media (max-width: 720px) {
+      .search-page { padding: 30px 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="panel search-page">
+      <div class="logo-wrap">
+        <img class="logo" src="../assets/starnet-logo.png" alt="StarNet logo">
+      </div>
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="搜索用户或关键词" autocomplete="off">
+        <button id="searchBtn" type="button">搜索</button>
+      </div>
+      <section class="results-wrap" id="results"></section>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var users = [
+        { name: "Orion", id: "@CONSTELL-Orion", bio: "CONSTELL成员", href: "./starnet-social-orion.html", avatar: "O", color: "linear-gradient(135deg,#65b6ff,#6d79ff)" },
+        { name: "Vega", id: "@CONSTELL-Vega", bio: "CONSTELL成员", href: "./starnet-social-vega.html", avatar: "V", color: "linear-gradient(135deg,#9a8bff,#7ac1ff)" },
+        { name: "Altair", id: "@CONSTELL-Altair", bio: "CONSTELL成员", href: "./starnet-social-altair.html", avatar: "A", color: "linear-gradient(135deg,#72d4ff,#5b8eff)" },
+        { name: "Regulus", id: "@CONSTELL-Regulus", bio: "CONSTELL成员", href: "./starnet-social-regulus.html", avatar: "R", color: "linear-gradient(135deg,#ffbe75,#ff8c65)" }
+      ];
+
+      var news = [
+        {
+          keys: ["归辰", "演唱会", "constell", "五周年"],
+          title: "【官方动态】《归辰》演唱会筹备进入最终阶段",
+          body: "据站内同步信息，CONSTELL 五周年纪念演唱会《归辰》进入最终联排阶段。舞台视觉与曲目编排将分批释出。"
+        }
+      ];
+
+      function norm(s) {
+        return String(s || "").trim().toLowerCase();
+      }
+
+      function normIdLike(s) {
+        return norm(s).replace(/^@+/, "").replace(/\s+/g, "");
+      }
+
+      function render(query) {
+        var list = document.getElementById("results");
+        var q = norm(query);
+        var qId = normIdLike(query);
+        var userMatched = users.filter(function (u) {
+          var n = norm(u.name);
+          var id = normIdLike(u.id);
+          return q && (n.indexOf(q) !== -1 || id.indexOf(qId) !== -1);
+        });
+        var newsMatched = news.filter(function (n) {
+          return q && n.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
+        });
+
+        var html = "";
+        if (userMatched.length) {
+          html += '<h2 class="section-title">用户</h2>';
+          userMatched.forEach(function (u) {
+            html += '<a class="card-link" href="' + u.href + '">';
+            html += '<span class="avatar" style="background:' + u.color + '">' + u.avatar + "</span>";
+            html += '<span><p class="name">' + u.name + '</p><p class="id">' + u.id + '</p><p class="bio">' + u.bio + "</p></span>";
+            html += "</a>";
+          });
+        }
+        if (newsMatched.length) {
+          html += '<h2 class="section-title">新闻内容</h2>';
+          newsMatched.forEach(function (n) {
+            html += '<article class="news-card"><h3 class="news-title">' + n.title + '</h3><p class="news-body">' + n.body + "</p></article>";
+          });
+        }
+        if (q && !html) {
+          html = '<p class="empty">未搜索到相关内容，请尝试成员名、ID或关键词。</p>';
+        }
+        list.innerHTML = html;
+      }
+
+      document.getElementById("searchBtn").addEventListener("click", function () {
+        render(document.getElementById("searchInput").value);
+      });
+      document.getElementById("searchInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          render(e.target.value);
+        }
+      });
+
+      render("");
+    })();
+  </script>
+</body>
+</html>

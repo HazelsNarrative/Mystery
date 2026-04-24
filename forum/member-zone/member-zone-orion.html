@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orion - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(120, 188, 255, 0.62), transparent 36%),
+        radial-gradient(circle at 84% 6%, rgba(255, 174, 224, 0.58), transparent 34%),
+        linear-gradient(180deg, #edf5ff 0%, #eef1ff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.35;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(760px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+    .nav-back {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #5f53b9;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(170, 160, 230, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+    .hero {
+      border-radius: 20px;
+      border: 2px solid rgba(170, 160, 230, 0.52);
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(85, 74, 150, 0.16);
+      background: rgba(255, 255, 255, 0.86);
+      margin-bottom: 14px;
+    }
+    .hero-top {
+      padding: 22px 20px 18px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.85), rgba(255,255,255,0.48));
+      border-bottom: 1px solid rgba(170, 160, 230, 0.25);
+    }
+    .kicker {
+      margin: 0 0 6px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+      color: #4f81df;
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+      color: #3e356d;
+    }
+    .sub {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #6a6588;
+      font-weight: 600;
+    }
+    .body { padding: 18px 20px 22px; }
+    .body p {
+      margin: 0;
+      color: #595479;
+      line-height: 1.85;
+      font-size: 14px;
+    }
+    .thread-list-card {
+      border-radius: 18px;
+      border: 2px solid rgba(170, 160, 230, 0.52);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 14px 34px rgba(85, 74, 150, 0.16);
+      overflow: hidden;
+    }
+    .thread-list-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(170, 160, 230, 0.25);
+      font-size: 12px;
+      color: #6a6588;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .thread-row {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 14px;
+      background: rgba(255,255,255,0.72);
+    }
+    .pin-tag {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #5c95ff, #7e6bff);
+      vertical-align: middle;
+    }
+    .thread-row h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #3f356f;
+    }
+    .thread-row .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+      color: #8b84aa;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="wrap">
+    <a class="nav-back" href="../littleplanets.html">← 返回小星球宇宙基地</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
+
+    <section class="hero">
+      <div class="hero-top">
+        <p class="kicker">ORION ZONE</p>
+        <h1>Orion</h1>
+        <p class="sub">成员专区</p>
+      </div>
+      <div class="body">
+        <p>这里都是Orion的个人相关内容，包含新闻、图片、舞台物料与讨论整理。</p>
+      </div>
+    </section>
+
+    <section class="thread-list-card">
+      <div class="thread-list-head">
+        <span>主题列表</span>
+        <span>LATEST</span>
+      </div>
+      <a class="thread-row" href="./member-zone-orion-thread-guide.html">
+        <h2><span class="pin-tag">置顶</span>【置顶】入坑指南｜星际猎手Orion最全成长记录贴｜新人速看💫</h2>
+        <div class="meta">
+          <span>楼主：小星球3107</span>
+          <span>回复 146</span>
+          <span>浏览 12.6w+</span>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>

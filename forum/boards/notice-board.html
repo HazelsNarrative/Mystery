@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>官方公告区 - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      width: min(720px, 92vw);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b5bd4;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+    .board-head { text-align: center; margin-bottom: 20px; }
+    .board-head h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      background: linear-gradient(120deg, #e868a0, #6b8de8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .board-head p { margin: 0; font-size: 12px; color: #8b84a8; }
+    .community-boardbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; margin-bottom: 12px;
+      border-radius: 12px; border: 1px solid rgba(200, 180, 255, 0.45);
+      background: rgba(255, 255, 255, 0.75);
+    }
+    .board-name { color: #4a3d6e; font-weight: 700; font-size: 13px; }
+    .board-latest { color: #9d7fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .thread-list { display: flex; flex-direction: column; gap: 0; }
+    .thread-row {
+      display: block;
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .thread-row:first-of-type { border-radius: 12px 12px 0 0; }
+    .thread-row:last-of-type { border-radius: 0 0 12px 12px; border-bottom: none; }
+    .thread-row:only-of-type { border-radius: 12px; }
+    .thread-row:hover { background: rgba(255, 255, 255, 0.92); }
+    .thread-row h2 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.5;
+      color: #4a3d7a;
+    }
+    .thread-excerpt {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #6a6588;
+    }
+    .thread-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: 11px; color: #9b94c0; font-weight: 600;
+    }
+
+    .guest-readonly-note {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(200, 180, 255, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      color: #6a6588;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="nav-back" href="../littleplanets.html">← 返回论坛首页</a>
+    <p class="guest-readonly-note" id="guestReadonlyNote" hidden>当前为访客浏览模式，仅展示社区内部分帖子与内容，完整动态请登录后查看。</p>
+    <header class="board-head">
+      <h1>📢 官方公告区</h1>
+      <p>行程 · 声明 · 重要通知</p>
+    </header>
+    <div class="community-boardbar">
+      <span class="board-name">主题列表</span>
+      <span class="board-latest">LATEST</span>
+    </div>
+    <div class="thread-list">
+      <a class="thread-row" href="../threads/notice/notice-thread-regulus-drama.html">
+        <h2>【公告】关于Regulus缺席电视剧《星际回响》发布会的说明</h2>
+        <p class="thread-excerpt">因身体原因，CONSTELL成员Regulus将缺席原定出席的电视剧《星际回响》发布会活动……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球0001（站务号）</span>
+          <span>发帖 9/15 11:20</span>
+          <span>回复 89</span>
+          <span>浏览 4.0w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="../threads/notice/notice-thread-guichen.html">
+        <h2>【汇总】CONSTELL五周年纪念演唱会《归辰》信息整理（持续更新）</h2>
+        <p class="thread-excerpt">给大家整理一下目前已公开的《归辰》演唱会相关信息，方便统一查看📌</p>
+        <div class="thread-meta">
+          <span>楼主：小星球0001（站务号）</span>
+          <span>发帖 6/22 20:10</span>
+          <span>回复 74</span>
+          <span>浏览 5.2w+</span>
+        </div>
+      </a>
+      <a class="thread-row" href="../threads/notice/notice-thread-summer-games.html">
+        <h2>【官方公告】CONSTELL确认担任亚洲夏季青少年运动会压轴表演嘉宾</h2>
+        <p class="thread-excerpt">据官方消息，CONSTELL已确认将作为压轴表演嘉宾，出席本届亚洲夏季青少年运动会闭幕式舞台……</p>
+        <div class="thread-meta">
+          <span>楼主：小星球0001（站务号）</span>
+          <span>发帖 8/2 10:18</span>
+          <span>回复 103</span>
+          <span>浏览 8.6k+</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem("lp_forum_mode") !== "guest") {
+        return;
+      }
+      var tip = document.getElementById("guestReadonlyNote");
+      if (tip) {
+        tip.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>
