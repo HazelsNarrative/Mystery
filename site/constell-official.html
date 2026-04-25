@@ -628,13 +628,18 @@
     .member-portrait::before {
       content: "";
       position: absolute;
-      inset: -18%;
-      background: conic-gradient(from 180deg, rgba(94, 165, 255, 0.18), rgba(125, 115, 255, 0.12), rgba(176, 111, 255, 0.2), rgba(94, 165, 255, 0.16));
-      filter: blur(20px);
+      left: -16%;
+      right: -16%;
+      top: -44%;
+      height: 88%;
+      background:
+        radial-gradient(ellipse at top, rgba(255, 255, 255, 0.68) 0%, rgba(214, 229, 255, 0.36) 38%, rgba(136, 180, 255, 0.16) 58%, rgba(0, 0, 0, 0) 75%);
+      filter: blur(6px);
       pointer-events: none;
       opacity: 0;
-      transition: none;
-      display: none;
+      transform: translateY(-20px) scale(0.92);
+      transition: opacity 0.24s ease, transform 0.24s ease;
+      z-index: 2;
     }
 
     .member-portrait:hover {
@@ -647,9 +652,15 @@
       box-shadow: none;
     }
 
-    .member-portrait.active::before { opacity: 0; }
+    .member-portrait.active::before {
+      opacity: 0.82;
+      transform: translateY(0) scale(1);
+    }
 
-    .member-portrait:hover::before { opacity: 0; }
+    .member-portrait:hover::before {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.92);
+    }
 
     .portrait-img {
       position: absolute;
@@ -665,8 +676,8 @@
       text-transform: uppercase;
       text-align: center;
       background: transparent;
-      filter: none;
-      transition: none;
+      filter: brightness(0.9) contrast(1.02);
+      transition: filter 0.24s ease;
     }
 
     .portrait-img::before {
@@ -675,11 +686,11 @@
       inset: 0;
       pointer-events: none;
       opacity: 0;
-      transition: none;
-      display: none;
+      transition: opacity 0.24s ease;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.02) 40%),
-        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.32), transparent 58%);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.02) 42%),
+        radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.28), transparent 56%);
+      z-index: 1;
     }
 
     .member-portrait[data-member="regulus"] .portrait-img {
@@ -708,6 +719,22 @@
       background-size: 152% auto;
       background-position: center -70px;
       background-repeat: no-repeat;
+    }
+
+    .member-portrait:hover .portrait-img {
+      filter: brightness(0.9) contrast(1.02);
+    }
+
+    .member-portrait:hover .portrait-img::before {
+      opacity: 0;
+    }
+
+    .member-portrait.active .portrait-img {
+      filter: brightness(1.12) contrast(1.06);
+    }
+
+    .member-portrait.active .portrait-img::before {
+      opacity: 0.46;
     }
 
     .member-detail-stage {
@@ -1312,6 +1339,7 @@
     const closeZigzagModal = document.getElementById("closeZigzagModal");
     const memberPortraits = document.querySelectorAll(".member-portrait");
     const memberDetails = document.querySelectorAll(".member-detail");
+    const memberShowcase = document.querySelector(".member-showcase");
     const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
     const hero = document.querySelector(".hero");
     const heroStreakLayer = document.getElementById("heroStreakLayer");
@@ -1358,11 +1386,26 @@
       });
     }
 
+    function clearMemberActive() {
+      memberPortraits.forEach((portrait) => {
+        portrait.classList.remove("active");
+        portrait.setAttribute("aria-selected", "false");
+      });
+    }
+
     function setupMemberShowcase() {
       memberPortraits.forEach((portrait) => {
         portrait.addEventListener("click", () => {
           activateMember(portrait.dataset.member);
         });
+      });
+      document.addEventListener("click", (event) => {
+        if (!memberShowcase) {
+          return;
+        }
+        if (!memberShowcase.contains(event.target)) {
+          clearMemberActive();
+        }
       });
     }
 
