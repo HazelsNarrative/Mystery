@@ -89,62 +89,7 @@
       background: #0b1128;
     }
 
-    .hero img { display: block; width: 100%; height: auto; }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(from 130deg, rgba(94, 165, 255, 0.1), rgba(122, 115, 255, 0.1), rgba(176, 111, 255, 0.12), rgba(94, 165, 255, 0.12));
-      filter: blur(52px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to top, rgba(7, 10, 22, 0.72), transparent 44%),
-        linear-gradient(90deg, rgba(19, 31, 76, 0.28), rgba(72, 56, 136, 0.16));
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-streak-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    .scroll-streak {
-      position: absolute;
-      width: 2px;
-      height: 140px;
-      border-radius: 999px;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(8, 8, 12, 0.9), rgba(0, 0, 0, 0));
-      opacity: 0;
-      transform: translate3d(0, 0, 0) rotate(var(--angle, -12deg));
-      animation: streakFly 720ms ease-out forwards;
-      mix-blend-mode: multiply;
-    }
-
-    @keyframes streakFly {
-      0% {
-        opacity: 0;
-        transform: translate3d(0, 78px, 0) rotate(var(--angle, -12deg));
-      }
-      20% {
-        opacity: 0.9;
-      }
-      100% {
-        opacity: 0;
-        transform: translate3d(0, -180px, 0) rotate(var(--angle, -12deg));
-      }
-    }
+    .hero img { display: block; width: 100%; height: auto; cursor: zoom-in; }
 
     .tabs-wrap {
       position: sticky;
@@ -508,17 +453,20 @@
       border-radius: 14px;
       border: 1px solid rgba(153, 174, 255, 0.3);
       padding: 14px;
+      padding-bottom: 62px;
       background: linear-gradient(180deg, rgba(19, 29, 62, 0.72), rgba(10, 16, 35, 0.84));
       box-shadow: 0 14px 24px rgba(11, 16, 40, 0.36);
     }
 
     .product-image {
       width: 100%;
+      max-width: 210px;
       aspect-ratio: 1 / 1;
-      margin-bottom: 12px;
+      margin: 0 auto 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       border-radius: 10px;
       border: 1px dashed rgba(165, 184, 255, 0.5);
       color: #a6b4da;
@@ -526,10 +474,22 @@
       background: rgba(10, 16, 36, 0.75);
     }
 
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 10px;
+      background: #f6f8ff;
+    }
+
     .product-name { margin: 0 0 8px; color: #e5ebff; font-size: 16px; line-height: 1.5; }
 
     .product-price {
-      margin: auto 0 0;
+      margin: 0;
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
       width: fit-content;
       padding: 8px 11px;
       border-radius: 8px;
@@ -545,6 +505,7 @@
     .product-points {
       margin: 0;
       padding-left: 18px;
+      margin-bottom: 14px;
       min-height: 110px;
       color: #ced8f1;
       font-size: 14px;
@@ -592,10 +553,9 @@
     }
 
     .member-showcase {
-      display: grid;
-      grid-template-columns: minmax(420px, 1.02fr) minmax(340px, 0.98fr);
+      display: flex;
+      flex-direction: column;
       gap: 0;
-      align-items: stretch;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(153, 174, 255, 0.34);
@@ -604,10 +564,36 @@
 
     .constell-section-title {
       margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 14px;
-      letter-spacing: 0.2em;
-      font-weight: 700;
-      color: #dbe4ff;
+      letter-spacing: 0.26em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: transparent;
+      background: linear-gradient(90deg, #b9d8ff 0%, #d7cbff 52%, #a9c2ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 14px rgba(152, 168, 255, 0.35);
+    }
+
+    .constell-section-title::before,
+    .constell-section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      min-width: 32px;
+      background: linear-gradient(90deg, rgba(130, 150, 255, 0.12), rgba(176, 197, 255, 0.65), rgba(130, 150, 255, 0.12));
+      box-shadow: 0 0 10px rgba(111, 132, 255, 0.25);
+    }
+
+    .constell-section-title::before {
+      transform: translateY(1px);
+    }
+
+    .constell-section-title::after {
+      transform: translateY(1px);
     }
 
     .album-strip {
@@ -686,7 +672,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0;
-      min-height: 450px;
+      min-height: clamp(260px, 34vw, 435px);
     }
 
     .member-portrait {
@@ -694,7 +680,7 @@
       border: none;
       border-right: 1px solid rgba(153, 174, 255, 0.26);
       background: linear-gradient(160deg, rgba(25, 38, 80, 0.75), rgba(11, 17, 40, 0.95));
-      min-height: 450px;
+      min-height: 0;
       cursor: pointer;
       overflow: hidden;
       transition: none;
@@ -755,9 +741,12 @@
       color: #e3ebff;
       text-transform: uppercase;
       text-align: center;
-      background: transparent;
+      background-color: #0b1128;
       filter: brightness(0.9) contrast(1.02);
       transition: filter 0.24s ease;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .portrait-img::before {
@@ -775,30 +764,23 @@
 
     .member-portrait[data-member="regulus"] .portrait-img {
       background-image: url("../assets/constell-member-regulus.png");
-      background-size: 148% auto;
-      background-position: center -50px;
-      background-repeat: no-repeat;
+      background-position: center -10px;
     }
 
     .member-portrait[data-member="orion"] .portrait-img {
       background-image: url("../assets/constell-member-orion.png");
-      background-size: 165% auto;
-      background-position: center -90px;
-      background-repeat: no-repeat;
+      background-size: 110% auto;
+      background-position: center -60px;
     }
 
     .member-portrait[data-member="rasal"] .portrait-img {
       background-image: url("../assets/constell-member-rasal.png");
-      background-size: 152% auto;
-      background-position: center -74px;
-      background-repeat: no-repeat;
+      background-position: center -34px;
     }
 
     .member-portrait[data-member="altair"] .portrait-img {
       background-image: url("../assets/constell-member-altair.png");
-      background-size: 152% auto;
-      background-position: center -70px;
-      background-repeat: no-repeat;
+      background-position: center -30px;
     }
 
     .member-portrait:hover .portrait-img {
@@ -819,26 +801,19 @@
 
     .member-detail-stage {
       position: relative;
-      border-left: 1px solid rgba(153, 174, 255, 0.34);
+      border-top: 1px solid rgba(153, 174, 255, 0.34);
       background: linear-gradient(180deg, rgba(19, 30, 67, 0.82), rgba(10, 16, 35, 0.9));
       overflow: hidden;
-      min-height: 450px;
+      min-height: 0;
     }
 
     .member-detail {
-      position: absolute;
-      inset: 0;
+      display: none;
       padding: 22px 20px;
-      opacity: 0;
-      transform: translateY(18px);
-      pointer-events: none;
-      transition: none;
     }
 
     .member-detail.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      display: block;
     }
 
     .member-name {
@@ -956,18 +931,31 @@
         border-radius: 16px;
       }
       .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .member-showcase { grid-template-columns: 1fr; }
-      .member-visuals { min-height: 320px; }
-      .member-portrait { min-height: 320px; }
-      .member-detail-stage { min-height: 340px; border-left: none; border-top: 1px solid rgba(153, 174, 255, 0.34); }
+      .member-visuals { min-height: 265px; }
+      .member-portrait { min-height: 265px; }
+      .member-portrait[data-member="regulus"] .portrait-img { background-position: center -24px; }
+      .member-portrait[data-member="orion"] .portrait-img { background-size: 112% auto; background-position: center -54px; }
+      .member-portrait[data-member="rasal"] .portrait-img { background-position: center -32px; }
+      .member-portrait[data-member="altair"] .portrait-img { background-position: center -30px; }
+      .member-detail-stage { min-height: 0; border-top: 1px solid rgba(153, 174, 255, 0.34); }
     }
 
     @media (max-width: 640px) {
       .panel { padding: 18px; }
-      .shop-grid { grid-template-columns: 1fr; }
-      .member-visuals { min-height: 280px; }
-      .member-portrait { min-height: 280px; }
-      .member-detail-stage { min-height: 300px; }
+      .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .product-card { padding: 10px; padding-bottom: 52px; }
+      .product-image { max-width: 140px; margin: 0 auto 8px; aspect-ratio: 1 / 1; font-size: 12px; }
+      .product-name { font-size: 14px; margin-bottom: 6px; }
+      .product-points { min-height: 0; margin-bottom: 12px; font-size: 12px; line-height: 1.6; }
+      .product-price { padding: 6px 9px; font-size: 12px; left: 10px; bottom: 8px; }
+      .cart-hint { width: 24px; height: 24px; font-size: 12px; right: 8px; bottom: 8px; }
+      .member-visuals { min-height: 225px; }
+      .member-portrait { min-height: 225px; }
+      .member-portrait[data-member="regulus"] .portrait-img { background-position: center -8px; }
+      .member-portrait[data-member="orion"] .portrait-img { background-size: 116% auto; background-position: center -28px; }
+      .member-portrait[data-member="rasal"] .portrait-img { background-position: center -12px; }
+      .member-portrait[data-member="altair"] .portrait-img { background-position: center -10px; }
+      .member-detail-stage { min-height: 0; }
     }
   </style>
 </head>
@@ -990,8 +978,7 @@
     </section>
 
     <section class="hero">
-      <img src="../assets/concert-poster.png" alt="CONSTELL 演唱会海报">
-      <div class="hero-streak-layer" id="heroStreakLayer" aria-hidden="true"></div>
+      <img id="heroPoster" src="../assets/concert-poster.png" alt="CONSTELL 演唱会海报">
     </section>
 
     <section class="content-stage">
@@ -1267,7 +1254,7 @@
         <h3 class="shop-title">《归辰》五周年纪念演唱会 官方周边</h3>
         <div class="shop-grid">
           <article class="product-card">
-            <div class="product-image">商品图片预留区</div>
+            <div class="product-image"><img src="../assets/shop-lightstick.png" alt="《归辰》限定应援棒（Starlight Ver.）商品图"></div>
             <h4 class="product-name">《归辰》限定应援棒（Starlight Ver.）</h4>
             <ul class="product-points">
               <li>支持多色变光，还原「极光蓝紫」渐变光效</li>
@@ -1279,31 +1266,55 @@
           </article>
 
           <article class="product-card">
-            <div class="product-image">商品图片预留区</div>
-            <h4 class="product-name">《归辰》纪念应援T恤</h4>
+            <div class="product-image"><img src="../assets/shop-tshirt.png" alt="《归辰》纪念应援T恤商品图"></div>
+            <h4 class="product-name">《归辰》限定应援T恤</h4>
             <ul class="product-points">
-              <li>黑/白双色可选</li>
-              <li>胸前印有CONSTELL星轨标识</li>
-              <li>背面为本次演唱会主题「归辰」特别设计</li>
+              <li>100%纯棉面料，亲肤透气舒适</li>
+              <li>黑/白双色可选，前后双面主题印花</li>
+              <li>宽松版型设计，适配日常与应援场景</li>
             </ul>
             <p class="product-price">108元</p>
             <span class="cart-hint" aria-hidden="true">🛒</span>
           </article>
 
           <article class="product-card">
-            <div class="product-image">商品图片预留区</div>
-            <h4 class="product-name">「星球联盟」应援手幅套装</h4>
+            <div class="product-image"><img src="../assets/shop-totebag.png" alt="《归辰》限定帆布袋商品图"></div>
+            <h4 class="product-name">《归辰》限定帆布袋</h4>
             <ul class="product-points">
-              <li>成员个人应援标语手幅</li>
-              <li>官方统一设计版本</li>
-              <li>含夜光材质</li>
+              <li>高密度帆布材质，耐用轻便</li>
+              <li>正面演唱会主题图案印刷</li>
+              <li>可容纳A4与日常通勤物品</li>
             </ul>
-            <p class="product-price">58元</p>
+            <p class="product-price">108元</p>
             <span class="cart-hint" aria-hidden="true">🛒</span>
           </article>
 
           <article class="product-card">
-            <div class="product-image">商品图片预留区</div>
+            <div class="product-image"><img src="../assets/shop-metal-badge.png" alt="《归辰》限定金属徽章商品图"></div>
+            <h4 class="product-name">《归辰》限定金属徽章</h4>
+            <ul class="product-points">
+              <li>合金材质电镀工艺，质感细腻</li>
+              <li>采用「归辰」主题星轨元素设计</li>
+              <li>附防掉落蝴蝶扣，适配包袋外套</li>
+            </ul>
+            <p class="product-price">68元</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"><img src="../assets/shop-vinyl.png" alt="《归辰》限定黑胶唱片商品图"></div>
+            <h4 class="product-name">《归辰》限定黑胶唱片</h4>
+            <ul class="product-points">
+              <li>精选曲目黑胶压制，收藏向版本</li>
+              <li>附专属封套与内页纪念卡</li>
+              <li>限量编号发售</li>
+            </ul>
+            <p class="product-price">268元</p>
+            <span class="cart-hint" aria-hidden="true">🛒</span>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"><img src="../assets/shop-polaroid.png" alt="CONSTELL官方拍立得纪念套组商品图"></div>
             <h4 class="product-name">CONSTELL官方拍立得纪念套组</h4>
             <ul class="product-points">
               <li>成员幕后花絮拍立得复刻</li>
@@ -1436,13 +1447,13 @@
     const memberPortraits = document.querySelectorAll(".member-portrait");
     const memberDetails = document.querySelectorAll(".member-detail");
     const memberShowcase = document.querySelector(".member-showcase");
+    const heroPoster = document.getElementById("heroPoster");
     const albumCards = document.querySelectorAll(".album-card");
+    const productImages = document.querySelectorAll(".product-image img");
     const albumPreviewModal = document.getElementById("albumPreviewModal");
     const albumPreviewImage = document.getElementById("albumPreviewImage");
     const closeAlbumPreviewModal = document.getElementById("closeAlbumPreviewModal");
     const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
-    const hero = document.querySelector(".hero");
-    const heroStreakLayer = document.getElementById("heroStreakLayer");
 
     const updateNewsMap = {
       default: openPressRelease,
@@ -1525,50 +1536,6 @@
       revealBlocks.forEach((block) => observer.observe(block));
     }
 
-    function heroInView() {
-      if (!hero) {
-        return false;
-      }
-      const rect = hero.getBoundingClientRect();
-      return rect.bottom > 0 && rect.top < window.innerHeight;
-    }
-
-    function spawnScrollStreak() {
-      if (!heroStreakLayer) {
-        return;
-      }
-      const streak = document.createElement("span");
-      streak.className = "scroll-streak";
-      const left = 6 + Math.random() * 88;
-      const height = 90 + Math.random() * 140;
-      const angle = -6 - Math.random() * 24;
-      streak.style.left = left + "%";
-      streak.style.height = height + "px";
-      streak.style.setProperty("--angle", angle + "deg");
-      heroStreakLayer.appendChild(streak);
-      streak.addEventListener("animationend", () => {
-        streak.remove();
-      });
-    }
-
-    function setupHeroWheelEffect() {
-      let wheelLock = false;
-      window.addEventListener("wheel", (event) => {
-        if (event.deltaY <= 0 || !heroInView()) {
-          return;
-        }
-        if (wheelLock) {
-          return;
-        }
-        wheelLock = true;
-        spawnScrollStreak();
-        spawnScrollStreak();
-        spawnScrollStreak();
-        setTimeout(() => {
-          wheelLock = false;
-        }, 90);
-      }, { passive: true });
-    }
 
     function runUpdatesSearch() {
       const key = updatesSearchKey(updatesSearchInput.value);
@@ -1608,8 +1575,13 @@
     }
 
     function setupAlbumPreview() {
-      if (!albumCards.length || !albumPreviewModal || !albumPreviewImage || !closeAlbumPreviewModal) {
+      if (!albumPreviewModal || !albumPreviewImage || !closeAlbumPreviewModal) {
         return;
+      }
+      if (heroPoster) {
+        heroPoster.addEventListener("click", () => {
+          setAlbumPreviewOpen(true, heroPoster.getAttribute("src"), heroPoster.getAttribute("alt"));
+        });
       }
       albumCards.forEach((card) => {
         const img = card.querySelector("img");
@@ -1618,6 +1590,11 @@
         }
         card.addEventListener("click", () => {
           setAlbumPreviewOpen(true, img.getAttribute("src"), img.getAttribute("alt"));
+        });
+      });
+      productImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          setAlbumPreviewOpen(true, img.getAttribute("src"), img.getAttribute("alt") || "商品图片大图");
         });
       });
       closeAlbumPreviewModal.addEventListener("click", () => {
@@ -1723,7 +1700,6 @@
     setupMemberShowcase();
     setupAlbumPreview();
     setupScrollReveal();
-    setupHeroWheelEffect();
   </script>
 </body>
 </html>
