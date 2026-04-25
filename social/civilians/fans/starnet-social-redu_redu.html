@@ -19,6 +19,7 @@
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
     .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
     .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
@@ -45,9 +46,8 @@
     <div class="profile"><h2 class="name">惹惹太萌惹</h2><p class="id">@redu_redu</p><p class="bio">常驻扩列区，欢迎同担团粉互关。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>38</strong> 关注</span><span><strong>533</strong> 粉丝</span><span><strong>33</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
     <div id="protectedContent" hidden>
-      <h3 class="feed-title">公开动态</h3>
-          <article class="post"><div class="post-head">redu_redu · 2 天前</div><p>新朋友来扩列！回复我都会看的。</p><div class="post-stats"><span>转发 3</span><span>赞 47</span><span>评论 4</span></div></article>
-          <article class="post"><div class="post-head">redu_redu · 1 周前</div><p>团粉cp粉都可以来聊，别太拘谨。<span class="tag">#长期互关</span></p><div class="post-stats"><span>转发 2</span><span>赞 39</span><span>评论 3</span></div></article>
+          <article class="post"><div class="post-head">@惹惹太萌惹· 2 天前</div><p>新朋友来扩列！回复我都会看的。</p><div class="post-stats"><span>转发 3</span><span>赞 47</span><span>评论 4</span></div></article>
+          <article class="post"><div class="post-head">@惹惹太萌惹· 1 周前</div><p>团粉cp粉都可以来聊，别太拘谨。<span class="tag">#长期互关</span></p><div class="post-stats"><span>转发 2</span><span>赞 39</span><span>评论 3</span></div></article>
     </div></section></main>
   <div class="modal" id="followModal">
     <div class="modal-card">
@@ -58,6 +58,16 @@
       <div class="modal-actions">
         <button class="btn-cancel" type="button" id="btnCancel">取消</button>
         <button class="btn-ok" type="button" id="btnSubmit">提交</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="unfollowConfirmModal">
+    <div class="modal-card">
+      <p class="modal-title">取消关注确认</p>
+      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
+        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
       </div>
     </div>
   </div>
@@ -110,9 +120,35 @@
       var lockedTip = document.getElementById("lockedTip");
       var expected = "星轨";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+        var profileNameEl = document.querySelector(".profile .name");
+        var profileName = (profileNameEl && String(profileNameEl.textContent || "").trim()) || "";
+        var profileMention = profileName || (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || "该用户";
+        var unfollowConfirmModal = document.getElementById("unfollowConfirmModal");
+        var unfollowConfirmText = document.getElementById("unfollowConfirmText");
+        var unfollowCancelBtn = document.getElementById("unfollowCancelBtn");
+        var unfollowConfirmBtn = document.getElementById("unfollowConfirmBtn");
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
 
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
+        followBtn.classList.toggle("following", isFollowing);
         protectedContent.hidden = !isFollowing;
         lockedTip.hidden = isFollowing;
       }
@@ -123,10 +159,19 @@
         answerError.textContent = "";
       }
 
+      function closeUnfollowConfirmModal() {
+        if (unfollowConfirmModal) unfollowConfirmModal.classList.remove("show");
+      }
+
+      function openUnfollowConfirmModal() {
+        if (!unfollowConfirmModal || !unfollowConfirmText) return;
+        unfollowConfirmText.textContent = "是否取消关注@" + profileMention;
+        unfollowConfirmModal.classList.add("show");
+      }
+
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
-          isFollowing = false;
-          render();
+          openUnfollowConfirmModal();
           return;
         }
         followModal.classList.add("show");
@@ -134,6 +179,9 @@
       });
 
       btnCancel.addEventListener("click", closeModal);
+      if (unfollowCancelBtn) {
+        unfollowCancelBtn.addEventListener("click", closeUnfollowConfirmModal);
+      }
 
       btnSubmit.addEventListener("click", function () {
         if (String(answerInput.value || "").trim() !== expected) {
@@ -141,14 +189,31 @@
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
+
+      if (unfollowConfirmBtn) {
+        unfollowConfirmBtn.addEventListener("click", function () {
+          isFollowing = false;
+          persistFollowState();
+          closeUnfollowConfirmModal();
+          render();
+        });
+      }
 
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
 
+      if (unfollowConfirmModal) {
+        unfollowConfirmModal.addEventListener("click", function (e) {
+          if (e.target === unfollowConfirmModal) closeUnfollowConfirmModal();
+        });
+      }
+
+      loadFollowState();
       render();
 
       setupCommentToggles();

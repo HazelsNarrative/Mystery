@@ -12,13 +12,17 @@
     .brand-logo { width:100px; height:auto; display:block; transform:scale(1.62); transform-origin:left center; margin-left:-10px; }
     .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
     .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(171,143,212,0.76), rgba(138,112,193,0.75) 45%, rgba(99,81,158,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
-    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(75,54,112,.25); display:grid; place-items:center; font-weight:800; color:#4a2f5f; background:radial-gradient(circle at 30% 30%,#fff,#dfd0ea 45%,#a483bc); }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(75,54,112,.25); background-image:url("../../../assets/starnet-avatar-xiaowen.png"); background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#dfd0ea; }
     .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); } .name { margin:0; font-size:22px; font-weight:800; } .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
     .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; } .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); } .stats strong { color:#263a61; }
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .feed-block-title { margin:0; padding:10px 18px; font-size:13px; font-weight:800; color:#4f4b6d; border-bottom:1px solid var(--line); background:#f8f9fd; }
+    .post-public { background:rgba(255,255,255,0.9); }
+    .post-followers { background:linear-gradient(180deg, #fcf8ff, #f8f4ff); border-left:3px solid #9d8dff; }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
     .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
     .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
@@ -41,23 +45,35 @@
 </head>
 <body>
   <main class="app"><section class="panel">
-    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/xiaowen</p></div><div class="cover"><div class="avatar">温</div></div>
-    <div class="profile"><h2 class="name">小温（五周年快乐版）</h2><p class="id">@xiaowen</p><p class="bio">团粉常驻，欢迎互关和日常闲聊。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>61</strong> 关注</span><span><strong>836</strong> 粉丝</span><span><strong>48</strong> 动态</span></div></div>
+    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/xiaowen</p></div><div class="cover"><div class="avatar" aria-label="小温头像"></div></div>
+    <div class="profile"><h2 class="name">小温（五周年快乐版）</h2><p class="id">@xiaowen</p><p class="bio">终于可以去见真人啦！！！！！！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>61</strong> 关注</span><span><strong>836</strong> 粉丝</span><span><strong>48</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
     <div id="protectedContent" hidden>
-      <h3 class="feed-title">公开动态</h3>
-          <article class="post"><div class="post-head">xiaowen · 今天</div><p>开了长期交友贴，欢迎来找我玩～</p><div class="post-stats"><span>转发 5</span><span>赞 72</span><span>评论 5</span></div></article>
-          <article class="post"><div class="post-head">xiaowen · 3 天前</div><p>入坑三年，认识大家真的很开心。<span class="tag">#团粉日常</span></p><div class="post-stats"><span>转发 3</span><span>赞 56</span><span>评论 4</span></div></article>
-    </div></section></main>
+          <article class="post post-followers"><div class="post-head">@小温（五周年快乐版）· 最新</div><p>到底怎么回事呀，有没有好心人可以跟我说说</p><div class="post-stats"><span>转发 14</span><span>赞 201</span><span>评论 28</span></div><div class="comments"><p class="comment"><strong>StarNet4821：</strong>别担心哦，好好学习要紧！</p><p class="comment"><strong>StarNet7903：</strong>我朋友八号本来打算去X城接机Regulus的，但是他根本没上飞机，最近也完全不营业</p><p class="comment"><strong>StarNet3358：</strong>我感觉吧，又是公司炒作hhh</p></div></article>
+    </div>
+    <article class="post post-public"><div class="post-head">@小温（五周年快乐版）· 3 天前</div><p>这几天没看手机，发生什么了？？？为什么要说四子失踪了？？？</p><div class="post-stats"><span>转发 21</span><span>赞 245</span><span>评论 39</span></div></article>
+    <article class="post post-public"><div class="post-head">@小温（五周年快乐版）· 1 个月前</div><p>我抢到票啦！！！！！！啊啊啊啊啊啊啊！！！！！！！</p><div class="post-stats"><span>转发 12</span><span>赞 186</span><span>评论 17</span></div></article>
+    <article class="post post-public"><div class="post-head">@小温（五周年快乐版）· 1 个月前</div><p>妈妈说我期末成绩进前五就可以去🙏🙏🙏</p><div class="post-stats"><span>转发 8</span><span>赞 132</span><span>评论 13</span></div></article>
+    </section></main>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：请输入“星轨”</p>
+      <p class="modal-question">问题：四子首字母年龄排序（大写！）</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
         <button class="btn-cancel" type="button" id="btnCancel">取消</button>
         <button class="btn-ok" type="button" id="btnSubmit">提交</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="unfollowConfirmModal">
+    <div class="modal-card">
+      <p class="modal-title">取消关注确认</p>
+      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
+        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
       </div>
     </div>
   </div>
@@ -108,11 +124,37 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "星轨";
+      var expected = "RORA";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+        var profileNameEl = document.querySelector(".profile .name");
+        var profileName = (profileNameEl && String(profileNameEl.textContent || "").trim()) || "";
+        var profileMention = profileName || (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || "该用户";
+        var unfollowConfirmModal = document.getElementById("unfollowConfirmModal");
+        var unfollowConfirmText = document.getElementById("unfollowConfirmText");
+        var unfollowCancelBtn = document.getElementById("unfollowCancelBtn");
+        var unfollowConfirmBtn = document.getElementById("unfollowConfirmBtn");
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
 
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
+        followBtn.classList.toggle("following", isFollowing);
         protectedContent.hidden = !isFollowing;
         lockedTip.hidden = isFollowing;
       }
@@ -123,10 +165,19 @@
         answerError.textContent = "";
       }
 
+      function closeUnfollowConfirmModal() {
+        if (unfollowConfirmModal) unfollowConfirmModal.classList.remove("show");
+      }
+
+      function openUnfollowConfirmModal() {
+        if (!unfollowConfirmModal || !unfollowConfirmText) return;
+        unfollowConfirmText.textContent = "是否取消关注@" + profileMention;
+        unfollowConfirmModal.classList.add("show");
+      }
+
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
-          isFollowing = false;
-          render();
+          openUnfollowConfirmModal();
           return;
         }
         followModal.classList.add("show");
@@ -134,21 +185,41 @@
       });
 
       btnCancel.addEventListener("click", closeModal);
+      if (unfollowCancelBtn) {
+        unfollowCancelBtn.addEventListener("click", closeUnfollowConfirmModal);
+      }
 
       btnSubmit.addEventListener("click", function () {
-        if (String(answerInput.value || "").trim() !== expected) {
+        if (String(answerInput.value || "").trim().toUpperCase() !== expected) {
           answerError.textContent = "答案错误，请重试。";
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
+
+      if (unfollowConfirmBtn) {
+        unfollowConfirmBtn.addEventListener("click", function () {
+          isFollowing = false;
+          persistFollowState();
+          closeUnfollowConfirmModal();
+          render();
+        });
+      }
 
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
 
+      if (unfollowConfirmModal) {
+        unfollowConfirmModal.addEventListener("click", function (e) {
+          if (e.target === unfollowConfirmModal) closeUnfollowConfirmModal();
+        });
+      }
+
+      loadFollowState();
       render();
 
       setupCommentToggles();

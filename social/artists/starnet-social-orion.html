@@ -36,6 +36,7 @@
     .post-image { margin-top:10px; width:62%; max-width:360px; border:1px solid #d4ddee; border-radius:12px; display:block; }
     .tag { color:var(--brand); }
     .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
     .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
     .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
@@ -72,21 +73,20 @@
         <p class="bio">CONSTELL成员</p>
         <button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>214</strong> 关注</span><span><strong>326.8万</strong> 粉丝</span><span><strong>1,289</strong> 动态</span></div>
       </div>
-      <h3 class="feed-title">公开动态</h3>
       <article class="post">
-        <div class="post-head">Orion · 3 小时前</div>
+        <div class="post-head">@Orion· 3 小时前</div>
         <p>今天练习室先到这，大家早点睡。<span class="tag">#归辰倒计时</span></p>
         <div class="post-stats"><span>转发 1.2w</span><span>赞 3.8w</span><span>评论 2,416</span></div>
         
       </article>
       <article class="post">
-        <div class="post-head">Orion · 昨天</div>
+        <div class="post-head">@Orion· 昨天</div>
         <p>下楼买水路过宠物店，差点又把自己拐进去。青柠最近状态很好🐶</p>
         <div class="post-stats"><span>转发 8,932</span><span>赞 2.6w</span><span>评论 1,209</span></div>
         
       </article>
       <article class="post">
-        <div class="post-head">Orion · 1 周前</div>
+        <div class="post-head">@Orion· 1 周前</div>
         <p>舞台返图存一下，感谢大家的支持。我们演唱会见。</p>
         <img
           class="post-image zoomable"
@@ -97,18 +97,28 @@
         <div class="post-stats"><span>转发 3.2w</span><span>赞 11.8w</span><span>评论 9,406</span></div>
       </article>
       <article class="post">
-        <div class="post-head">Orion · 2 天前</div>
+        <div class="post-head">@Orion· 2 天前</div>
         <p>新 demo 还在改，等我再磨一磨。谢谢一直在。</p>
         <div class="post-stats"><span>转发 6,107</span><span>赞 1.9w</span><span>评论 836</span></div>
         
       </article>
       <article class="post">
-        <div class="post-head">Orion · 1 年前</div>
+        <div class="post-head">@Orion· 1 年前</div>
         <p>入驻 StarNet，之后在这里和大家见面。<a href="../starnet-home.html">starnet.social</a></p>
         <div class="post-stats"><span>转发 5.2w</span><span>赞 18.6w</span><span>评论 2.1w</span></div>
       </article>
     </section>
   </main>
+  <div class="modal" id="unfollowConfirmModal">
+    <div class="modal-card">
+      <p class="modal-title">取消关注确认</p>
+      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
+        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
+      </div>
+    </div>
+  </div>
   <script>
     (function () {
       function setupCommentToggles() {
@@ -161,11 +171,65 @@
       var followBtn = document.getElementById("followBtn");
       if (followBtn) {
         var isFollowing = false;
-        function renderFollow() { followBtn.textContent = isFollowing ? "已关注" : "关注"; }
+        var profileIdEl = document.querySelector(".profile .id");
+        var urlEl = document.querySelector(".url");
+        var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+        var profileNameEl = document.querySelector(".profile .name");
+        var profileName = (profileNameEl && String(profileNameEl.textContent || "").trim()) || "";
+        var profileMention = profileName || (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || "该用户";
+        var unfollowConfirmModal = document.getElementById("unfollowConfirmModal");
+        var unfollowConfirmText = document.getElementById("unfollowConfirmText");
+        var unfollowCancelBtn = document.getElementById("unfollowCancelBtn");
+        var unfollowConfirmBtn = document.getElementById("unfollowConfirmBtn");
+        var followStorageKey = "starnet_follow_state::" + profileId;
+        function persistFollowState() {
+          try {
+            localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+          } catch (e) {}
+        }
+        function loadFollowState() {
+          try {
+            isFollowing = localStorage.getItem(followStorageKey) === "1";
+          } catch (e) {
+            isFollowing = false;
+          }
+        }
+        function renderFollow() { followBtn.textContent = isFollowing ? "已关注" : "关注";
+        followBtn.classList.toggle("following", isFollowing); }
+        function closeUnfollowConfirmModal() {
+          if (unfollowConfirmModal) unfollowConfirmModal.classList.remove("show");
+        }
+        function openUnfollowConfirmModal() {
+          if (!unfollowConfirmModal || !unfollowConfirmText) return;
+          unfollowConfirmText.textContent = "是否取消关注@" + profileMention;
+          unfollowConfirmModal.classList.add("show");
+        }
         followBtn.addEventListener("click", function () {
-          isFollowing = !isFollowing;
+          if (isFollowing) {
+            openUnfollowConfirmModal();
+            return;
+          }
+          isFollowing = true;
+          persistFollowState();
           renderFollow();
         });
+        if (unfollowCancelBtn) {
+          unfollowCancelBtn.addEventListener("click", closeUnfollowConfirmModal);
+        }
+        if (unfollowConfirmBtn) {
+          unfollowConfirmBtn.addEventListener("click", function () {
+            isFollowing = false;
+            persistFollowState();
+            closeUnfollowConfirmModal();
+            renderFollow();
+          });
+        }
+        if (unfollowConfirmModal) {
+          unfollowConfirmModal.addEventListener("click", function (e) {
+            if (e.target === unfollowConfirmModal) closeUnfollowConfirmModal();
+          });
+        }
+        loadFollowState();
         renderFollow();
       }
 

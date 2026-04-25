@@ -29,6 +29,7 @@
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; }
     .tag { color:var(--brand); }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
     .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
     .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
@@ -65,15 +66,14 @@
       </div>
       <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
     <div id="protectedContent" hidden>
-      <h3 class="feed-title">公开动态</h3>
-            <article class="post"><div class="post-head">xhsl666666 · 刚刚</div><p>我恨你们。</p><div class="post-stats"><span>转发 2</span><span>赞 33</span><span>评论 2</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 3 天前</div><p>下辈子再也不要追星了。</p><div class="post-stats"><span>转发 1</span><span>赞 26</span><span>评论 1</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 1 周前</div><p>感觉这几个逼一直在PUA我。</p><div class="post-stats"><span>转发 3</span><span>赞 41</span><span>评论 3</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 10 天前</div><p>CONSTELL你们还没有原谅小星球吗。</p><div class="post-stats"><span>转发 2</span><span>赞 37</span><span>评论 2</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 13 天前</div><p>卧槽我真服了，CONSTELL我不骂你们了还不行吗，一群死男人又在这里玩欲擒故纵。</p><div class="post-stats"><span>转发 5</span><span>赞 83</span><span>评论 4</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 2 周前</div><p>狗公司CONSTELL上辈子是杀了你全家是吧！演唱会前雪藏是不是有病？？？？？别告诉我这又是你们的小巧思。</p><div class="post-stats"><span>转发 6</span><span>赞 96</span><span>评论 5</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 1 个月前</div><p>这次演唱会还是那些丑妆造我真的要脱粉了，五丑人消失的这段时间也给我多去做做医美好吗，修图真的很累。</p><div class="post-stats"><span>转发 4</span><span>赞 58</span><span>评论 3</span></div></article>
-            <article class="post"><div class="post-head">xhsl666666 · 2 个月前</div><p>我草啊到底是谁抢到了首日的票，黄牛你大爷的，干完这票祖宗十八代的坟都买齐了是吧。</p><div class="post-stats"><span>转发 3</span><span>赞 42</span><span>评论 2</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 刚刚</div><p>我恨你们。</p><div class="post-stats"><span>转发 2</span><span>赞 33</span><span>评论 2</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 3 天前</div><p>下辈子再也不要追星了。</p><div class="post-stats"><span>转发 1</span><span>赞 26</span><span>评论 1</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 1 周前</div><p>感觉这几个逼一直在PUA我。</p><div class="post-stats"><span>转发 3</span><span>赞 41</span><span>评论 3</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 10 天前</div><p>CONSTELL你们还没有原谅小星球吗。</p><div class="post-stats"><span>转发 2</span><span>赞 37</span><span>评论 2</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 13 天前</div><p>卧槽我真服了，CONSTELL我不骂你们了还不行吗，一群死男人又在这里玩欲擒故纵。</p><div class="post-stats"><span>转发 5</span><span>赞 83</span><span>评论 4</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 2 周前</div><p>狗公司CONSTELL上辈子是杀了你全家是吧！演唱会前雪藏是不是有病？？？？？别告诉我这又是你们的小巧思。</p><div class="post-stats"><span>转发 6</span><span>赞 96</span><span>评论 5</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 1 个月前</div><p>这次演唱会还是那些丑妆造我真的要脱粉了，五丑人消失的这段时间也给我多去做做医美好吗，修图真的很累。</p><div class="post-stats"><span>转发 4</span><span>赞 58</span><span>评论 3</span></div></article>
+            <article class="post"><div class="post-head">@星河娱乐好像真的要完蛋了· 2 个月前</div><p>我草啊到底是谁抢到了首日的票，黄牛你大爷的，干完这票祖宗十八代的坟都买齐了是吧。</p><div class="post-stats"><span>转发 3</span><span>赞 42</span><span>评论 2</span></div></article>
     </div></section>
   </main>
   <div class="modal" id="followModal">
@@ -85,6 +85,16 @@
       <div class="modal-actions">
         <button class="btn-cancel" type="button" id="btnCancel">取消</button>
         <button class="btn-ok" type="button" id="btnSubmit">提交</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="unfollowConfirmModal">
+    <div class="modal-card">
+      <p class="modal-title">取消关注确认</p>
+      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
+        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
       </div>
     </div>
   </div>
@@ -137,9 +147,35 @@
       var lockedTip = document.getElementById("lockedTip");
       var expected = "星轨";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+        var profileNameEl = document.querySelector(".profile .name");
+        var profileName = (profileNameEl && String(profileNameEl.textContent || "").trim()) || "";
+        var profileMention = profileName || (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || "该用户";
+        var unfollowConfirmModal = document.getElementById("unfollowConfirmModal");
+        var unfollowConfirmText = document.getElementById("unfollowConfirmText");
+        var unfollowCancelBtn = document.getElementById("unfollowCancelBtn");
+        var unfollowConfirmBtn = document.getElementById("unfollowConfirmBtn");
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
 
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
+        followBtn.classList.toggle("following", isFollowing);
         protectedContent.hidden = !isFollowing;
         lockedTip.hidden = isFollowing;
       }
@@ -150,10 +186,19 @@
         answerError.textContent = "";
       }
 
+      function closeUnfollowConfirmModal() {
+        if (unfollowConfirmModal) unfollowConfirmModal.classList.remove("show");
+      }
+
+      function openUnfollowConfirmModal() {
+        if (!unfollowConfirmModal || !unfollowConfirmText) return;
+        unfollowConfirmText.textContent = "是否取消关注@" + profileMention;
+        unfollowConfirmModal.classList.add("show");
+      }
+
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
-          isFollowing = false;
-          render();
+          openUnfollowConfirmModal();
           return;
         }
         followModal.classList.add("show");
@@ -161,6 +206,9 @@
       });
 
       btnCancel.addEventListener("click", closeModal);
+      if (unfollowCancelBtn) {
+        unfollowCancelBtn.addEventListener("click", closeUnfollowConfirmModal);
+      }
 
       btnSubmit.addEventListener("click", function () {
         if (String(answerInput.value || "").trim() !== expected) {
@@ -168,14 +216,31 @@
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
+
+      if (unfollowConfirmBtn) {
+        unfollowConfirmBtn.addEventListener("click", function () {
+          isFollowing = false;
+          persistFollowState();
+          closeUnfollowConfirmModal();
+          render();
+        });
+      }
 
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
 
+      if (unfollowConfirmModal) {
+        unfollowConfirmModal.addEventListener("click", function (e) {
+          if (e.target === unfollowConfirmModal) closeUnfollowConfirmModal();
+        });
+      }
+
+      loadFollowState();
       render();
 
       setupCommentToggles();
