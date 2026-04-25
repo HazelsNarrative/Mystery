@@ -38,7 +38,26 @@
     .comment strong { color:#2a426a; }
     .report-image { margin-top:10px; width:100%; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
     .tag { color:var(--brand); }
-</style>
+    .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
+    .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
+    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
+    .modal.show { display:flex; }
+    .modal-card { width:min(360px,92vw); background:#fff; border-radius:14px; border:1px solid #e1e8f4; padding:16px; }
+    .modal-title { margin:0 0 8px; font-size:15px; color:#2c3f63; font-weight:800; }
+    .modal-question { margin:0 0 10px; font-size:13px; color:#5f6f89; }
+    .modal-input { width:100%; border:1px solid #d6dfef; border-radius:10px; padding:9px 10px; font-size:13px; margin-bottom:8px; }
+    .modal-error { min-height:1.2em; margin:0 0 8px; font-size:12px; color:#d44c72; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:8px; }
+    .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
+    .btn-cancel { background:#eef2fb; color:#5f6f89; }
+    .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
+      .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+  </style>
 </head>
 <body>
   <main class="app">
@@ -54,7 +73,7 @@
         <h2 class="name">Regulus</h2>
         <p class="id">@CONSTELL-Regulus</p>
         <p class="bio">CONSTELL成员</p>
-        <div class="stats"><span><strong>92</strong> 关注</span><span><strong>205.7万</strong> 粉丝</span><span><strong>861</strong> 动态</span></div>
+        <button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>92</strong> 关注</span><span><strong>205.7万</strong> 粉丝</span><span><strong>861</strong> 动态</span></div>
       </div>
       <h3 class="feed-title">公开动态</h3>
       <article class="post"><div class="post-head">Regulus · 1 小时前</div><p>今天复盘了上周的舞台版本。</p><div class="post-stats"><span>转发 7,221</span><span>赞 2.3w</span><span>评论 1,095</span></div></article>
@@ -67,5 +86,57 @@
       </article>
     </section>
   </main>
+  <script>
+    (function () {
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+
+          comments.hidden = true;
+
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
+      var followBtn = document.getElementById("followBtn");
+      if (!followBtn) return;
+      var isFollowing = false;
+      function render() { followBtn.textContent = isFollowing ? "已关注" : "关注"; }
+      followBtn.addEventListener("click", function () {
+        isFollowing = !isFollowing;
+        render();
+      });
+      render();
+
+      setupCommentToggles();
+    })();
+  </script>
 </body>
 </html>
