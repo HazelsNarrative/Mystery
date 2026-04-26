@@ -18,6 +18,8 @@
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .post-public { background:rgba(255,255,255,0.9); }
+    .post-followers { background:linear-gradient(180deg, #fcf8ff, #f8f4ff); border-left:3px solid #9d8dff; }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
@@ -43,16 +45,18 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/weiweinuonuo</p></div><div class="cover"><div class="avatar">诺</div></div>
-    <div class="profile"><h2 class="name">惟惟诺诺</h2><p class="id">@weiweinuonuo</p><p class="bio">Rasal粉，慢热但超爱唠嗑。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>41</strong> 关注</span><span><strong>587</strong> 粉丝</span><span><strong>31</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">惟惟诺诺</h2><p class="id">@weiweinuonuo</p><p class="bio">喜欢Rasal，但不是毒唯哦</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>41</strong> 关注</span><span><strong>587</strong> 粉丝</span><span><strong>31</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
+    <article class="post post-public"><div class="post-head">@惟惟诺诺 · 最近</div><p>官博为什么把自己给隐藏了？？？到底在搞什么？？？</p><div class="post-stats"><span>转发 2</span><span>赞 17</span><span>评论 4</span></div></article>
+    <article class="post post-public"><div class="post-head">@惟惟诺诺 · 1 周前</div><p>做梦都想去演唱会，上次的solo太好看了，我又在重温，好仙的舞台。</p><div class="post-stats"><span>转发 1</span><span>赞 14</span><span>评论 2</span></div></article>
+    <article class="post post-public"><div class="post-head">@惟惟诺诺 · 2 周前</div><p>惟惟今天的舞台好好看呀啊啊啊啊啊啊，不过纹身应该都是假的吧？</p><div class="post-stats"><span>转发 1</span><span>赞 16</span><span>评论 1</span></div><div class="comments"><p class="comment"><strong>StarNet6402：</strong>是呀惟惟没有纹身也没有耳洞的</p></div></article>
     <div id="protectedContent" hidden>
-          <article class="post"><div class="post-head">@惟惟诺诺· 2 天前</div><p>交友贴里大家都好可爱，我先社恐地点个赞。</p><div class="post-stats"><span>转发 1</span><span>赞 18</span><span>评论 3</span></div></article>
-          <article class="post"><div class="post-head">@惟惟诺诺· 1 周前</div><p>今天也在稳定上头中。<span class="tag">#Rasal</span></p><div class="post-stats"><span>转发 1</span><span>赞 18</span><span>评论 3</span></div></article>
+      <article class="post post-followers"><div class="post-head">@惟惟诺诺 · 2 个月前</div><p>黑洞上那些人说的真的假的啊，但是看完不仅不想脱粉反而觉得惟惟更可怜了呜呜呜。</p><div class="post-stats"><span>转发 1</span><span>赞 12</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet2108：</strong>我不信，她们哪来的知道那么多。</p><p class="comment"><strong>StarNet7751：</strong>就算是真的，他爸犯事也跟他没关系吧，他从小又不跟他爸一起生活。</p><p class="comment"><strong>StarNet4936：</strong>我最意外的是说他妈……刚入坑大家都说他和他妈妈感情很好的。</p></div></article>
     </div></section></main>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：请输入“星轨”</p>
+      <p class="modal-question">问题：惟惟最近特别爱喝？</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
@@ -118,7 +122,7 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "星轨";
+      var expected = "豆奶";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
