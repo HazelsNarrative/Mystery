@@ -12,12 +12,17 @@
     .brand-logo { width:100px; height:auto; display:block; transform:scale(1.62); transform-origin:left center; margin-left:-10px; }
     .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
     .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(98,150,180,0.76), rgba(70,126,162,0.75) 45%, rgba(45,89,123,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
-    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(45,77,98,.25); display:grid; place-items:center; font-weight:800; color:#284661; background:radial-gradient(circle at 30% 30%,#fff,#cde1ec 45%,#779bb5); }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(45,77,98,.25); background-image:url("../../../assets/starnet-avatar-xiaojiang_tai.png"); background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#cde1ec; }
     .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); } .name { margin:0; font-size:22px; font-weight:800; } .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
     .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; } .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); } .stats strong { color:#263a61; }
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .post-public { background:rgba(255,255,255,0.9); }
+    .post-followers { background:linear-gradient(180deg, #fcf8ff, #f8f4ff); border-left:3px solid #9d8dff; }
+    .repost-card { margin-top:10px; border:1px solid #d7e0ee; border-radius:12px; background:#f9fbff; padding:10px; }
+    .repost-head { font-size:12px; color:#607087; margin-bottom:6px; }
+    .post-image { margin:10px auto 0; width:62%; max-width:360px; border:1px solid #d4ddee; border-radius:12px; display:block; }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
@@ -42,17 +47,22 @@
 </head>
 <body>
   <main class="app"><section class="panel">
-    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/xiaojiang_tai</p></div><div class="cover"><div class="avatar">汰</div></div>
-    <div class="profile"><h2 class="name">是小江也是小汰</h2><p class="id">@xiaojiang_tai</p><p class="bio">Altair担，听歌聊天型选手。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>52</strong> 关注</span><span><strong>648</strong> 粉丝</span><span><strong>37</strong> 动态</span></div></div>
+    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/xiaojiang_tai</p></div><div class="cover"><div class="avatar" aria-label="是小江也是小汰头像"></div></div>
+    <div class="profile"><h2 class="name">是小江也是小汰</h2><p class="id">@xiaojiang_tai</p><p class="bio">专注Altair</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>52</strong> 关注</span><span><strong>648</strong> 粉丝</span><span><strong>37</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
+    <article class="post post-public"><div class="post-head">@是小江也是小汰 · 最近 · 公开可见</div><p>宝宝八月见！！！！</p><div class="repost-card"><div class="repost-head">转发 @CONSTELL-Official</div><p>我们八月见。</p><img class="post-image" src="../../../assets/concert-poster.png" alt="CONSTELL官宣演唱会主视觉"></div><div class="post-stats"><span>转发 3</span><span>赞 21</span><span>评论 4</span></div></article>
     <div id="protectedContent" hidden>
-          <article class="post"><div class="post-head">@是小江也是小汰· 1 天前</div><p>晚点开个房间一起听歌吗？</p><div class="post-stats"><span>转发 2</span><span>赞 29</span><span>评论 3</span></div></article>
-          <article class="post"><div class="post-head">@是小江也是小汰· 6 天前</div><p>今天又把歌单循环了一遍，还是喜欢。<span class="tag">#日常</span></p><div class="post-stats"><span>转发 1</span><span>赞 35</span><span>评论 3</span></div></article>
-    </div></section></main>
+      <article class="post post-followers"><div class="post-head">@是小江也是小汰 · 两周前</div><p>这次真的想转唯了，落井下石的人你们都给我记着。</p><div class="post-stats"><span>转发 2</span><span>赞 13</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet4821：</strong>我早就变毒唯了</p><p class="comment"><strong>StarNet7903：</strong>搞不好这次的黑料都是队友在后面推波助澜，我看抽烟喝酒的另有其人吧</p></div></article>
+      <article class="post post-followers"><div class="post-head">@是小江也是小汰 · 三周前</div><p>造谣的人太可恨了！！！根本就是合成图吧！！</p><div class="post-stats"><span>转发 2</span><span>赞 15</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet3358：</strong>肯定是啊，都找到一模一样的图了，原本是彩排图，被移花接木上去的</p><p class="comment"><strong>StarNet2246：</strong>现在技术这么发达，造谣成本越来越低了</p><p class="comment"><strong>StarNet9184：</strong>而且宝宝那天不是回去陪家人了吗，怎么可能出现在夜店啊！！！</p></div></article>
+    </div>
+    <article class="post post-public"><div class="post-head">@是小江也是小汰 · 三周前 · 公开可见</div><p>家人们快转澄清贴！！！洗广场！！！</p><div class="post-stats"><span>转发 4</span><span>赞 19</span><span>评论 6</span></div></article>
+    <article class="post post-public"><div class="post-head">@是小江也是小汰 · 一个月前 · 公开可见</div><p>我在“璀璨盛典-年度歌手”中投给了“Alstair（CONSTELL）”，快来和我一起支持TA！</p><div class="post-stats"><span>转发 1</span><span>赞 8</span><span>评论 2</span></div></article>
+    <article class="post post-public"><div class="post-head">@是小江也是小汰 · 一个月前 · 公开可见</div><p>分享歌曲：Zig-Zag - Alstair<br>我正在听这首歌，你也来听听看吧！</p><div class="post-stats"><span>转发 1</span><span>赞 6</span><span>评论 1</span></div></article>
+    </section></main>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：请输入“星轨”</p>
+      <p class="modal-question">问题：请说：Altair是全宇宙最可爱的宝宝！</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
@@ -118,7 +128,7 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "星轨";
+      var expected = "Altair是全宇宙最可爱的宝宝！";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
