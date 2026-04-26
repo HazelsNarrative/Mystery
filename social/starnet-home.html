@@ -154,6 +154,26 @@
       border: 1px solid #d4ddee;
       border-radius: 12px;
       display: block;
+      cursor: zoom-in;
+    }
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(12, 16, 28, 0.82);
+      z-index: 260;
+      padding: 24px;
+    }
+    .image-lightbox.show { display: flex; }
+    .image-lightbox img {
+      max-width: min(1100px, 92vw);
+      max-height: 88vh;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 20px 45px rgba(0,0,0,.45);
+      background: #111827;
     }
     .news-title { margin: 0 0 6px; font-size: 14px; color: #21395d; font-weight: 800; }
     .news-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; }
@@ -177,6 +197,9 @@
       <section class="results-wrap" id="results"></section>
     </section>
   </main>
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
 
   <script>
     (function () {
@@ -226,6 +249,27 @@
 
       function normIdLike(s) {
         return norm(s).replace(/^@+/, "").replace(/\s+/g, "");
+      }
+
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        var list = document.getElementById("results");
+        if (!lightbox || !lightboxImage || !list) return;
+        list.addEventListener("click", function (e) {
+          var img = e.target && e.target.closest("img.post-image");
+          if (!img) return;
+          lightboxImage.src = img.currentSrc || img.src;
+          lightboxImage.alt = img.alt || "查看大图";
+          lightbox.classList.add("show");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
       }
 
       function render(query) {
@@ -290,6 +334,7 @@
         }
       });
 
+      setupImageZoom();
       render("");
     })();
   </script>

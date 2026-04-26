@@ -43,7 +43,7 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/twinstar_loop</p></div><div class="cover"><div class="avatar">双</div></div>
-    <div class="profile"><h2 class="name">双星环绕不息</h2><p class="id">@twinstar_loop</p><p class="bio">双星组常驻选手，欢迎同担来玩。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>49</strong> 关注</span><span><strong>699</strong> 粉丝</span><span><strong>35</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">双星环绕不息</h2><p class="id">@twinstar_loop</p><p class="bio">热爱巡游天际，双星环绕不息。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>49</strong> 关注</span><span><strong>699</strong> 粉丝</span><span><strong>35</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
     <div id="protectedContent" hidden>
           <article class="post"><div class="post-head">@双星环绕不息· 最新</div><p>双星环绕不息，今天也是嗑糖的一天。</p><div class="post-stats"><span>转发 2</span><span>赞 14</span><span>评论 8</span></div></article>
@@ -52,7 +52,7 @@
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：请输入“星轨”</p>
+      <p class="modal-question">问题：我A经典吃醋名言（五个字）</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
@@ -118,7 +118,7 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "星轨";
+      var expected = "你别不要我";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");

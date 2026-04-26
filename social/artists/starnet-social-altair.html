@@ -37,6 +37,9 @@
     .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
     .comment strong { color:#2a426a; }
     .report-image { margin:10px auto 0; width:62%; max-width:360px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; cursor: zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
     .tag { color:var(--brand); }
     .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
@@ -120,8 +123,32 @@
       </div>
     </div>
   </div>
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img").forEach(function (img) {
+          img.classList.add("zoomable");
+          img.style.cursor = "zoom-in";
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
       function setupCommentToggles() {
         document.querySelectorAll(".post").forEach(function (post) {
           var comments = post.querySelector(".comments");
@@ -235,6 +262,7 @@
       }
 
       setupCommentToggles();
+      setupImageZoom();
     })();
   </script>
 </body>

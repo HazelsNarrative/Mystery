@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大家都来聊聊那些触动你的团爱瞬间吧～ - 小星球宇宙基地</title>
+  <style>
+    :root { --text: #4e4a76; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 8%, rgba(255, 182, 223, 0.75), transparent 35%),
+        radial-gradient(circle at 83% 4%, rgba(172, 198, 255, 0.75), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f2edff 100%);
+      min-height: 100vh;
+    }
+    .stars::before, .stars::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 2px);
+      background-size: 160px 160px; opacity: 0.4;
+    }
+    .wrap { position: relative; z-index: 1; width: min(620px, 92vw); margin: 0 auto; padding: 20px 0 40px; }
+    .nav-back { display: inline-block; font-size: 13px; font-weight: 600; color: #6b5bd4; text-decoration: none; margin-bottom: 12px; }
+    .nav-back:hover { text-decoration: underline; }
+    .thread-card {
+      background: linear-gradient(180deg, #fffdf9, #f6f0ff);
+      border: 2px solid rgba(200, 170, 255, 0.55);
+      border-radius: 18px;
+      padding: 20px 18px 22px;
+      box-shadow: 0 12px 32px rgba(100, 80, 160, 0.15);
+    }
+    .lp-thread-kicker { font-size: 11px; font-weight: 700; color: #9d7fff; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .member-badge { display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:10px; font-weight:800; color:#fff; background:linear-gradient(90deg,#ff6f9f,#8a6dff); }
+    .lp-thread-title { margin: 0 0 8px; font-size: 18px; font-weight: 800; line-height: 1.45; color: #4a3d7a; }
+    .lp-thread-author { margin: 0 0 4px; font-size: 13px; color: #7a6fb0; }
+    .lp-thread-hr { text-align: center; margin: 10px 0; font-size: 12px; color: #c8c0e0; letter-spacing: 0.2em; }
+    .lp-thread-body p { margin: 0 0 7px; font-size: 14px; line-height: 1.75; color: #4e4a6a; white-space: pre-line; }
+    .lp-cmt { border-radius: 12px; padding: 10px 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(200, 180, 250, 0.35); margin-top: 10px; }
+    .lp-cmt .who { font-size: 12px; font-weight: 800; color: #7d6adb; margin-bottom: 4px; }
+    .lp-cmt p { margin: 0; font-size: 13px; line-height: 1.65; color: #5a5678; white-space: pre-line; }
+    .denied { border-radius: 14px; padding: 14px; border:1px solid rgba(200,180,255,.45); background:rgba(255,255,255,.82); color:#645f83; font-size:13px; line-height:1.7; }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <article class="wrap">
+    <a class="nav-back" href="../../boards/general-board.html">← 返回主题列表</a>
+
+    <div class="denied" id="memberDenied" hidden>
+      该帖子为会员可见内容。请先使用邀请码注册并登录后查看。
+    </div>
+
+    <div class="thread-card" id="memberContent" hidden>
+      <p class="lp-thread-kicker">💬 CONSTELL 综合讨论区 · 帖子正文 <span class="member-badge">会员可见</span></p>
+      <h1 class="lp-thread-title">大家都来聊聊那些触动你的团爱瞬间吧～</h1>
+      <p class="lp-thread-author">楼主：小星球6408</p>
+      <p class="lp-thread-hr">⸻</p>
+      <div class="lp-thread-body">
+        <p>我是两年前看他们一起去动物园兼职入坑的55555
+那期实在是太好哭了，和即将离开的小动物告别，大家手里捧着烛光最后在帐篷里谈心，哎，好羡慕他们四个的感情</p>
+      </div>
+      <p class="lp-thread-hr">⸻</p>
+      <p class="lp-thread-hr" style="font-size:11px;color:#a39cc6">评论区</p>
+      <div class="lp-cmt"><div class="who">小星球1184</div><p>我觉得另外三个一起欺负O的时候挺有团爱的（O担别骂我</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球2269</div><p>谁还记得首场演唱会，Altair一哭，其他三个宝宝就围上来的场景……</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球3347</div><p>靠别说了，我在现场，当时我也快哭晕了，孩子们都太不容易了
+只后悔没有在他们一出道就爱上</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球4481</div><p>出道是直播，之前也没什么宣传，星河那会儿规模也不算大，好像就包了几个城市的几块大屏同步直播了一下，我记得那天我刚下班，抬头就看到他们四个在唱歌，然后一眼就看中我担，一直追到现在。</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球5527</div><p>楼上居然是接生粉吗，好厉害</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球6670</div><p>咱们星应该没有接生粉一说吧，出道前都神神秘秘的，也就Rasal和Altair比较有名一点。</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球7731</div><p>我觉得团爱就是他们现在做节目真的越来越有默契了，抛梗接梗好溜，刚出道那些物料我都不敢二刷，有些真的太尴尬了233333</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球8862</div><p>Regulus那会儿是为了维持高冷人设还是啥，反正经常臭着脸，好多被他圈进来的都爬去别家了</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球9015</div><p>我高度怀疑是紧张的，热热其实脾气很好，只是没表情就很凶，一直被人误会</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球1163</div><p>团爱瞬间，有无人记得前年跨年物料，明明是个人战，最后Ra啥也不比了，把金币全爆给阿太</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球2278</div><p>记得记得，然后欧日昂就在旁边做饭，惹哥穿着围裙蹲在旁边生火，最后火没生起来，脸完全黑了hhh</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球3390</div><p>然后Altair大叫：化妆老师！！！！我哥脸又黑了！！！
+我当时还想说为什么是又，结果后来花絮说惹哥已经失败过一次了，他觉得太丢脸又求大家重录了一次，其实当时已经凌晨两点了</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球4472</div><p>虽然Re是大哥，但是大家都很宠他，这点也很好嗑！</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球5538</div><p>是啊是啊，前段时间欧老师策划的带大家去琅婆罗洲，也说是因为惹哥一直想去看热带雨林（虽然惹哥可能这辈子都不想去第二次了23333</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球6601</div><p>总结：阿惹是好孩子，就是太别扭了</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球7715</div><p>都团爱了，怎么没人提出道那年的爱豆运动会啊……</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球8857</div><p>哦对，接力闯关，其他团都已经放弃了，只有我们家还在咬牙坚持，那一天的挑战，我看着都已经快虚脱了，最后欧宝的表现太好了！</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球9964</div><p>欧最后爬上去按按钮的那个瞬间我跟我妈抱在一起尖叫</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球1038</div><p>现在宿舍的冰箱好像还是那时候拿的吧？</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球2140</div><p>Rasal贡献经典名言：我知道这冰箱本来不应该是我们的，是我们偏要不懂事的站在这里。</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球3279</div><p>“但镜头装下了我的脸，就丢掉了我的遗憾。”后来被好多家拿去当文案用了，都不给rara版权费。</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球4315</div><p>所以说我们星真不是一帆风顺的组合，早期大家全都很拼……</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球5478</div><p>早期他们不仅跟外人较劲，还跟彼此较劲，有人说那天Re跑那么快是因为跟O吵架了</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球6581</div><p>笑死，后来再没看re跑那么快过，跟疯了一样</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球7620</div><p>RORA forever！</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球8783</div><p>现在呢，怎么大家说的都是以前的事hhh</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球9805</div><p>现在有单人活动了，合体时间越来越少了呜呜呜，最近的物料都是两两组合，上一个团体物料还是在两个月前</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球1952</div><p>但是八月份他们要去集训了啊，那个时候天天粘在一起，肯定会有好多小物料给我们看</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球3016</div><p>就怕他们自己偷着乐，星群宝宝们，艾斯特也想跟你们一起幸福</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球4167</div><p>八月份整个团都在一起，又是集训，又是演唱会，哦对了，集训期间还要给欧包过生日</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球5294</div><p>Altair给每个人都定制项链也很有团爱啊，虽然平时总说他下克上，但是他对哥哥们一直都好大方</p></div>
+      <p class="lp-thread-hr" style="margin:4px 0">⸻</p>
+      <div class="lp-cmt"><div class="who">小星球6382</div><p>Rasal珠宝代言也给队友们都准备了胸针，很萌</p></div>
+    </div>
+  </article>
+  <script>
+    (function () {
+      var isMember = !!(sessionStorage.getItem("lp_forum_member_user") || localStorage.getItem("lp_forum_member_user"));
+      var denied = document.getElementById("memberDenied");
+      var content = document.getElementById("memberContent");
+      if (isMember) {
+        content.hidden = false;
+      } else {
+        denied.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>
