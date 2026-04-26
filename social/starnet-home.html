@@ -83,6 +83,13 @@
       font-weight: 700;
       cursor: pointer;
     }
+    .search-tip {
+      margin: 10px auto 0;
+      width: min(700px, 92%);
+      text-align: left;
+      font-size: 12px;
+      color: #6d7f98;
+    }
     .results-wrap {
       text-align: left;
       width: min(760px, 92%);
@@ -133,6 +140,21 @@
     .post-head { margin: 0 0 6px; font-size: 13px; color: #5e6f87; }
     .post-head strong { color: #21395d; }
     .post-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; white-space: pre-line; }
+    .repost-card {
+      margin-top: 8px;
+      border: 1px solid #d7e0ee;
+      border-radius: 12px;
+      background: #f9fbff;
+      padding: 10px;
+    }
+    .repost-head { margin: 0 0 6px; font-size: 12px; color: #607087; }
+    .post-image {
+      margin: 8px auto 0;
+      width: min(360px, 100%);
+      border: 1px solid #d4ddee;
+      border-radius: 12px;
+      display: block;
+    }
     .news-title { margin: 0 0 6px; font-size: 14px; color: #21395d; font-weight: 800; }
     .news-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; }
     .empty { margin: 0; font-size: 13px; color: #74859a; padding-top: 6px; }
@@ -151,6 +173,7 @@
         <input id="searchInput" type="search" placeholder="搜索用户或关键词" autocomplete="off">
         <button id="searchBtn" type="button">搜索</button>
       </div>
+      <p class="search-tip">艺人新闻请使用“名字 + 关键词”进行搜索，例如：CONSTELL 演唱会。</p>
       <section class="results-wrap" id="results"></section>
     </section>
   </main>
@@ -166,7 +189,7 @@
 
       var news = [
         {
-          keys: ["归辰", "演唱会", "constell", "五周年"],
+          keys: ["归辰", "五周年"],
           title: "【官方动态】《归辰》演唱会筹备进入最终阶段",
           body: "据站内同步信息，CONSTELL 五周年纪念演唱会《归辰》进入最终联排阶段。舞台视觉与曲目编排将分批释出。"
         }
@@ -176,6 +199,24 @@
           keys: ["风萧萧", "fxx"],
           id: "@风萧萧兮",
           body: "最近有人私信问我有没有合集，就简单列一下最近写的RO（Regulus × Orion），都在StarNet上，感兴趣可以自己翻一下。\n\n基本都是随手写的，篇幅不太固定，也没怎么修，轻拍🙏\n📄《禁区》｜短篇｜约1.8w\n📄《夜行偏差》｜短篇｜约3w\n📄《RE：O 从零开始的寰宇猎手生活》｜长篇｜23.5w\n📄《恒星失序》｜短篇｜约9k\n📄《界外》｜一发完｜约5k"
+        },
+        {
+          keys: ["constell 演唱会", "CONSTELL 演唱会", "constell", "演唱会", "xiaojiang_tai", "我们八月见"],
+          id: "@CONSTELL-Official",
+          body: "我们八月见。",
+          postImage: "../assets/concert-poster.png"
+        },
+        {
+          keys: ["altair 夜店"],
+          matchMode: "exact",
+          id: "@Altair520",
+          body: "澄清！！！网传“Altair 夜店包厢图”均为不实信息，相关夜店内图片系拼接合成。另有传言称物料里出现某品牌威士忌、电子烟，也与事实不符：画面中出现的是海外品牌的护嗓药物，所谓“电子烟”实为唇膏。请勿继续传播失实内容。"
+        },
+        {
+          keys: ["altair 夜店"],
+          matchMode: "exact",
+          id: "@独家星闻",
+          body: "劲爆！当红男团人气成员 Altair 被曝深夜流连夜店，更有粉丝翻出其在官方物料中疑似出现抽烟、饮酒画面，相关争议持续发酵中……更多内容请见>>>"
         }
       ];
 
@@ -200,6 +241,9 @@
           return q && n.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
         });
         var postsMatched = posts.filter(function (p) {
+          if (p.matchMode === "exact") {
+            return q && p.keys.some(function (k) { return norm(k) === q; });
+          }
           return q && p.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
         });
 
@@ -222,7 +266,12 @@
         if (postsMatched.length) {
           html += '<h2 class="section-title">动态</h2>';
           postsMatched.forEach(function (p) {
-            html += '<article class="post-card"><p class="post-head"><strong>' + p.id + '</strong> · 动态</p><p class="post-body">' + p.body + "</p></article>";
+            html += '<article class="post-card"><p class="post-head"><strong>' + p.id + '</strong> · 动态</p>';
+            html += '<p class="post-body">' + p.body + "</p>";
+            if (p.postImage) {
+              html += '<img class="post-image" src="' + p.postImage + '" alt="动态配图">';
+            }
+            html += "</article>";
           });
         }
         if (q && !html) {
