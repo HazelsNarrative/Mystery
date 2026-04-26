@@ -63,13 +63,46 @@
     .thread-row {
       display: block;
       padding: 16px 14px;
-      border-radius: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
       background: rgba(255, 255, 255, 0.55);
-      color: #7b75a0;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .thread-row:first-of-type { border-radius: 12px 12px 0 0; }
+    .thread-row:last-of-type { border-radius: 0 0 12px 12px; border-bottom: none; }
+    .thread-row:only-of-type { border-radius: 12px; }
+    .thread-row:hover { background: rgba(255, 255, 255, 0.92); }
+    .thread-row h2 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.5;
+      color: #4a3d7a;
+    }
+    .thread-excerpt {
+      margin: 0 0 10px;
       font-size: 13px;
       line-height: 1.6;
-      border: 1px solid rgba(255, 255, 255, 0.55);
+      color: #6a6588;
     }
+    .thread-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: 11px; color: #9b94c0; font-weight: 600;
+    }
+    .member-only-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, #8a6dff, #4f81df);
+      margin-right: 8px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+    }
+    .member-only-thread { display: none; }
   </style>
 </head>
 <body>
@@ -85,8 +118,25 @@
       <span class="board-latest">LATEST</span>
     </div>
     <div class="thread-list">
-      <div class="thread-row"></div>
+      <a class="thread-row member-only-thread" href="../threads/relation/relation-thread-oreo-cp.html">
+        <h2><span class="member-only-tag">会员可见</span>只有我觉得Orion和Regulus是最好嗑的一对吗？？？</h2>
+        <p class="thread-excerpt">听说这对居然是最冷门的，何意味？？？</p>
+        <div class="thread-meta">
+          <span>楼主：小星球5880</span>
+          <span>发帖 刚刚</span>
+          <span>回复 17</span>
+          <span>浏览 932</span>
+        </div>
+      </a>
     </div>
   </div>
+  <script>
+    (function () {
+      var isMember = !!sessionStorage.getItem("lp_forum_member_user");
+      document.querySelectorAll(".member-only-thread").forEach(function (el) {
+        el.style.display = isMember ? "block" : "none";
+      });
+    })();
+  </script>
 </body>
 </html>

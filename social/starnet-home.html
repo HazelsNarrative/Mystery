@@ -123,6 +123,16 @@
       margin-bottom: 8px;
       background: #fff;
     }
+    .post-card {
+      border: 1px solid #e6ebf6;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #fff;
+    }
+    .post-head { margin: 0 0 6px; font-size: 13px; color: #5e6f87; }
+    .post-head strong { color: #21395d; }
+    .post-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; white-space: pre-line; }
     .news-title { margin: 0 0 6px; font-size: 14px; color: #21395d; font-weight: 800; }
     .news-body { margin: 0; font-size: 13px; line-height: 1.7; color: #33465f; }
     .empty { margin: 0; font-size: 13px; color: #74859a; padding-top: 6px; }
@@ -161,6 +171,13 @@
           body: "据站内同步信息，CONSTELL 五周年纪念演唱会《归辰》进入最终联排阶段。舞台视觉与曲目编排将分批释出。"
         }
       ];
+      var posts = [
+        {
+          keys: ["风萧萧", "fxx"],
+          id: "@风萧萧兮",
+          body: "最近有人私信问我有没有合集，就简单列一下最近写的RO（Regulus × Orion），都在StarNet上，感兴趣可以自己翻一下。\n\n基本都是随手写的，篇幅不太固定，也没怎么修，轻拍🙏\n📄《禁区》｜短篇｜约1.8w\n📄《夜行偏差》｜短篇｜约3w\n📄《RE：O 从零开始的寰宇猎手生活》｜长篇｜23.5w\n📄《恒星失序》｜短篇｜约9k\n📄《界外》｜一发完｜约5k"
+        }
+      ];
 
       function norm(s) {
         return String(s || "").trim().toLowerCase();
@@ -182,6 +199,9 @@
         var newsMatched = news.filter(function (n) {
           return q && n.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
         });
+        var postsMatched = posts.filter(function (p) {
+          return q && p.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
+        });
 
         var html = "";
         if (userMatched.length) {
@@ -197,6 +217,12 @@
           html += '<h2 class="section-title">新闻内容</h2>';
           newsMatched.forEach(function (n) {
             html += '<article class="news-card"><h3 class="news-title">' + n.title + '</h3><p class="news-body">' + n.body + "</p></article>";
+          });
+        }
+        if (postsMatched.length) {
+          html += '<h2 class="section-title">动态</h2>';
+          postsMatched.forEach(function (p) {
+            html += '<article class="post-card"><p class="post-head"><strong>' + p.id + '</strong> · 动态</p><p class="post-body">' + p.body + "</p></article>";
           });
         }
         if (q && !html) {
