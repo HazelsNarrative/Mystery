@@ -36,7 +36,11 @@
     .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
     .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
     .comment strong { color:#2a426a; }
-    .report-image { margin-top:10px; width:100%; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
+    .report-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; cursor: zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
     .tag { color:var(--brand); }
     .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
@@ -80,6 +84,38 @@
       <article class="post"><div class="post-head">@Regulus· 昨天</div><p>状态恢复中，别担心。</p><div class="post-stats"><span>转发 1.9w</span><span>赞 5.8w</span><span>评论 4,417</span></div></article>
       <article class="post"><div class="post-head">@Regulus· 2 天前</div><p>谢谢每一条认真留言。</p><div class="post-stats"><span>转发 6,884</span><span>赞 2.1w</span><span>评论 972</span></div></article>
       <article class="post">
+        <div class="post-head">@Regulus· 半年前</div>
+        <p>休息一下。</p>
+        <img
+          class="post-image zoomable"
+          src="../../assets/starnet-regulus-rest-post.png"
+          data-fallback-srcs="./assets/starnet-regulus-rest-post.png|assets/starnet-regulus-rest-post.png|../../assets/starnet-regulus-rest-post.png"
+          alt="Regulus 半年前动态配图"
+        >
+        <div class="post-stats"><span>转发 2.6w</span><span>赞 8.9w</span><span>评论 3</span></div>
+        <div class="comments">
+          <p class="comment"><strong>StarNet1883：</strong>啊啊啊啊啊啊啊</p>
+          <p class="comment"><strong>StarNet5327：</strong>惹哥这次会回家看看嘛</p>
+          <p class="comment"><strong>StarNet9041：</strong>好像是去纽约和顶级舞团合作了？</p>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-head">@Regulus· 1 年前</div>
+        <p>🎂</p>
+        <img
+          class="post-image zoomable"
+          src="../../assets/starnet-regulus-birthday-post.png"
+          data-fallback-srcs="./assets/starnet-regulus-birthday-post.png|assets/starnet-regulus-birthday-post.png|../../assets/starnet-regulus-birthday-post.png"
+          alt="Regulus 生日动态配图"
+        >
+        <div class="post-stats"><span>转发 3.8w</span><span>赞 11.2w</span><span>评论 4</span></div>
+        <div class="comments">
+          <p class="comment"><strong>StarNet2031：</strong>祝Rasal生日快乐呀</p>
+          <p class="comment"><strong>StarNet5786：</strong>这是在MV拍摄中吗哈哈哈哈哈</p>
+          <p class="comment"><strong>StarNet8164：</strong>RaRa真的好喜欢看书</p>
+        </div>
+      </article>
+      <article class="post">
         <div class="post-head">@Regulus· 1 年前</div>
         <p>入驻 StarNet，之后在这里和大家见面。<a href="../starnet-home.html">starnet.social</a></p>
         <div class="post-stats"><span>转发 5.2w</span><span>赞 18.6w</span><span>评论 2.1w</span></div>
@@ -95,6 +131,9 @@
         <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
       </div>
     </div>
+  </div>
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
   </div>
   <script>
     (function () {
@@ -135,6 +174,36 @@
           }
         });
       }
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img").forEach(function (img) {
+          img.classList.add("zoomable");
+          img.style.cursor = "zoom-in";
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      document.querySelectorAll("img[data-fallback-srcs]").forEach(function (img) {
+        var candidates = (img.getAttribute("data-fallback-srcs") || "").split("|").filter(Boolean);
+        var idx = candidates.indexOf(img.getAttribute("src"));
+        if (idx < 0) idx = 0;
+        img.addEventListener("error", function () {
+          idx += 1;
+          if (idx < candidates.length) img.src = candidates[idx];
+        });
+      });
       var followBtn = document.getElementById("followBtn");
       if (!followBtn) return;
       var isFollowing = false;
@@ -200,6 +269,7 @@
       render();
 
       setupCommentToggles();
+      setupImageZoom();
     })();
   </script>
 </body>
