@@ -48,10 +48,25 @@
     }
 
     .site-header {
-      padding: 30px 24px 12px;
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+      padding: 22px 0 8px;
       display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    .official-logo {
+      width: clamp(72px, 8.5vw, 104px);
+      height: auto;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .brand {
@@ -961,6 +976,7 @@
 </head>
 <body>
   <header class="site-header">
+    <img class="official-logo" src="../assets/constell-logo-mark.png" alt="CONSTELL 官方logo">
     <h1 class="brand">CONSTELL OFFICIAL</h1>
   </header>
 
