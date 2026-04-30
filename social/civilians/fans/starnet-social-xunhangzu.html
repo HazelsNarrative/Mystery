@@ -32,6 +32,23 @@
     .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
     .btn-cancel { background:#eef2fb; color:#5f6f89; }
     .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
+  
+    /* starnet-fan-chrome */
+    .tag { color:var(--brand); }
+    .post-stats { align-items:center; flex-wrap:wrap; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+    .comment-media { max-width:240px; margin-top:8px; border-radius:12px; border:1px solid #d8e1ee; display:block; cursor:zoom-in; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:min(560px,80vh); border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
+
   </style>
 </head>
 <body>
@@ -39,7 +56,11 @@
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/xunhangzu</p></div><div class="cover"><div class="avatar">星</div></div>
     <div class="profile"><h2 class="name">OA其实是AO</h2><p class="id">@xunhangzu</p><p class="bio">就爱吃哥弟怎么了！！！！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@OA其实是AO· 最近</div><p>0.0 说得越来越玄乎了，不是只是演唱会集训吗？</p><div class="post-stats"><span>转发 5</span><span>赞 79</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet2210：</strong>但是本来有航班的，四人四地，只是最后都没出现</p></div></article><article class="post post-public"><div class="post-head">@OA其实是AO· 3个月前</div><p>哎，最近两位老师怎么都不太平……</p><div class="post-stats"><span>转发 6</span><span>赞 96</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet9558：</strong>是说Altair的事吗，已经澄清了啊</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 半年前</div><p>又品了一下那句“你别不要我”，为什么这句话能这么打动我呢，好品就品在Altair的慌乱，最开始自信满满总觉得他哥毫无疑问会优先选他，发现不是的那一刻先是震惊，再到不满，再到难得在镜头面前露出了那种怨恨不甘心的表情，最后才是彻底手足无措的慌张，我敢说其他任何一个人不选他他都会骄傲地表示不在乎，可只有Orion的选择，能让他如此动摇，要我说这段关系表面上是Altair的任性妄为，但其实真正的主导者永远都是Orion。</p><div class="post-stats"><span>转发 3</span><span>赞 31</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet5808：</strong>姐妹你分析得好好！就跟着你嗑了！</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 半年前</div><p>拆家真的很烦，有没有可能我们才是一起晨跑一起去游乐园一起吃饭一起逛街的关系，大大方方从不避嫌的才是真爱好吗。</p><div class="post-stats"><span>转发 4</span><span>赞 55</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet3684：</strong>谁都敢说，美帝姐嗑的糖真的很硬</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 1年前</div><p>Orion，真的没谈就出来澄清一下吧，粉丝看着蛮心累的。</p><div class="post-stats"><span>转发 5</span><span>赞 55</span><span>评论 6</span></div></article>
+    <article class="post post-public"><div class="post-head">@OA其实是AO· 最近</div><p>0.0 说得越来越玄乎了，不是只是演唱会集训吗？</p><div class="post-stats"><span>转发 6</span><span>赞 68</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet0599：</strong>但是本来有航班的，四人四地，只是最后都没出现</p></div></article><article class="post post-public"><div class="post-head">@OA其实是AO· 3个月前</div><p>哎，最近两位老师怎么都不太平……</p><div class="post-stats"><span>转发 0</span><span>赞 68</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet2102：</strong>是说Altair的事吗，已经澄清了啊</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 半年前</div><p>又品了一下那句“你别不要我”，为什么这句话能这么打动我呢，好品就品在Altair的慌乱，最开始自信满满总觉得他哥毫无疑问会优先选他，发现不是的那一刻先是震惊，再到不满，再到难得在镜头面前露出了那种怨恨不甘心的表情，最后才是彻底手足无措的慌张，我敢说其他任何一个人不选他他都会骄傲地表示不在乎，可只有Orion的选择，能让他如此动摇，要我说这段关系表面上是Altair的任性妄为，但其实真正的主导者永远都是Orion。</p><div class="post-stats"><span>转发 2</span><span>赞 96</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet3681：</strong>姐妹你分析得好好！就跟着你嗑了！</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 半年前</div><p>拆家真的很烦，有没有可能我们才是一起晨跑一起去游乐园一起吃饭一起逛街的关系，大大方方从不避嫌的才是真爱好吗。</p><div class="post-stats"><span>转发 2</span><span>赞 30</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet1607：</strong>谁都敢说，美帝姐嗑的糖真的很硬</p></div></article><article class="post post-followers" hidden><div class="post-head">@OA其实是AO· 1年前</div><p>Orion，真的没谈就出来澄清一下吧，粉丝看着蛮心累的。</p><div class="post-stats"><span>转发 2</span><span>赞 88</span><span>评论 3</span></div></article>
+    <!-- starnet-fan-chrome -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -54,6 +75,56 @@
   </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img, .comments img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+          comments.hidden = true;
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
       var answerInput = document.getElementById("answerInput");
@@ -64,6 +135,25 @@
       var lockedTip = document.getElementById("lockedTip");
       var expected = "你别不要我";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
+
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
@@ -87,6 +177,7 @@
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
           isFollowing = false;
+          persistFollowState();
           render();
           return;
         }
@@ -99,13 +190,17 @@
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
+      loadFollowState();
       render();
+      setupCommentToggles();
+      setupImageZoom();
     })();
   </script>
 </body>

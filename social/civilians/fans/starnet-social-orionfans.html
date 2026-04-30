@@ -32,6 +32,23 @@
     .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
     .btn-cancel { background:#eef2fb; color:#5f6f89; }
     .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
+  
+    /* starnet-fan-chrome */
+    .tag { color:var(--brand); }
+    .post-stats { align-items:center; flex-wrap:wrap; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+    .comment-media { max-width:240px; margin-top:8px; border-radius:12px; border:1px solid #d8e1ee; display:block; cursor:zoom-in; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:min(560px,80vh); border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
+
   </style>
 </head>
 <body>
@@ -39,7 +56,11 @@
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/orionfans</p></div><div class="cover"><div class="avatar">星</div></div>
     <div class="profile"><h2 class="name">爱吃欧包</h2><p class="id">@orionfans</p><p class="bio">这欧包我一口一个！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@爱吃欧包· 最近</div><p>欧包你到底在哪里啊啊啊啊啊啊啊啊啊啊</p><div class="post-stats"><span>转发 6</span><span>赞 23</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet4216：</strong>这四个人为什么都不见了？？？？</p><p class="comment"><strong>StarNet8058：</strong>总感觉在憋个大的</p></div></article><article class="post post-public"><div class="post-head">@爱吃欧包· 1周前</div><p>@CONSTELl-Orion，今天过得怎么样呀，我今天吃了特别好吃的黑松露炒饭！！！</p><div class="post-stats"><span>转发 4</span><span>赞 52</span><span>评论 6</span></div></article><article class="post post-public"><div class="post-head">@爱吃欧包· 2个月前</div><p>都快来给欧包的舞台投票呀！上《RAP STAGE》的官网！</p><div class="post-stats"><span>转发 0</span><span>赞 51</span><span>评论 3</span></div></article><article class="post post-followers" hidden><div class="post-head">@爱吃欧包· 4个月前</div><p>可恶的私生，连和自己家人出来玩都要被堵，我的欧包<br>你是不是都没吃上我们这儿的特色小吃QAQ～～～</p><div class="post-stats"><span>转发 1</span><span>赞 86</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet9885：</strong>我天，私生真的太过分了</p><p class="comment"><strong>StarNet0791：</strong>我听说直接堵在酒店门口了，还骂他家人，好可怕</p><p class="comment"><strong>StarNet0572：</strong>刚发微博了，这次真的很严重吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱吃欧包· 4个月前</div><p>天呐，听说欧包要来我家这边了！！！期待偶遇！！！</p><div class="post-stats"><span>转发 6</span><span>赞 33</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet0836：</strong>姐妹，你怎么知道的，黑洞上看来的吗？</p><p class="comment"><strong>StarNet6537：</strong>是录综艺吗？</p></div></article>
+    <article class="post post-public"><div class="post-head">@爱吃欧包· 最近</div><p>欧包你到底在哪里啊啊啊啊啊啊啊啊啊啊</p><div class="post-stats"><span>转发 4</span><span>赞 17</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet5728：</strong>这四个人为什么都不见了？？？？</p><p class="comment"><strong>StarNet3874：</strong>总感觉在憋个大的</p></div></article><article class="post post-public"><div class="post-head">@爱吃欧包· 1周前</div><p>@CONSTELl-Orion，今天过得怎么样呀，我今天吃了特别好吃的黑松露炒饭！！！</p><div class="post-stats"><span>转发 6</span><span>赞 52</span><span>评论 9</span></div></article><article class="post post-public"><div class="post-head">@爱吃欧包· 2个月前</div><p>都快来给欧包的舞台投票呀！上《RAP STAGE》的官网！</p><div class="post-stats"><span>转发 3</span><span>赞 27</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@爱吃欧包· 4个月前</div><p>可恶的私生，连和自己家人出来玩都要被堵，我的欧包<br>你是不是都没吃上我们这儿的特色小吃QAQ～～～</p><div class="post-stats"><span>转发 6</span><span>赞 97</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet5539：</strong>我天，私生真的太过分了</p><p class="comment"><strong>StarNet3209：</strong>我听说直接堵在酒店门口了，还骂他家人，好可怕</p><p class="comment"><strong>StarNet2976：</strong>刚发微博了，这次真的很严重吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱吃欧包· 4个月前</div><p>天呐，听说欧包要来我家这边了！！！期待偶遇！！！</p><div class="post-stats"><span>转发 4</span><span>赞 68</span><span>评论 8</span></div><div class="comments"><p class="comment"><strong>StarNet8044：</strong>姐妹，你怎么知道的，黑洞上看来的吗？</p><p class="comment"><strong>StarNet0115：</strong>是录综艺吗？</p></div></article>
+    <!-- starnet-fan-chrome -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -54,6 +75,56 @@
   </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img, .comments img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+          comments.hidden = true;
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
       var answerInput = document.getElementById("answerInput");
@@ -64,6 +135,25 @@
       var lockedTip = document.getElementById("lockedTip");
       var expected = "大哥";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
+
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
@@ -87,6 +177,7 @@
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
           isFollowing = false;
+          persistFollowState();
           render();
           return;
         }
@@ -99,13 +190,17 @@
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
+      loadFollowState();
       render();
+      setupCommentToggles();
+      setupImageZoom();
     })();
   </script>
 </body>

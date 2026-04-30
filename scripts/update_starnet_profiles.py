@@ -252,6 +252,24 @@ def build_new_profile_html(file_path, display_name, bio):
       var lockedTip = document.getElementById("lockedTip");
       var expected = "1234";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {{
+        try {{
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        }} catch (e) {{}}
+      }}
+
+      function loadFollowState() {{
+        try {{
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        }} catch (e) {{
+          isFollowing = false;
+        }}
+      }}
       function render() {{
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
@@ -275,6 +293,7 @@ def build_new_profile_html(file_path, display_name, bio):
       followBtn.addEventListener("click", function () {{
         if (isFollowing) {{
           isFollowing = false;
+          persistFollowState();
           render();
           return;
         }}
@@ -287,12 +306,14 @@ def build_new_profile_html(file_path, display_name, bio):
           return;
         }}
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       }});
       followModal.addEventListener("click", function (e) {{
         if (e.target === followModal) closeModal();
       }});
+      loadFollowState();
       render();
     }})();
   </script>
@@ -552,6 +573,217 @@ def replace_or_fail(pattern, replacement, content, flag_msg, count=0):
     return new_content
 
 
+_FAN_IIFE_NEEDLE = '(function () {\n      var followBtn'
+_FAN_IIFE_NEEDLE_CRLF = '(function () {\r\n      var followBtn'
+
+
+_FAN_CHROME_CSS = """
+    /* starnet-fan-chrome */
+    .tag { color:var(--brand); }
+    .post-stats { align-items:center; flex-wrap:wrap; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+    .comment-media { max-width:240px; margin-top:8px; border-radius:12px; border:1px solid #d8e1ee; display:block; cursor:zoom-in; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:min(560px,80vh); border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
+"""
+
+
+_FAN_SETUP_HOOK = """      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img, .comments img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+          comments.hidden = true;
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
+"""
+
+
+def ensure_fan_page_chrome(html: str, file_path: str) -> str:
+    """简版 civilians/fans：补 hashtag、配图、评论区折叠与 lightbox（与其它粉丝主页一致）。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/fans/" not in norm:
+        return html
+
+    def _inject_image_lightbox(s: str) -> str:
+        head_before_script = (s.split("<script>", 1)[0] if "<script>" in s else s)
+        if '<div class="image-lightbox"' in head_before_script:
+            return s
+        m = re.search(r"(?m)^(?P<ind>[ \t]*)(<div class=\"modal\" id=\"followModal\">)", s)
+        if not m:
+            return s
+        ind = m.group("ind")
+        block = (
+            f'{ind}  <!-- starnet-fan-chrome -->\n'
+            f'{ind}<div class="image-lightbox" id="imageLightbox" aria-hidden="true">\n'
+            f'{ind}  <img id="lightboxImage" alt="查看大图">\n'
+            f'{ind}</div>\n'
+            f'{m.group(0)}'
+        )
+        return s[: m.start()] + block + s[m.end() :]
+
+    needle_ok = _FAN_IIFE_NEEDLE in html or _FAN_IIFE_NEEDLE_CRLF in html
+    if "setupCommentToggles" in html and not needle_ok:
+        return _inject_image_lightbox(html)
+
+    if not needle_ok:
+        return html
+
+    if "setupCommentToggles" in html:
+        return _inject_image_lightbox(html)
+
+    style_close = "</style>"
+    ix = html.find(style_close)
+    if ix != -1 and "/* starnet-fan-chrome */" not in html:
+        html = html[:ix] + _FAN_CHROME_CSS + "\n  " + html[ix:]
+
+    html = _inject_image_lightbox(html)
+
+    if _FAN_IIFE_NEEDLE in html:
+        html = html.replace(_FAN_IIFE_NEEDLE, "(function () {\n" + _FAN_SETUP_HOOK + "      var followBtn", 1)
+    elif _FAN_IIFE_NEEDLE_CRLF in html:
+        hk = _FAN_SETUP_HOOK.replace("\n", "\r\n")
+        html = html.replace(_FAN_IIFE_NEEDLE_CRLF, "(function () {\r\n" + hk + "      var followBtn", 1)
+
+    html, nrep = re.subn(
+        r"render\(\);\s*\r?\n\s*\}\)\(\);",
+        "render();\n      setupCommentToggles();\n      setupImageZoom();\n    })();",
+        html,
+        count=1,
+    )
+    if nrep != 1:
+        raise ValueError(f"无法在粉丝主页注入脚本结尾（需含 render(); 后紧跟 IIFE 结束）: {file_path}")
+
+    return html
+
+
+_FOLLOW_LOCAL_STORAGE_SNIPPET = """
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
+"""
+
+
+def ensure_follow_local_storage(html: str, file_path: str) -> str:
+    """粉丝/黑粉等有验证的关注页：用 localStorage 记住关注状态（刷新后不丢）。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/" not in norm:
+        return html
+    if "followStorageKey" in html:
+        return html
+    if 'id="followModal"' not in html or not re.search(r"var\s+isFollowing\s*=", html):
+        return html
+
+    def _inj_storage_block(s: str) -> str:
+        return re.sub(
+            r"(var\s+isFollowing\s*=\s*false\s*;)",
+            r"\1" + _FOLLOW_LOCAL_STORAGE_SNIPPET,
+            s,
+            count=1,
+        )
+
+    html2 = _inj_storage_block(html)
+    if html2 == html:
+        return html
+
+    html = html2
+    html = re.sub(
+        r"(if\s*\(isFollowing\)\s*\{\s*\n\s+isFollowing\s*=\s*false;\s*\n)(\s+)(render\(\);)",
+        r"\1\2persistFollowState();\n\2\3",
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r"(isFollowing\s*=\s*true;\s*\n)(\s+)(closeModal\(\);\s*\n\s*)(render\(\);)",
+        r"\1\2persistFollowState();\n\2\3\4",
+        html,
+        count=1,
+    )
+
+    html, n_chrome = re.subn(
+        r"(\n)(\s+)render\(\);(\s*\n\s+setupCommentToggles)",
+        r"\1\2loadFollowState();\n\2render();\3",
+        html,
+        count=1,
+    )
+    if n_chrome == 0:
+        html, n_plain = re.subn(
+            r"(\n)(\s+)render\(\);(\s*\n\s+)\}\)\(\);",
+            r"\1\2loadFollowState();\n\2render();\3",
+            html,
+            count=1,
+        )
+        if n_plain == 0:
+            raise ValueError(f"无法在素人页注入 loadFollowState（{file_path}）")
+
+    return html
+
+
 def update_single_file(profile_id, file_path, profile_row, feed_rows):
     abs_path = ROOT / file_path
     ensure_profile_file(profile_id, file_path, profile_row)
@@ -662,6 +894,11 @@ def update_single_file(profile_id, file_path, profile_row, feed_rows):
             )
         else:
             content = merge_artist_feed_panel(content, rebuilt)
+
+    if "/civilians/fans/" in file_path.replace("\\", "/"):
+        content = ensure_fan_page_chrome(content, file_path)
+    if "/civilians/" in file_path.replace("\\", "/"):
+        content = ensure_follow_local_storage(content, file_path)
 
     abs_path.write_text(content, encoding="utf-8")
 

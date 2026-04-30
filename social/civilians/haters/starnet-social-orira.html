@@ -39,7 +39,7 @@
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/orira</p></div><div class="cover"><div class="avatar">星</div></div>
     <div class="profile"><h2 class="name">欧辣今天分手了吗</h2><p class="id">@orira</p><p class="bio">谢谢你们像巧克力一样出现在我的世界里，但我是狗，感谢你们毁了我的生活。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 最近</div><p>没有，并且一起失踪了。</p><div class="post-stats"><span>转发 3780</span><span>赞 29538</span><span>评论 1043</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 1个月前</div><p>没有。</p><div class="post-stats"><span>转发 3355</span><span>赞 4082</span><span>评论 625</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 2个月前</div><p>没有。</p><div class="post-stats"><span>转发 1566</span><span>赞 27626</span><span>评论 1299</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 3个月前</div><p>没有</p><div class="post-stats"><span>转发 3973</span><span>赞 24906</span><span>评论 528</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 半年前</div><p>又没有了。</p><div class="post-stats"><span>转发 651</span><span>赞 30391</span><span>评论 1403</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 1年前</div><p>分了。</p><div class="post-stats"><span>转发 5772</span><span>赞 23859</span><span>评论 1690</span></div></article><article class="post post-followers" hidden><div class="post-head">@欧辣今天分手了吗· 1年前</div><p>mw亲爹进去了？？？？？？</p><div class="post-stats"><span>转发 341</span><span>赞 1179</span><span>评论 948</span></div><div class="comments"><p class="comment"><strong>StarNet4421：</strong>真是他亲爹？？？</p><p class="comment"><strong>StarNet5450：</strong>刚看到新闻，真是他爹啊</p><p class="comment"><strong>StarNet6003：</strong>有1说1，他也没从他爹那吃到什么红利吧</p><p class="comment"><strong>StarNet3350：</strong>也不是吧，只是他爹势利眼，红了以后才腆着脸来赞助演唱会</p><p class="comment"><strong>StarNet8632：</strong>哪场演唱会啊</p></div></article>
+    <article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 最近</div><p>没有，并且一起失踪了。</p><div class="post-stats"><span>转发 2479</span><span>赞 10963</span><span>评论 1279</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 1个月前</div><p>没有。</p><div class="post-stats"><span>转发 2081</span><span>赞 2383</span><span>评论 1569</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 2个月前</div><p>没有。</p><div class="post-stats"><span>转发 1370</span><span>赞 24170</span><span>评论 2969</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 3个月前</div><p>没有</p><div class="post-stats"><span>转发 2549</span><span>赞 23987</span><span>评论 549</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 半年前</div><p>又没有了。</p><div class="post-stats"><span>转发 5401</span><span>赞 7615</span><span>评论 2623</span></div></article><article class="post post-public"><div class="post-head">@欧辣今天分手了吗· 1年前</div><p>分了。</p><div class="post-stats"><span>转发 1462</span><span>赞 2099</span><span>评论 2019</span></div></article><article class="post post-followers" hidden><div class="post-head">@欧辣今天分手了吗· 1年前</div><p>mw亲爹进去了？？？？？？</p><div class="post-stats"><span>转发 101</span><span>赞 967</span><span>评论 446</span></div><div class="comments"><p class="comment"><strong>StarNet5714：</strong>真是他亲爹？？？</p><p class="comment"><strong>StarNet0914：</strong>刚看到新闻，真是他爹啊</p><p class="comment"><strong>StarNet8595：</strong>有1说1，他也没从他爹那吃到什么红利吧</p><p class="comment"><strong>StarNet0180：</strong>也不是吧，只是他爹势利眼，红了以后才腆着脸来赞助演唱会</p><p class="comment"><strong>StarNet9163：</strong>哪场演唱会啊</p></div></article>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -64,6 +64,25 @@
       var lockedTip = document.getElementById("lockedTip");
       var expected = "未醍";
       var isFollowing = false;
+      var profileIdEl = document.querySelector(".profile .id");
+      var urlEl = document.querySelector(".url");
+      var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
+      var followStorageKey = "starnet_follow_state::" + profileId;
+
+      function persistFollowState() {
+        try {
+          localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
+        } catch (e) {}
+      }
+
+      function loadFollowState() {
+        try {
+          isFollowing = localStorage.getItem(followStorageKey) === "1";
+        } catch (e) {
+          isFollowing = false;
+        }
+      }
+
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
@@ -87,6 +106,7 @@
       followBtn.addEventListener("click", function () {
         if (isFollowing) {
           isFollowing = false;
+          persistFollowState();
           render();
           return;
         }
@@ -99,14 +119,16 @@
           return;
         }
         isFollowing = true;
+        persistFollowState();
         closeModal();
         render();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
       });
+      loadFollowState();
       render();
-    })();
+    
   </script>
 </body>
 </html>
