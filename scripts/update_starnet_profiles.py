@@ -900,6 +900,82 @@ def ensure_follow_modal_portal_to_body(html: str, file_path: str) -> str:
     return new_html if n == 1 else html
 
 
+def ensure_follow_success_feedback(html: str, file_path: str) -> str:
+    """关注成功后展示「已成功关注@昵称」与礼花动画。"""
+    norm = file_path.replace("\\", "/")
+    if ("/social/" not in norm and not norm.startswith("social/")) or 'id="followBtn"' not in html:
+        return html
+
+    if "starnet-follow-success-fx" not in html and "</style>" in html:
+        css = (
+            "\n    /* starnet-follow-success-fx */\n"
+            "    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%);"
+            " z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca;"
+            " background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px;"
+            " font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0;"
+            " animation:followToastIn .2s ease-out forwards; }\n"
+            "    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }\n"
+            "    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px;"
+            " z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }\n"
+            "    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }\n"
+            "    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }\n"
+            "    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }\n"
+        )
+        html = html.replace("</style>", css + "\n  </style>", 1)
+
+    if "function showFollowSuccessFx()" not in html:
+        js = (
+            "      function showFollowSuccessFx() {\n"
+            "        var nameEl = document.querySelector(\".profile .name\");\n"
+            "        var nickname = (nameEl && String(nameEl.textContent || \"\").trim()) || \"该用户\";\n"
+            "        var toast = document.createElement(\"div\");\n"
+            "        toast.className = \"follow-success-toast\";\n"
+            "        toast.textContent = \"已成功关注@\" + nickname;\n"
+            "        document.body.appendChild(toast);\n"
+            "        var colors = [\"#22c55e\", \"#60a5fa\", \"#f59e0b\", \"#a78bfa\", \"#f472b6\"];\n"
+            "        for (var i = 0; i < 18; i++) {\n"
+            "          var p = document.createElement(\"span\");\n"
+            "          p.className = \"follow-confetti\";\n"
+            "          p.style.background = colors[i % colors.length];\n"
+            "          p.style.setProperty(\"--dx\", (Math.random() * 220 - 110).toFixed(0) + \"px\");\n"
+            "          p.style.setProperty(\"--dy\", (80 + Math.random() * 120).toFixed(0) + \"px\");\n"
+            "          p.style.setProperty(\"--rot\", (Math.random() * 520 - 260).toFixed(0) + \"deg\");\n"
+            "          document.body.appendChild(p);\n"
+            "          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);\n"
+            "        }\n"
+            "        setTimeout(function () { toast.classList.add(\"leave\"); }, 980);\n"
+            "        setTimeout(function () { toast.remove(); }, 1300);\n"
+            "      }\n"
+        )
+        html, n_locked = re.subn(
+            r"(var\s+lockedTip\s*=\s*document\.getElementById\(\"lockedTip\"\);\s*\r?\n)",
+            r"\1" + js,
+            html,
+            count=1,
+        )
+        if n_locked == 0:
+            html, _ = re.subn(
+                r"(var\s+profileMention\s*=.*?;\s*\r?\n)",
+                r"\1" + js,
+                html,
+                count=1,
+            )
+
+    html, _ = re.subn(
+        r"(isFollowing\s*=\s*true;\s*\r?\n\s*persistFollowState\(\);\s*\r?\n\s*closeModal\(\);\s*\r?\n\s*render\(\);\s*\r?\n)",
+        r"\1        showFollowSuccessFx();\n",
+        html,
+        count=1,
+    )
+    html, _ = re.subn(
+        r"(isFollowing\s*=\s*true;\s*\r?\n\s*persistFollowState\(\);\s*\r?\n\s*renderFollow\(\);\s*\r?\n)",
+        r"\1          showFollowSuccessFx();\n",
+        html,
+        count=1,
+    )
+    return html
+
+
 def update_single_file(profile_id, file_path, profile_row, feed_rows):
     abs_path = ROOT / file_path
     ensure_profile_file(profile_id, file_path, profile_row)
@@ -1023,6 +1099,7 @@ def update_single_file(profile_id, file_path, profile_row, feed_rows):
         content = bump_haters_follow_storage_namespace(content, file_path)
         content = ensure_follow_modal_portal_to_body(content, file_path)
         content = ensure_follow_script_iife_closed(content, file_path)
+    content = ensure_follow_success_feedback(content, file_path)
 
     abs_path.write_text(content, encoding="utf-8")
 

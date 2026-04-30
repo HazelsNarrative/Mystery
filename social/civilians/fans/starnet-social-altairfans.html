@@ -46,14 +46,23 @@
     .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
     .comment-toggle:hover { color:#5c6d86; }
     .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+  
+    /* starnet-follow-success-fx */
+    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%); z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca; background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0; animation:followToastIn .2s ease-out forwards; }
+    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }
+    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px; z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }
+    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }
+    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }
+    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/altairfans</p></div><div class="cover"><div class="avatar" aria-label="是小江也是小汰头像"></div></div>
-    <div class="profile"><h2 class="name">是小江也是小太</h2><p class="id">@altairfans</p><p class="bio">Altair要成为世界上最棒的歌手！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>52</strong> 关注</span><span><strong>1203</strong> 粉丝</span><span><strong>25</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">是小江也是小太</h2><p class="id">@altairfans</p><p class="bio">Altair要成为世界上最棒的歌手！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>161</strong> 关注</span><span><strong>4920</strong> 粉丝</span><span><strong>52</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@是小江也是小太· 最近</div><p>宝宝八月见！！！！</p><img class="post-image zoomable" src="../../../assets/concert-poster.png" alt="CONSTELL官宣演唱会主视觉"><div class="post-stats"><span>转发 3</span><span>赞 85</span><span>评论 3</span></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>这次真的想转唯了，落井下石的人你们都给我记着。</p><div class="post-stats"><span>转发 1</span><span>赞 34</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet4821：</strong>我早就变毒唯了</p><p class="comment"><strong>StarNet7903：</strong>搞不好这次的黑料都是队友在后面推波助澜，我看抽烟喝酒的另有其人吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>造谣的人太可恨了！！！根本就是合成图吧！！</p><div class="post-stats"><span>转发 1</span><span>赞 85</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet3358：</strong>肯定是啊，都找到一模一样的图了，原本是彩排图，被移花接木上去的</p><p class="comment"><strong>StarNet2246：</strong>现在技术这么发达，造谣成本越来越低了</p><p class="comment"><strong>StarNet9184：</strong>而且宝宝那天不是回去陪家人了吗，怎么可能出现在夜店啊！！！</p></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 2个月前</div><p>家人们快转澄清贴！！！洗广场！！！</p><div class="post-stats"><span>转发 1</span><span>赞 84</span><span>评论 7</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>我在“璀璨盛典-年度歌手”中投给了“Alstair（CONSTELL）”，快来和我一起支持TA！</p><div class="post-stats"><span>转发 0</span><span>赞 55</span><span>评论 0</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>分享歌曲：Zig-Zag - Alstair<br>我正在听这首歌，你也来听听看吧！</p><div class="post-stats"><span>转发 4</span><span>赞 66</span><span>评论 3</span></div></article>
+    <article class="post post-public"><div class="post-head">@是小江也是小太· 最近</div><p>宝宝八月见！！！！</p><img class="post-image zoomable" src="../../../assets/concert-poster.png" alt="CONSTELL官宣演唱会主视觉"><div class="post-stats"><span>转发 0</span><span>赞 3</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>这次真的想转唯了，落井下石的人你们都给我记着。</p><div class="post-stats"><span>转发 5</span><span>赞 8</span><span>评论 8</span></div><div class="comments"><p class="comment"><strong>StarNet4821：</strong>我早就变毒唯了</p><p class="comment"><strong>StarNet7903：</strong>搞不好这次的黑料都是队友在后面推波助澜，我看抽烟喝酒的另有其人吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>造谣的人太可恨了！！！根本就是合成图吧！！</p><div class="post-stats"><span>转发 2</span><span>赞 81</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet3358：</strong>肯定是啊，都找到一模一样的图了，原本是彩排图，被移花接木上去的</p><p class="comment"><strong>StarNet2246：</strong>现在技术这么发达，造谣成本越来越低了</p><p class="comment"><strong>StarNet9184：</strong>而且宝宝那天不是回去陪家人了吗，怎么可能出现在夜店啊！！！</p></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 2个月前</div><p>家人们快转澄清贴！！！洗广场！！！</p><div class="post-stats"><span>转发 4</span><span>赞 69</span><span>评论 0</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>我在“璀璨盛典-年度歌手”中投给了“Alstair（CONSTELL）”，快来和我一起支持TA！</p><div class="post-stats"><span>转发 3</span><span>赞 12</span><span>评论 6</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>分享歌曲：Zig-Zag - Alstair<br>我正在听这首歌，你也来听听看吧！</p><div class="post-stats"><span>转发 6</span><span>赞 14</span><span>评论 4</span></div></article>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -149,6 +158,27 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
+      function showFollowSuccessFx() {
+        var nameEl = document.querySelector(".profile .name");
+        var nickname = (nameEl && String(nameEl.textContent || "").trim()) || "该用户";
+        var toast = document.createElement("div");
+        toast.className = "follow-success-toast";
+        toast.textContent = "已成功关注@" + nickname;
+        document.body.appendChild(toast);
+        var colors = ["#22c55e", "#60a5fa", "#f59e0b", "#a78bfa", "#f472b6"];
+        for (var i = 0; i < 18; i++) {
+          var p = document.createElement("span");
+          p.className = "follow-confetti";
+          p.style.background = colors[i % colors.length];
+          p.style.setProperty("--dx", (Math.random() * 220 - 110).toFixed(0) + "px");
+          p.style.setProperty("--dy", (80 + Math.random() * 120).toFixed(0) + "px");
+          p.style.setProperty("--rot", (Math.random() * 520 - 260).toFixed(0) + "deg");
+          document.body.appendChild(p);
+          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);
+        }
+        setTimeout(function () { toast.classList.add("leave"); }, 980);
+        setTimeout(function () { toast.remove(); }, 1300);
+      }
       var expected = "Altair是全宇宙最可爱的宝宝！";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
@@ -232,6 +262,8 @@
         persistFollowState();
         closeModal();
         render();
+        showFollowSuccessFx();
+        showFollowSuccessFx();
       });
 
       if (unfollowConfirmBtn) {

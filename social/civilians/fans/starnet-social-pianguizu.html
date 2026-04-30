@@ -49,14 +49,23 @@
     .image-lightbox.show { display:flex; }
     .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
 
+  
+    /* starnet-follow-success-fx */
+    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%); z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca; background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0; animation:followToastIn .2s ease-out forwards; }
+    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }
+    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px; z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }
+    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }
+    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }
+    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/pianguizu</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">爱是偏离轨道的逃逸</h2><p class="id">@pianguizu</p><p class="bio">跟嗑不到ReA的人没话说了</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>136</strong> 关注</span><span><strong>4609</strong> 粉丝</span><span><strong>34</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">爱是偏离轨道的逃逸</h2><p class="id">@pianguizu</p><p class="bio">跟嗑不到ReA的人没话说了</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>125</strong> 关注</span><span><strong>4594</strong> 粉丝</span><span><strong>60</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@爱是偏离轨道的逃逸· 最近</div><p>@CONSTELL-Regulus@CONSTELL-Altair 不出来默认在doi</p><div class="post-stats"><span>转发 1</span><span>赞 64</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet5935：</strong>不出来默认在doi</p><p class="comment"><strong>StarNet9823：</strong>不出来默认在doi</p><p class="comment"><strong>StarNet4214：</strong>不出来默认在doi</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 1个月前</div><p>为什么都说Re在看心理医生啊，到底哪里传出来的瓜？？？</p><div class="post-stats"><span>转发 2</span><span>赞 79</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet2620：</strong>黑洞吧……</p><p class="comment"><strong>StarNet2206：</strong>只能是黑洞了……</p><p class="comment"><strong>StarNet9037：</strong>真的假的，那家心理诊所我也去过</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 2个月前</div><p>无所谓吧，Altair喝酒怎么了，我也喝啊，而且他最爱的那款我也爱喝，就是太贵了，日常喝不起……</p><div class="post-stats"><span>转发 1</span><span>赞 92</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet3451：</strong>比起喝酒，还是去夜店问题更大一点……</p><p class="comment"><strong>StarNet2142：</strong>他好像都喝的威士忌，沉船湾、锈钉、烬潮……</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 3个月前</div><p>我产也打过架真的假的😂，Re不是只有跟队长打过架吗？不过就算打过我也还是觉得好嗑哈哈，就喜欢这种尴尬别扭但是很有性张力的关系。</p><div class="post-stats"><span>转发 6</span><span>赞 16</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet2851：</strong>想象不了他俩打架</p><p class="comment"><strong>StarNet9920：</strong>感觉他俩可以不认识都不会打架hhh</p><p class="comment"><strong>StarNet1144：</strong>打架也得先认识（不是</p></div></article>
+    <article class="post post-public"><div class="post-head">@爱是偏离轨道的逃逸· 最近</div><p>@CONSTELL-Regulus@CONSTELL-Altair 不出来默认在doi</p><div class="post-stats"><span>转发 5</span><span>赞 97</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet0190：</strong>不出来默认在doi</p><p class="comment"><strong>StarNet4935：</strong>不出来默认在doi</p><p class="comment"><strong>StarNet4827：</strong>不出来默认在doi</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 1个月前</div><p>为什么都说Re在看心理医生啊，到底哪里传出来的瓜？？？</p><div class="post-stats"><span>转发 0</span><span>赞 3</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet1453：</strong>黑洞吧……</p><p class="comment"><strong>StarNet3988：</strong>只能是黑洞了……</p><p class="comment"><strong>StarNet8781：</strong>真的假的，那家心理诊所我也去过</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 2个月前</div><p>无所谓吧，Altair喝酒怎么了，我也喝啊，而且他最爱的那款我也爱喝，就是太贵了，日常喝不起……</p><div class="post-stats"><span>转发 6</span><span>赞 56</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet6223：</strong>比起喝酒，还是去夜店问题更大一点……</p><p class="comment"><strong>StarNet0168：</strong>他好像都喝的威士忌，沉船湾、锈钉、烬潮……</p></div></article><article class="post post-followers" hidden><div class="post-head">@爱是偏离轨道的逃逸· 3个月前</div><p>我产也打过架真的假的😂，Re不是只有跟队长打过架吗？不过就算打过我也还是觉得好嗑哈哈，就喜欢这种尴尬别扭但是很有性张力的关系。</p><div class="post-stats"><span>转发 1</span><span>赞 51</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet3687：</strong>想象不了他俩打架</p><p class="comment"><strong>StarNet7390：</strong>感觉他俩可以不认识都不会打架hhh</p><p class="comment"><strong>StarNet2397：</strong>打架也得先认识（不是</p></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -137,6 +146,27 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
+      function showFollowSuccessFx() {
+        var nameEl = document.querySelector(".profile .name");
+        var nickname = (nameEl && String(nameEl.textContent || "").trim()) || "该用户";
+        var toast = document.createElement("div");
+        toast.className = "follow-success-toast";
+        toast.textContent = "已成功关注@" + nickname;
+        document.body.appendChild(toast);
+        var colors = ["#22c55e", "#60a5fa", "#f59e0b", "#a78bfa", "#f472b6"];
+        for (var i = 0; i < 18; i++) {
+          var p = document.createElement("span");
+          p.className = "follow-confetti";
+          p.style.background = colors[i % colors.length];
+          p.style.setProperty("--dx", (Math.random() * 220 - 110).toFixed(0) + "px");
+          p.style.setProperty("--dy", (80 + Math.random() * 120).toFixed(0) + "px");
+          p.style.setProperty("--rot", (Math.random() * 520 - 260).toFixed(0) + "deg");
+          document.body.appendChild(p);
+          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);
+        }
+        setTimeout(function () { toast.classList.add("leave"); }, 980);
+        setTimeout(function () { toast.remove(); }, 1300);
+      }
       var expected = "有线耳机";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
@@ -197,6 +227,8 @@
         persistFollowState();
         closeModal();
         render();
+        showFollowSuccessFx();
+        showFollowSuccessFx();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();

@@ -53,14 +53,23 @@
     .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
     .comment-toggle:hover { color:#5c6d86; }
     .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+  
+    /* starnet-follow-success-fx */
+    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%); z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca; background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0; animation:followToastIn .2s ease-out forwards; }
+    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }
+    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px; z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }
+    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }
+    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }
+    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/jinliezu</p></div><div class="cover"><div class="avatar" aria-label="ROmantic头像"></div></div>
-    <div class="profile"><h2 class="name">soROmantic</h2><p class="id">@jinliezu</p><p class="bio">我产今天打架了吗？</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>154</strong> 关注</span><span><strong>1751</strong> 粉丝</span><span><strong>16</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">soROmantic</h2><p class="id">@jinliezu</p><p class="bio">我产今天打架了吗？</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>196</strong> 关注</span><span><strong>3006</strong> 粉丝</span><span><strong>18</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@soROmantic· 1 周前</div><p>支持这个O老师的商务！！！</p><div class="post-stats"><span>转发 1</span><span>赞 48</span><span>评论 3</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 2 周前</div><p>没人觉得O是队长才是最好的风味吗，为什么我总看到有同人文里把Re写成队长然后搞训诫啊，明明年下管年上最香了！！！同意请点赞！</p><div class="post-stats"><span>转发 0</span><span>赞 40</span><span>评论 7</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 1 个月前</div><p>又重温了惹哥名场面啊啊啊啊，实话实说刚出道的时候欧小狗看起来真的有点土土的，但惹哥已经完全是完成时了。</p><div class="post-stats"><span>转发 6</span><span>赞 42</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet7710：</strong>刚出道的时候最先出圈的就惹惹惹</p><img class="comment-media zoomable" style="max-width:240px;display:block;margin-top:8px;border-radius:12px;border:1px solid #d8e1ee;cursor:zoom-in" src="../../../assets/starnet-comment-ridiculous.gif" alt="ridiculous 表情包"><p class="comment"><strong>StarNet2142：</strong>你这句话三个惹hhhh</p></div></article><article class="post post-public"><div class="post-head">@soROmantic· 1 个月前</div><p>我产真是一对纯恨的小夫夫，但我真的很讨厌她们说他俩吵架是在为另一位争风吃醋。</p><div class="post-stats"><span>转发 0</span><span>赞 8</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet5521：</strong>点了</p><p class="comment"><strong>StarNet8840：</strong>美帝粉真的很KY</p></div></article>
+    <article class="post post-public"><div class="post-head">@soROmantic· 1 周前</div><p>支持这个O老师的商务！！！</p><div class="post-stats"><span>转发 4</span><span>赞 97</span><span>评论 5</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 2 周前</div><p>没人觉得O是队长才是最好的风味吗，为什么我总看到有同人文里把Re写成队长然后搞训诫啊，明明年下管年上最香了！！！同意请点赞！</p><div class="post-stats"><span>转发 3</span><span>赞 20</span><span>评论 7</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 1 个月前</div><p>又重温了惹哥名场面啊啊啊啊，实话实说刚出道的时候欧小狗看起来真的有点土土的，但惹哥已经完全是完成时了。</p><div class="post-stats"><span>转发 0</span><span>赞 99</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet7710：</strong>刚出道的时候最先出圈的就惹惹惹</p><img class="comment-media zoomable" style="max-width:240px;display:block;margin-top:8px;border-radius:12px;border:1px solid #d8e1ee;cursor:zoom-in" src="../../../assets/starnet-comment-ridiculous.gif" alt="ridiculous 表情包"><p class="comment"><strong>StarNet2142：</strong>你这句话三个惹hhhh</p></div></article><article class="post post-public"><div class="post-head">@soROmantic· 1 个月前</div><p>我产真是一对纯恨的小夫夫，但我真的很讨厌她们说他俩吵架是在为另一位争风吃醋。</p><div class="post-stats"><span>转发 4</span><span>赞 72</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet5521：</strong>点了</p><p class="comment"><strong>StarNet8840：</strong>美帝粉真的很KY</p></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -138,6 +147,27 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
+      function showFollowSuccessFx() {
+        var nameEl = document.querySelector(".profile .name");
+        var nickname = (nameEl && String(nameEl.textContent || "").trim()) || "该用户";
+        var toast = document.createElement("div");
+        toast.className = "follow-success-toast";
+        toast.textContent = "已成功关注@" + nickname;
+        document.body.appendChild(toast);
+        var colors = ["#22c55e", "#60a5fa", "#f59e0b", "#a78bfa", "#f472b6"];
+        for (var i = 0; i < 18; i++) {
+          var p = document.createElement("span");
+          p.className = "follow-confetti";
+          p.style.background = colors[i % colors.length];
+          p.style.setProperty("--dx", (Math.random() * 220 - 110).toFixed(0) + "px");
+          p.style.setProperty("--dy", (80 + Math.random() * 120).toFixed(0) + "px");
+          p.style.setProperty("--rot", (Math.random() * 520 - 260).toFixed(0) + "deg");
+          document.body.appendChild(p);
+          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);
+        }
+        setTimeout(function () { toast.classList.add("leave"); }, 980);
+        setTimeout(function () { toast.remove(); }, 1300);
+      }
       var expected = "寰宇猎手生活";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
@@ -221,6 +251,8 @@
         persistFollowState();
         closeModal();
         render();
+        showFollowSuccessFx();
+        showFollowSuccessFx();
       });
 
       if (unfollowConfirmBtn) {

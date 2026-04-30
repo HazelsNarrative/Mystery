@@ -49,14 +49,23 @@
     .image-lightbox.show { display:flex; }
     .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
 
+  
+    /* starnet-follow-success-fx */
+    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%); z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca; background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0; animation:followToastIn .2s ease-out forwards; }
+    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }
+    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px; z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }
+    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }
+    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }
+    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/shuangxingzu</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">双星环绕不息</h2><p class="id">@shuangxingzu</p><p class="bio">热爱巡游天际，双星环绕不息。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>169</strong> 关注</span><span><strong>1786</strong> 粉丝</span><span><strong>75</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">双星环绕不息</h2><p class="id">@shuangxingzu</p><p class="bio">热爱巡游天际，双星环绕不息。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>148</strong> 关注</span><span><strong>3391</strong> 粉丝</span><span><strong>28</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@双星环绕不息· 最近</div><p>你们俩不出现最好是在准备合作舞台……</p><div class="post-stats"><span>转发 0</span><span>赞 94</span><span>评论 5</span></div><div class="comments"><p class="comment"><strong>StarNet0151：</strong>网上传言好多，我有点崩溃了</p><p class="comment"><strong>StarNet6558：</strong>你们俩不出现最好是在准备合作舞台……</p></div></article><article class="post post-public"><div class="post-head">@双星环绕不息· 1个月前</div><p>啊啊啊啊！我cp又发糖了，姐狗稳稳的很安心。</p><div class="post-stats"><span>转发 5</span><span>赞 29</span><span>评论 9</span></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 2个月前</div><p>……真的假的？</p><div class="post-stats"><span>转发 3</span><span>赞 70</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet8425：</strong>Altair这半年真的感觉变了好多</p></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 半年前</div><p>Rasal老师写的词真的很不错</p><img class="post-image zoomable" src="../../../assets/starnet-altair-phony-lyrics-card.png" alt="「Phony」歌词卡 · Altair - CONSTELL"><div class="post-stats"><span>转发 6</span><span>赞 7</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet9957：</strong>天才来着</p></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 1年前</div><p>我吐了，身为队长自己有恋爱绯闻不澄清，转头搞什么秒删把队友拖下水。</p><div class="post-stats"><span>转发 0</span><span>赞 9</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet7054：</strong>公司一直在刻意卖这对，明明我们ARa才是真的</p></div></article>
+    <article class="post post-public"><div class="post-head">@双星环绕不息· 最近</div><p>你们俩不出现最好是在准备合作舞台……</p><div class="post-stats"><span>转发 4</span><span>赞 46</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet9884：</strong>网上传言好多，我有点崩溃了</p><p class="comment"><strong>StarNet2113：</strong>你们俩不出现最好是在准备合作舞台……</p></div></article><article class="post post-public"><div class="post-head">@双星环绕不息· 1个月前</div><p>啊啊啊啊！我cp又发糖了，姐狗稳稳的很安心。</p><div class="post-stats"><span>转发 6</span><span>赞 40</span><span>评论 9</span></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 2个月前</div><p>……真的假的？</p><div class="post-stats"><span>转发 0</span><span>赞 79</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet5778：</strong>Altair这半年真的感觉变了好多</p></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 半年前</div><p>Rasal老师写的词真的很不错</p><img class="post-image zoomable" src="../../../assets/starnet-altair-phony-lyrics-card.png" alt="「Phony」歌词卡 · Altair - CONSTELL"><div class="post-stats"><span>转发 1</span><span>赞 33</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet5504：</strong>天才来着</p></div></article><article class="post post-followers" hidden><div class="post-head">@双星环绕不息· 1年前</div><p>我吐了，身为队长自己有恋爱绯闻不澄清，转头搞什么秒删把队友拖下水。</p><div class="post-stats"><span>转发 0</span><span>赞 83</span><span>评论 8</span></div><div class="comments"><p class="comment"><strong>StarNet5681：</strong>公司一直在刻意卖这对，明明我们ARa才是真的</p></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -137,6 +146,27 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
+      function showFollowSuccessFx() {
+        var nameEl = document.querySelector(".profile .name");
+        var nickname = (nameEl && String(nameEl.textContent || "").trim()) || "该用户";
+        var toast = document.createElement("div");
+        toast.className = "follow-success-toast";
+        toast.textContent = "已成功关注@" + nickname;
+        document.body.appendChild(toast);
+        var colors = ["#22c55e", "#60a5fa", "#f59e0b", "#a78bfa", "#f472b6"];
+        for (var i = 0; i < 18; i++) {
+          var p = document.createElement("span");
+          p.className = "follow-confetti";
+          p.style.background = colors[i % colors.length];
+          p.style.setProperty("--dx", (Math.random() * 220 - 110).toFixed(0) + "px");
+          p.style.setProperty("--dy", (80 + Math.random() * 120).toFixed(0) + "px");
+          p.style.setProperty("--rot", (Math.random() * 520 - 260).toFixed(0) + "deg");
+          document.body.appendChild(p);
+          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);
+        }
+        setTimeout(function () { toast.classList.add("leave"); }, 980);
+        setTimeout(function () { toast.remove(); }, 1300);
+      }
       var expected = "Phony";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
@@ -197,6 +227,8 @@
         persistFollowState();
         closeModal();
         render();
+        showFollowSuccessFx();
+        showFollowSuccessFx();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();

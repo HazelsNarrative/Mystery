@@ -49,14 +49,23 @@
     .image-lightbox.show { display:flex; }
     .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
 
+  
+    /* starnet-follow-success-fx */
+    .follow-success-toast { position:fixed; left:50%; top:86px; transform:translateX(-50%); z-index:320; padding:10px 14px; border-radius:999px; border:1px solid #bfe8ca; background:linear-gradient(90deg,#ecfff3,#f4fffa); color:#1f6d45; font-size:13px; font-weight:700; box-shadow:0 8px 24px rgba(34,197,94,.18); opacity:0; animation:followToastIn .2s ease-out forwards; }
+    .follow-success-toast.leave { animation:followToastOut .28s ease-in forwards; }
+    .follow-confetti { position:fixed; top:96px; left:50%; width:8px; height:12px; border-radius:2px; z-index:319; pointer-events:none; animation:followConfetti 900ms ease-out forwards; }
+    @keyframes followToastIn { from { opacity:0; transform:translate(-50%,-8px);} to { opacity:1; transform:translate(-50%,0);} }
+    @keyframes followToastOut { from { opacity:1; transform:translate(-50%,0);} to { opacity:0; transform:translate(-50%,-10px);} }
+    @keyframes followConfetti { from { opacity:1; transform:translate(0,0) rotate(0deg);} to { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--rot));} }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/rasalhater</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">我女辣赛尔</h2><p class="id">@rasalhater</p><p class="bio">想说些漂亮话哄你，可是想来想去最漂亮的也只有你了。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>52</strong> 关注</span><span><strong>647</strong> 粉丝</span><span><strong>21</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">我女辣赛尔</h2><p class="id">@rasalhater</p><p class="bio">想说些漂亮话哄你，可是想来想去最漂亮的也只有你了。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>82</strong> 关注</span><span><strong>481</strong> 粉丝</span><span><strong>36</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@我女辣赛尔· 最近</div><p>没上飞机？？？？</p><div class="post-stats"><span>转发 4</span><span>赞 14</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet2184：</strong>他们又在整私生吗</p><p class="comment"><strong>StarNet9051：</strong>队友那边好像也一样</p><p class="comment"><strong>StarNet6673：</strong>给我气笑了……</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1个月前</div><p>买到了航班嘻嘻嘻嘻嘻嘻嘻可以去见我女了</p><div class="post-stats"><span>转发 1</span><span>赞 75</span><span>评论 1</span></div><div class="comments"><p class="comment"><strong>StarNet6743：</strong>恭喜！</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 半年前</div><p>感觉我女的身世经历简直就是苦情戏小白花，有没有懂的，惟惟让我好好疼爱你……（今晚就怒写3w字抹布文，这次放别的地方，求求粉丝别举报我了）</p><div class="post-stats"><span>转发 1</span><span>赞 78</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet8705：</strong>求私</p><p class="comment"><strong>StarNet1778：</strong>论坛里那群萌萌人真的很无聊，我也被挂过</p><p class="comment"><strong>StarNet5199：</strong>口嗨几句男的怎么了？</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1年前</div><p>mw就是私生子怎么了，接有钱老爹漂亮老妈，给我这个建模和零花我不介意被人戳一辈子脊梁骨。</p><div class="post-stats"><span>转发 6</span><span>赞 26</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet2945：</strong>姐妹你这话有点不太对吧……</p><p class="comment"><strong>StarNet5853：</strong>不是，他小时候真得过得很惨啊……</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1年前</div><p>听说那个黑洞挺有意思的，有真瓜吗？</p><div class="post-stats"><span>转发 4</span><span>赞 91</span><span>评论 5</span></div><div class="comments"><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p><p class="comment"><strong>StarNet0881：</strong>不知道啊，随便吃吃</p></div></article>
+    <article class="post post-public"><div class="post-head">@我女辣赛尔· 最近</div><p>没上飞机？？？？</p><div class="post-stats"><span>转发 6</span><span>赞 37</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet2184：</strong>他们又在整私生吗</p><p class="comment"><strong>StarNet9051：</strong>队友那边好像也一样</p><p class="comment"><strong>StarNet6673：</strong>给我气笑了……</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1个月前</div><p>买到了航班嘻嘻嘻嘻嘻嘻嘻可以去见我女了</p><div class="post-stats"><span>转发 0</span><span>赞 41</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet6883：</strong>恭喜！</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 半年前</div><p>感觉我女的身世经历简直就是苦情戏小白花，有没有懂的，惟惟让我好好疼爱你……（今晚就怒写3w字抹布文，这次放别的地方，求求粉丝别举报我了）</p><div class="post-stats"><span>转发 4</span><span>赞 54</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet0884：</strong>求私</p><p class="comment"><strong>StarNet6901：</strong>论坛里那群萌萌人真的很无聊，我也被挂过</p><p class="comment"><strong>StarNet5300：</strong>口嗨几句男的怎么了？</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1年前</div><p>mw就是私生子怎么了，接有钱老爹漂亮老妈，给我这个建模和零花我不介意被人戳一辈子脊梁骨。</p><div class="post-stats"><span>转发 1</span><span>赞 71</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet9061：</strong>姐妹你这话有点不太对吧……</p><p class="comment"><strong>StarNet9135：</strong>不是，他小时候真得过得很惨啊……</p></div></article><article class="post post-followers" hidden><div class="post-head">@我女辣赛尔· 1年前</div><p>听说那个黑洞挺有意思的，有真瓜吗？</p><div class="post-stats"><span>转发 5</span><span>赞 42</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p><p class="comment"><strong>StarNet6239：</strong>不知道啊，随便吃吃</p></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -137,6 +146,27 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
+      function showFollowSuccessFx() {
+        var nameEl = document.querySelector(".profile .name");
+        var nickname = (nameEl && String(nameEl.textContent || "").trim()) || "该用户";
+        var toast = document.createElement("div");
+        toast.className = "follow-success-toast";
+        toast.textContent = "已成功关注@" + nickname;
+        document.body.appendChild(toast);
+        var colors = ["#22c55e", "#60a5fa", "#f59e0b", "#a78bfa", "#f472b6"];
+        for (var i = 0; i < 18; i++) {
+          var p = document.createElement("span");
+          p.className = "follow-confetti";
+          p.style.background = colors[i % colors.length];
+          p.style.setProperty("--dx", (Math.random() * 220 - 110).toFixed(0) + "px");
+          p.style.setProperty("--dy", (80 + Math.random() * 120).toFixed(0) + "px");
+          p.style.setProperty("--rot", (Math.random() * 520 - 260).toFixed(0) + "deg");
+          document.body.appendChild(p);
+          (function (node) { setTimeout(function () { node.remove(); }, 920); })(p);
+        }
+        setTimeout(function () { toast.classList.add("leave"); }, 980);
+        setTimeout(function () { toast.remove(); }, 1300);
+      }
       var expected = "庄暮诚";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
@@ -197,6 +227,8 @@
         persistFollowState();
         closeModal();
         render();
+        showFollowSuccessFx();
+        showFollowSuccessFx();
       });
       followModal.addEventListener("click", function (e) {
         if (e.target === followModal) closeModal();
