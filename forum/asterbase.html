@@ -476,11 +476,27 @@
     }
 
     .tile-name {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       margin: 0 0 2px;
       font-size: 14px;
       font-weight: 800;
       color: #534a8a;
+    }
+
+    .tile-new-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4d6d;
+      box-shadow: 0 0 0 2px rgba(255, 77, 109, 0.18);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .tile-new-dot[hidden] {
+      display: none !important;
     }
 
     .tile-meta {
@@ -876,7 +892,7 @@
           <a class="board-tile board-tile--link" href="./boards/general-board.html">
             <span class="tile-ico" aria-hidden="true">💬</span>
             <span class="tile-body">
-              <span class="tile-name">CONSTELL 综合讨论区</span>
+              <span class="tile-name">CONSTELL 综合讨论区<span class="tile-new-dot" data-newdot="general" hidden></span></span>
               <span class="tile-meta">闲聊 · 吐槽 · 团魂发电</span>
             </span>
           </a>
@@ -933,7 +949,7 @@
           <button type="button" class="board-tile board-tile--wide" id="btnRelationZone">
             <span class="tile-ico" aria-hidden="true">💞</span>
             <span class="tile-body">
-              <span class="tile-name">关系研究所（CP 专区）</span>
+              <span class="tile-name">关系研究所（CP 专区）<span class="tile-new-dot" data-newdot="relation" hidden></span></span>
               <span class="tile-meta">糖点考古 · 互动分析 · 同人粮仓</span>
             </span>
           </button>
@@ -948,7 +964,7 @@
           <button type="button" class="board-tile board-tile--chill" id="btnRestZone">
             <span class="tile-ico" aria-hidden="true">🌙</span>
             <span class="tile-body">
-              <span class="tile-name">小星球休息区（水区）</span>
+              <span class="tile-name">小星球休息区（水区）<span class="tile-new-dot" data-newdot="rest" hidden></span></span>
               <span class="tile-meta">今日份碎碎念 · 树洞 · 贴贴</span>
             </span>
           </button>
@@ -986,6 +1002,7 @@
       var MODE_KEY = "lp_forum_mode";
       var USERS_KEY = "lp_forum_users";
       var MEMBER_USER_KEY = "lp_forum_member_user";
+      var NEW_BADGE_KEY = "lp_forum_member_new_badges_v1";
       var INVITE_CODE = "JY971208ZWLPX";
 
       var QUIZ = {
@@ -1060,6 +1077,12 @@
       var btnOpenCpVote = document.getElementById("btnOpenCpVote");
       var accessTipTimer = null;
       var authOpenedFromForum = false;
+      var generalBoardLink = document.querySelector('a[href="./boards/general-board.html"]');
+      var newDots = {
+        general: document.querySelector('[data-newdot="general"]'),
+        relation: document.querySelector('[data-newdot="relation"]'),
+        rest: document.querySelector('[data-newdot="rest"]')
+      };
 
       function showPanel(id) {
         if (id === "forumPanel") {
@@ -1085,6 +1108,7 @@
       function setMode(mode) {
         sessionStorage.setItem(MODE_KEY, mode);
         guestModeBar.hidden = mode !== "guest";
+        applyNewBadgeDots();
       }
 
       function getCurrentMemberUser() {
@@ -1098,9 +1122,43 @@
       function setMemberUser(username) {
         if (!username) {
           sessionStorage.removeItem(MEMBER_USER_KEY);
+          applyNewBadgeDots();
           return;
         }
         sessionStorage.setItem(MEMBER_USER_KEY, username);
+        applyNewBadgeDots();
+      }
+
+      function getBadgeState() {
+        try {
+          var raw = JSON.parse(localStorage.getItem(NEW_BADGE_KEY) || "{}");
+          return {
+            general: raw.general === true,
+            relation: raw.relation === true,
+            rest: raw.rest === true
+          };
+        } catch (e) {
+          return { general: false, relation: false, rest: false };
+        }
+      }
+
+      function setBadgeSeen(key) {
+        var state = getBadgeState();
+        if (state[key]) {
+          return;
+        }
+        state[key] = true;
+        localStorage.setItem(NEW_BADGE_KEY, JSON.stringify(state));
+        applyNewBadgeDots();
+      }
+
+      function applyNewBadgeDots() {
+        var isMember = (sessionStorage.getItem(MODE_KEY) || "guest") === "member";
+        var state = getBadgeState();
+        Object.keys(newDots).forEach(function (k) {
+          if (!newDots[k]) return;
+          newDots[k].hidden = !isMember || state[k];
+        });
       }
 
       function showAccessTip(msg) {
@@ -1389,6 +1447,7 @@
           showAccessTip("访客模式下暂不可查看关系区，请登录后访问。");
           return;
         }
+        setBadgeSeen("relation");
         window.location.href = "./boards/relation-board.html";
       });
 
@@ -1397,8 +1456,18 @@
           showAccessTip("访客模式下暂不可查看休息区，请登录后访问。");
           return;
         }
+        setBadgeSeen("rest");
         window.location.href = "./boards/rest-board.html";
       });
+
+      if (generalBoardLink) {
+        generalBoardLink.addEventListener("click", function () {
+          if ((sessionStorage.getItem(MODE_KEY) || "guest") !== "member") {
+            return;
+          }
+          setBadgeSeen("general");
+        });
+      }
 
       btnOpenCpVote.addEventListener("click", function () {
         if ((sessionStorage.getItem(MODE_KEY) || "guest") === "guest") {
@@ -1436,6 +1505,8 @@
         setMode("guest");
         showPanel("forumPanel");
       });
+
+      applyNewBadgeDots();
     })();
   </script>
 </body>
