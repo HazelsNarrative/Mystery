@@ -3,34 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@rasalmylady | StarNet</title>
+  <title>@jinliezu | StarNet</title>
   <style>
     :root { --bg:#f8f9fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#6f77ff; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
-    .app { width:min(900px,94vw); margin:0 auto; padding:20px 0 30px; }
-    .panel { background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 10px 24px rgba(63,77,110,0.08); }
+    * { box-sizing:border-box; } body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .app { width:min(900px,94vw); margin:0 auto; padding:20px 0 30px; } .panel { background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 10px 24px rgba(63,77,110,0.08); }
     .site-head { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); display:flex; justify-content:space-between; align-items:center; gap:10px; }
-    .brand-logo { width:100px; height:auto; display:block; transform: scale(1.62); transform-origin: left center; margin-left: -10px; }
+    .brand-logo { width:100px; height:auto; display:block; transform:scale(1.62); transform-origin:left center; margin-left:-10px; }
     .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
-    .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(121,87,166,0.78), rgba(93,70,131,0.76) 45%, rgba(57,42,83,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
-    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(64,44,93,.25); display:grid; place-items:center; font-weight:800; color:#3f2a61; background:radial-gradient(circle at 30% 30%,#fff,#ddcef1 45%,#997ebf); }
-    .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); }
-    .name { margin:0; font-size:22px; font-weight:800; }
-    .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
-    .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; }
-    .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); }
-    .stats strong { color:#263a61; }
+    .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(139,175,202,0.76), rgba(106,145,180,0.75) 45%, rgba(73,109,147,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(45,77,98,.25); background-image:url("../../../assets/starnet-avatar-romantic_ro.png"); background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#cde1ec; }
+    .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); } .name { margin:0; font-size:22px; font-weight:800; } .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
+    .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; } .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); } .stats strong { color:#263a61; }
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
-    .post { padding:14px 18px; border-bottom:1px solid var(--line); }
-    .post:last-child { border-bottom:none; }
-    .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; }
-    .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
-    .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; }
-    .tag { color:var(--brand); }
-    .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
-    .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
+    .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
+    .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .post-public { background:rgba(255,255,255,0.9); }
+    .post-followers { background:linear-gradient(180deg, #fcf8ff, #f8f4ff); border-left:3px solid #9d8dff; }
+    .report-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; }
+    .post-image-placeholder {
+      margin-top: 6px;
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px dashed #c9d4e8;
+      background: #f4f7fc;
+      color: #7b8ba3;
+      font-size: 11px;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+      .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
+    .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
     .locked-tip { margin:12px 18px 14px; padding:10px 12px; border:1px solid #e2d6ff; border-radius:12px; background:#faf7ff; color:#6a5f8a; font-size:12px; line-height:1.7; }
     .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(20,24,40,.45); z-index:200; }
     .modal.show { display:flex; }
@@ -52,20 +57,14 @@
 </head>
 <body>
   <main class="app"><section class="panel">
-    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/rasalmylady</p></div><div class="cover"><div class="avatar">V</div></div>
-    <div class="profile"><h2 class="name">我女辣赛尔</h2><p class="id">@rasalmylady</p><p class="bio">想说些漂亮话哄你，可是想来想去最漂亮的也只有你了。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>101</strong> 关注</span><span><strong>1,034</strong> 粉丝</span><span><strong>74</strong> 动态</span></div></div>
-    
-    
-      <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post"><div class="post-head">@我女辣赛尔 · 2 周前</div><p>我女你就是天天喝这个喝得🐻越来越大的吗小心雌激素过剩</p><div class="post-stats"><span>转发 2</span><span>赞 22</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet2184：</strong>完全小女孩口味</p><p class="comment"><strong>StarNet9051：</strong>我今天就要把她给办了！</p><p class="comment"><strong>StarNet6673：</strong>妹爱喝豆奶我爱喝妹的大奶</p><p class="comment"><strong>StarNet3409：</strong>xswl，你们再说这些又要被mmr举了</p></div></article>
-    <div id="protectedContent" hidden>
-            <article class="post"><div class="post-head">@我女辣赛尔· 刚刚</div><p>又有人说我造谣？那你解释一下这份行程截图哪里错了。</p><div class="post-stats"><span>转发 3</span><span>赞 38</span><span>评论 6</span></div></article>
-            <article class="post"><div class="post-head">@我女辣赛尔· 2 天前</div><p>粉圈捂嘴速度真的一流，评论区全在控评。<span class="tag">#别装路人</span></p><div class="post-stats"><span>转发 2</span><span>赞 11</span><span>评论 2</span></div></article>
-    </div></section></main>
+    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/jinliezu</p></div><div class="cover"><div class="avatar" aria-label="ROmantic头像"></div></div>
+    <div class="profile"><h2 class="name">soROmantic</h2><p class="id">@jinliezu</p><p class="bio">我产今天打架了吗？</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>46</strong> 关注</span><span><strong>611</strong> 粉丝</span><span><strong>30</strong> 动态</span></div></div>
+    <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
+    <article class="post post-public"><div class="post-head">@soROmantic· 1 周前</div><p>支持这个O老师的商务！！！</p><div class="post-stats"><span>转发 5</span><span>赞 28</span><span>评论 8</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 2 周前</div><p>没人觉得O是队长才是最好的风味吗，为什么我总看到有同人文里把Re写成队长然后搞训诫啊，明明年下管年上最香了！！！同意请点赞！</p><div class="post-stats"><span>转发 0</span><span>赞 75</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 1 个月前</div><p>又重温了惹哥名场面啊啊啊啊，实话实说刚出道的时候欧小狗看起来真的有点土土的，但惹哥已经完全是完成时了。</p><div class="post-stats"><span>转发 3</span><span>赞 33</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet7710：</strong>刚出道的时候最先出圈的就惹惹惹</p><img class="comment-media zoomable" style="max-width:240px;display:block;margin-top:8px;border-radius:12px;border:1px solid #d8e1ee;cursor:zoom-in" src="../../../assets/starnet-comment-ridiculous.gif" alt="ridiculous 表情包"><p class="comment"><strong>StarNet2142：</strong>你这句话三个惹hhhh</p></div></article><article class="post post-public"><div class="post-head">@soROmantic· 1 个月前</div><p>我产真是一对纯恨的小夫夫，但我真的很讨厌她们说他俩吵架是在为另一位争风吃醋。</p><div class="post-stats"><span>转发 1</span><span>赞 92</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet5521：</strong>点了</p><p class="comment"><strong>StarNet8840：</strong>美帝粉真的很KY</p></div></article>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：我女混账爹大名</p>
+      <p class="modal-question">RE：O 从零开始的……</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
@@ -131,7 +130,7 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "庄暮诚";
+      var expected = "寰宇猎手生活";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
@@ -162,7 +161,16 @@
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
-        protectedContent.hidden = !isFollowing;
+        if (protectedContent && protectedContent.querySelector(".post.post-followers")) {
+          protectedContent.hidden = !isFollowing;
+        } else {
+          document.querySelectorAll(".post.post-followers").forEach(function (el) {
+            el.hidden = !isFollowing;
+          });
+          if (protectedContent) {
+            protectedContent.hidden = true;
+          }
+        }
         lockedTip.hidden = isFollowing;
       }
 

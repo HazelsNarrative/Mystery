@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@CONSTELL-Orion | StarNet</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>@constellorion | StarNet</title>
+<style>
     :root { --bg:#f8f9fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#6f77ff; }
     * { box-sizing:border-box; }
     body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
@@ -61,120 +62,37 @@
   </style>
 </head>
 <body>
-  <main class="app">
-    <section class="panel">
-      <div class="site-head">
-        <div class="brand-wrap">
-          <img class="brand-logo" src="../../assets/starnet-logo.png" alt="StarNet logo">
-        </div>
-        <p class="url">https://starnet.social/CONSTELL-Orion</p>
-      </div>
-      <div class="cover"><div class="avatar">O</div></div>
-      <div class="profile">
-        <h2 class="name">Orion</h2>
-        <p class="id">@CONSTELL-Orion</p>
-        <p class="bio">CONSTELL成员</p>
-        <button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>214</strong> 关注</span><span><strong>326.8万</strong> 粉丝</span><span><strong>1,289</strong> 动态</span></div>
-      </div>
-      <article class="post">
-        <div class="post-head">@Orion· 3 小时前</div>
-        <p>今天练习室先到这，大家早点睡。<span class="tag">#归辰倒计时</span></p>
-        <div class="post-stats"><span>转发 1.2w</span><span>赞 3.8w</span><span>评论 2,416</span></div>
-        
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 昨天</div>
-        <p>下楼买水路过宠物店，差点又把自己拐进去。青柠最近状态很好🐶</p>
-        <div class="post-stats"><span>转发 8,932</span><span>赞 2.6w</span><span>评论 1,209</span></div>
-        
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 2 天前</div>
-        <p>新 demo 还在改，等我再磨一磨。谢谢一直在。</p>
-        <div class="post-stats"><span>转发 6,107</span><span>赞 1.9w</span><span>评论 836</span></div>
-        
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 1 周前</div>
-        <p>舞台返图存一下，感谢大家的支持。我们演唱会见。</p>
-        <img
-          class="post-image zoomable"
-          src="../../assets/starnet-orion-stage.png"
-          data-fallback-srcs="./assets/starnet-orion-stage.png|assets/starnet-orion-stage.png|../../assets/starnet-orion-stage.png"
-          alt="Orion 舞台返图，球衣97号"
-        >
-        <div class="post-stats"><span>转发 3.2w</span><span>赞 11.8w</span><span>评论 9,406</span></div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 1 年前</div>
-        <p>生日快乐。</p>
-        <img
-          class="post-image zoomable"
-          src="../../assets/starnet-orion-birthday-post.png"
-          data-fallback-srcs="./assets/starnet-orion-birthday-post.png|assets/starnet-orion-birthday-post.png|../../assets/starnet-orion-birthday-post.png"
-          alt="Orion 生日动态配图"
-        >
-        <div class="post-stats"><span>转发 4.1w</span><span>赞 12.7w</span><span>评论 4</span></div>
-        <div class="comments">
-          <p class="comment"><strong>StarNet2714：</strong>啊啊啊啊啊啊啊啊啊啊啊</p>
-          <p class="comment"><strong>StarNet5830：</strong>祝两位老师友谊长长久久！！！！！</p>
-          <p class="comment"><strong>StarNet9042：</strong>Orion你前面秒删什么意思你前面秒删什么意思你前面秒删什么意思</p>
-          <p class="comment"><strong>StarNet1296：</strong>就这个0926爽！！！！我就知道每年都会有大糖！！！！！！</p>
-        </div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 1 年前</div>
-        <p>Regulus生日快乐！你想去的地方我们都会和你一起去的！</p>
-        <img
-          class="post-image zoomable"
-          src="../../assets/starnet-orion-regulus-birthday-post.png"
-          data-fallback-srcs="./assets/starnet-orion-regulus-birthday-post.png|assets/starnet-orion-regulus-birthday-post.png|../../assets/starnet-orion-regulus-birthday-post.png"
-          alt="Orion 祝Regulus生日快乐动态配图"
-        >
-        <div class="post-stats"><span>转发 4.4w</span><span>赞 13.1w</span><span>评论 3</span></div>
-        <div class="comments">
-          <p class="comment"><strong>StarNet4721：</strong>Regulus老师生日快乐呀</p>
-          <p class="comment"><strong>StarNet8395：</strong>来考古了，今年热带雨林物料真的要笑死我了哈哈哈哈哈</p>
-          <p class="comment"><strong>StarNet2608：</strong>re哥你现在是不是后悔了哈哈哈哈哈</p>
-        </div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 1 年前</div>
-        <p>就在刚才随手拍的哈哈，Altair生日快乐，想吃啥，哥请客。</p>
-        <img
-          class="post-image zoomable"
-          src="../../assets/starnet-orion-altair-birthday-post.png"
-          data-fallback-srcs="./assets/starnet-orion-altair-birthday-post.png|assets/starnet-orion-altair-birthday-post.png|../../assets/starnet-orion-altair-birthday-post.png"
-          alt="Orion 祝Altair生日快乐动态配图"
-        >
-        <div class="post-stats"><span>转发 3.7w</span><span>赞 11.9w</span><span>评论 3</span></div>
-        <div class="comments">
-          <p class="comment"><strong>StarNet3147：</strong>刚才？？？这是哪个公园，我要去偶遇你们！！！</p>
-          <p class="comment"><strong>StarNet8820：</strong>你俩又在卷运动吗哈哈哈</p>
-          <p class="comment"><strong>StarNet5204：</strong>Altair明明是年纪最小的，怎么数十年如一日的爱有线耳机……</p>
-        </div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Orion· 1 年前</div>
-        <p>入驻 StarNet，之后在这里和大家见面。<a href="../starnet-home.html">starnet.social</a></p>
-        <div class="post-stats"><span>转发 5.2w</span><span>赞 18.6w</span><span>评论 2.1w</span></div>
-      </article>
-    </section>
-  </main>
-  <div class="modal" id="unfollowConfirmModal">
-    <div class="modal-card">
-      <p class="modal-title">取消关注确认</p>
-      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
-      <div class="modal-actions">
-        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
-        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
-      </div>
-    </div>
-  </div>
-  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
-    <img id="lightboxImage" alt="查看大图">
-  </div>
-  <script>
+<main class="app">
+<section class="panel">
+<div class="site-head">
+<div class="brand-wrap">
+<img alt="StarNet logo" class="brand-logo" src="../../assets/starnet-logo.png"/>
+</div>
+<p class="url">https://starnet.social/constellorion</p>
+</div>
+<div class="cover"><div class="avatar">O</div></div>
+<div class="profile">
+<h2 class="name">CONSTELL-Orion</h2>
+<p class="id">@constellorion</p>
+<p class="bio">CONSTELL成员 Orion</p>
+<button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>192</strong> 关注</span><span><strong>3156.6万</strong> 粉丝</span><span><strong>2,683</strong> 动态</span></div>
+</div>
+<article class="post post-public"><div class="post-head">@CONSTELL-Orion· 1周前</div><p>这一次，带给你们不一样的我。<span class="tag">#归辰</span></p><div class="post-stats"><span>转发 5.1万</span><span>赞 3.1万</span><span>评论 5.7万</span></div><div class="comments"><p class="comment"><strong>StarNet0637：</strong>期待了！！！</p><p class="comment"><strong>StarNet9908：</strong>Orion你在哪里啊，一周没有营业了～</p><p class="comment"><strong>StarNet7712：</strong>快出来报个平安吧！听到了一些不好的传闻</p><p class="comment"><strong>StarNet5235：</strong>哥哥你在哪QAQ</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 2周前</div><p>今天人很乖，但狗不乖，青柠又在家里拉💩了</p><div class="post-stats"><span>转发 8.3万</span><span>赞 12.9万</span><span>评论 8.8万</span></div><div class="comments"><p class="comment"><strong>StarNet6224：</strong>哈哈哈哈哈哈哈</p><p class="comment"><strong>StarNet8646：</strong>哈哈哈哈哈哈哈哈哈</p><p class="comment"><strong>StarNet1065：</strong>你说的人是Rasal吗？</p><p class="comment"><strong>StarNet0457：</strong>CP粉不要来ky好吗？？？？</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 1个月前</div><p>舞台返图存一下，感谢大家的支持。我们演唱会见。</p><img alt="Orion舞台返图" class="post-image zoomable" src="../../assets/starnet-orion-stage.png"/><div class="post-stats"><span>转发 5.8万</span><span>赞 12.7万</span><span>评论 7.4万</span></div><div class="comments"><p class="comment"><strong>StarNet4814：</strong>这次状态真的特别好！</p><p class="comment"><strong>StarNet1081：</strong>兄弟！神舞台有了！</p><p class="comment"><strong>StarNet3732：</strong>哥哥我抢到票了！演唱会见！</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 2 个月前</div><p>就在刚才随手拍的哈哈，Altair生日快乐，想吃啥，哥请客。</p><img alt="Orion-Altair生日" class="post-image zoomable" src="../../assets/starnet-orion-altair-birthday-post.png"/><div class="post-stats"><span>转发 4.4万</span><span>赞 9.5万</span><span>评论 2.7万</span></div><div class="comments"><p class="comment"><strong>StarNet3147：</strong>刚才？？？这是哪个公园，我要去偶遇你们！！！</p><p class="comment"><strong>StarNet8820：</strong>你俩又在卷运动吗哈哈哈</p><p class="comment"><strong>StarNet5204：</strong>Altair明明是年纪最小的，怎么数十年如一日的爱有线耳机……</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 4个月前</div><p>请不要再打扰我和我的家人了，注意安全，感谢理解，我们舞台上见🙏</p><div class="post-stats"><span>转发 7.5万</span><span>赞 15.7万</span><span>评论 1.5万</span></div><div class="comments"><p class="comment"><strong>StarNet1439：</strong>哥哥你不要这么好说话了好不好，直接告</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 半年前</div><p>生日快乐。</p><img alt="Orion-Rasal生日" class="post-image zoomable" src="../../assets/starnet-orion-birthday-post.png"/><div class="post-stats"><span>转发 8万</span><span>赞 6.7万</span><span>评论 1.6万</span></div><div class="comments"><p class="comment"><strong>StarNet2714：</strong>啊啊啊啊啊啊啊啊啊啊啊</p><p class="comment"><strong>StarNet5830：</strong>祝两位老师友谊长长久久！！！！！</p><p class="comment"><strong>StarNet9042：</strong>Orion你前面秒删什么意思你前面秒删什么意思你前面秒删什么意思</p><p class="comment"><strong>StarNet1296：</strong>就这个0926爽！！！！我就知道每年都会有大糖！！！！！！</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 半年前</div><p>重要的人都在身边，这个生日很开心。</p><div class="post-stats"><span>转发 6万</span><span>赞 19.2万</span><span>评论 1.8万</span></div><div class="comments"><p class="comment"><strong>StarNet1770：</strong>生日快乐欧大帅哥！</p><p class="comment"><strong>StarNet6553：</strong>新的一年我也要像鬼一样缠着你</p><p class="comment"><strong>StarNet1643：</strong>CONSTELL长长久久！！！</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 1 年前</div><p>Regulus生日快乐！你想去的地方我们都会和你一起去的！</p><img alt="Orion-Regulus生日" class="post-image zoomable" src="../../assets/starnet-orion-regulus-birthday-post.png"/><div class="post-stats"><span>转发 9.7万</span><span>赞 12.6万</span><span>评论 3.6万</span></div><div class="comments"><p class="comment"><strong>StarNet4721：</strong>Regulus老师生日快乐呀</p><p class="comment"><strong>StarNet8395：</strong>来考古了，今年热带雨林物料真的要笑死我了哈哈哈哈哈</p><p class="comment"><strong>StarNet2608：</strong>re哥你现在是不是后悔了哈哈哈哈哈</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Orion· 1 年前</div><p>入驻 StarNet，之后在这里和大家见面。<br/><a href="../starnet-home.html">starnet.social</a></p><div class="post-stats"><span>转发 1.8万</span><span>赞 15.2万</span><span>评论 7.3万</span></div></article></section>
+</main>
+<div class="modal" id="unfollowConfirmModal">
+<div class="modal-card">
+<p class="modal-title">取消关注确认</p>
+<p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+<div class="modal-actions">
+<button class="btn-cancel" id="unfollowCancelBtn" type="button">取消</button>
+<button class="btn-ok" id="unfollowConfirmBtn" type="button">确认</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="image-lightbox" id="imageLightbox">
+<img alt="查看大图" id="lightboxImage"/>
+</div>
+<script>
     (function () {
       function setupImageZoom() {
         var lightbox = document.getElementById("imageLightbox");
@@ -313,6 +231,5 @@
       setupImageZoom();
     })();
   </script>
-
 </body>
 </html>

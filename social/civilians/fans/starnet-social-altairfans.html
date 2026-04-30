@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@pick_star_for_u | StarNet</title>
+  <title>@altairfans | StarNet</title>
   <style>
     :root { --bg:#f8f9fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#6f77ff; }
     * { box-sizing:border-box; } body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
@@ -11,13 +11,21 @@
     .site-head { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); display:flex; justify-content:space-between; align-items:center; gap:10px; }
     .brand-logo { width:100px; height:auto; display:block; transform:scale(1.62); transform-origin:left center; margin-left:-10px; }
     .url { margin:0; font-size:12px; color:var(--sub); word-break:break-all; }
-    .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(167,130,207,0.76), rgba(134,100,189,0.75) 45%, rgba(92,71,151,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
-    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(75,54,112,.25); display:grid; place-items:center; font-weight:800; color:#4a2f5f; background:radial-gradient(circle at 30% 30%,#fff,#dfd0ea 45%,#a483bc); }
+    .cover { height:200px; position:relative; background-image:linear-gradient(120deg, rgba(98,150,180,0.76), rgba(70,126,162,0.75) 45%, rgba(45,89,123,0.8)), url("../../../assets/starnet-home-bg.png"); background-size:cover; background-position:center; }
+    .avatar { position:absolute; left:18px; bottom:-34px; width:84px; height:84px; border-radius:50%; border:4px solid #fff; box-shadow:0 8px 18px rgba(45,77,98,.25); background-image:url("../../../assets/starnet-avatar-xiaojiang_tai.png"); background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#cde1ec; }
     .profile { padding:46px 18px 14px; border-bottom:1px solid var(--line); } .name { margin:0; font-size:22px; font-weight:800; } .id { margin:4px 0 10px; color:var(--sub); font-size:13px; }
     .bio { margin:0; line-height:1.7; color:#243046; font-size:14px; } .stats { margin-top:10px; display:flex; gap:16px; font-size:12px; color:var(--sub); } .stats strong { color:#263a61; }
     .feed-title { margin:0; padding:12px 18px; font-size:15px; font-weight:800; border-bottom:1px solid var(--line); color:#22345a; }
     .post { padding:14px 18px; border-bottom:1px solid var(--line); } .post:last-child { border-bottom:none; } .post-head { font-size:13px; color:var(--sub); margin-bottom:6px; } .post p { margin:0; font-size:14px; line-height:1.75; color:#1d2432; }
     .post-stats { margin-top:8px; font-size:12px; color:#6f7f94; display:flex; gap:14px; } .tag { color:var(--brand); }
+    .post-public { background:rgba(255,255,255,0.9); }
+    .post-followers { background:linear-gradient(180deg, #fcf8ff, #f8f4ff); border-left:3px solid #9d8dff; }
+    .repost-card { margin-top:10px; border:1px solid #d7e0ee; border-radius:12px; background:#f9fbff; padding:10px; }
+    .repost-head { font-size:12px; color:#607087; margin-bottom:6px; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
       .follow-btn { margin-top:10px; border:none; border-radius:999px; padding:8px 14px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(90deg,#8a6dff,#4f81df); cursor:pointer; }
     .follow-btn.following { background:#d1d5db; color:#4b5563; border:1px solid #9ca3af; }
     .private-note { margin:10px 0 0; font-size:13px; color:#8a5a74; font-weight:700; }
@@ -42,17 +50,14 @@
 </head>
 <body>
   <main class="app"><section class="panel">
-    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/pick_star_for_u</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">想摘下星星给你</h2><p class="id">@pick_star_for_u</p><p class="bio">美帝姐无所畏惧</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>56</strong> 关注</span><span><strong>734</strong> 粉丝</span><span><strong>36</strong> 动态</span></div></div>
+    <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/altairfans</p></div><div class="cover"><div class="avatar" aria-label="是小江也是小汰头像"></div></div>
+    <div class="profile"><h2 class="name">是小江也是小太</h2><p class="id">@altairfans</p><p class="bio">Altair要成为世界上最棒的歌手！</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>52</strong> 关注</span><span><strong>648</strong> 粉丝</span><span><strong>37</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <div id="protectedContent" hidden>
-          <article class="post"><div class="post-head">@想摘下星星给你· 昨天</div><p>猎星组今天也稳稳升温中。</p><div class="post-stats"><span>转发 0</span><span>赞 29</span><span>评论 5</span></div></article>
-          <article class="post"><div class="post-head">@想摘下星星给你· 5 天前</div><p>想摘下星星给你，这句我能嗑一年。<span class="tag">#猎星组</span></p><div class="post-stats"><span>转发 1</span><span>赞 14</span><span>评论 3</span></div></article>
-    </div></section></main>
+    <article class="post post-public"><div class="post-head">@是小江也是小太· 最近</div><p>宝宝八月见！！！！</p><img class="post-image zoomable" src="../../../assets/concert-poster.png" alt="CONSTELL官宣演唱会主视觉"><div class="post-stats"><span>转发 1</span><span>赞 28</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>这次真的想转唯了，落井下石的人你们都给我记着。</p><div class="post-stats"><span>转发 0</span><span>赞 87</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet4821：</strong>我早就变毒唯了</p><p class="comment"><strong>StarNet7903：</strong>搞不好这次的黑料都是队友在后面推波助澜，我看抽烟喝酒的另有其人吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@是小江也是小太· 2个月前</div><p>造谣的人太可恨了！！！根本就是合成图吧！！</p><div class="post-stats"><span>转发 6</span><span>赞 97</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet3358：</strong>肯定是啊，都找到一模一样的图了，原本是彩排图，被移花接木上去的</p><p class="comment"><strong>StarNet2246：</strong>现在技术这么发达，造谣成本越来越低了</p><p class="comment"><strong>StarNet9184：</strong>而且宝宝那天不是回去陪家人了吗，怎么可能出现在夜店啊！！！</p></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 2个月前</div><p>家人们快转澄清贴！！！洗广场！！！</p><div class="post-stats"><span>转发 6</span><span>赞 93</span><span>评论 6</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>我在“璀璨盛典-年度歌手”中投给了“Alstair（CONSTELL）”，快来和我一起支持TA！</p><div class="post-stats"><span>转发 5</span><span>赞 39</span><span>评论 9</span></div></article><article class="post post-public"><div class="post-head">@是小江也是小太· 3个月前</div><p>分享歌曲：Zig-Zag - Alstair<br>我正在听这首歌，你也来听听看吧！</p><div class="post-stats"><span>转发 4</span><span>赞 43</span><span>评论 0</span></div></article>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
-      <p class="modal-question">问题：无解的那天，无解的时间（八位数字）</p>
+      <p class="modal-question">请说：Altair是全宇宙最可爱的宝宝！</p>
       <input class="modal-input" id="answerInput" type="text" placeholder="请输入答案">
       <p class="modal-error" id="answerError"></p>
       <div class="modal-actions">
@@ -71,8 +76,30 @@
       </div>
     </div>
   </div>
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
       function setupCommentToggles() {
         document.querySelectorAll(".post").forEach(function (post) {
           var comments = post.querySelector(".comments");
@@ -118,7 +145,7 @@
       var btnSubmit = document.getElementById("btnSubmit");
       var protectedContent = document.getElementById("protectedContent");
       var lockedTip = document.getElementById("lockedTip");
-      var expected = "09261314";
+      var expected = "Altair是全宇宙最可爱的宝宝！";
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
@@ -149,7 +176,16 @@
       function render() {
         followBtn.textContent = isFollowing ? "已关注" : "关注";
         followBtn.classList.toggle("following", isFollowing);
-        protectedContent.hidden = !isFollowing;
+        if (protectedContent && protectedContent.querySelector(".post.post-followers")) {
+          protectedContent.hidden = !isFollowing;
+        } else {
+          document.querySelectorAll(".post.post-followers").forEach(function (el) {
+            el.hidden = !isFollowing;
+          });
+          if (protectedContent) {
+            protectedContent.hidden = true;
+          }
+        }
         lockedTip.hidden = isFollowing;
       }
 
@@ -217,6 +253,7 @@
       render();
 
       setupCommentToggles();
+      setupImageZoom();
     })();
   </script>
 </body>

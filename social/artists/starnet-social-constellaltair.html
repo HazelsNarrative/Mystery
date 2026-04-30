@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@CONSTELL-Altair | StarNet</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>@constellaltair | StarNet</title>
+<style>
     :root { --bg:#f8f9fb; --card:#fff; --line:#e6ecf5; --text:#0f1419; --sub:#536471; --brand:#6f77ff; }
     * { box-sizing:border-box; }
     body { margin:0; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text); }
@@ -36,7 +37,7 @@
     .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
     .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
     .comment strong { color:#2a426a; }
-    .report-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; cursor: zoom-in; }
+    .report-image, .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:280px; border:1px solid #d4ddee; border-radius:12px; display:block; background:#0f1626; cursor: zoom-in; }
     .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
     .image-lightbox.show { display:flex; }
     .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
@@ -64,95 +65,37 @@
   </style>
 </head>
 <body>
-  <main class="app">
-    <section class="panel">
-      <div class="site-head">
-        <div class="brand-wrap">
-          <img class="brand-logo" src="../../assets/starnet-logo.png" alt="StarNet logo">
-        </div>
-        <p class="url">https://starnet.social/CONSTELL-Altair</p>
-      </div>
-      <div class="cover"><div class="avatar">A</div></div>
-      <div class="profile">
-        <h2 class="name">Altair</h2>
-        <p class="id">@CONSTELL-Altair</p>
-        <p class="bio">CONSTELL成员</p>
-        <button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>176</strong> 关注</span><span><strong>241.1万</strong> 粉丝</span><span><strong>1,142</strong> 动态</span></div>
-      </div>
-      <article class="post">
-        <div class="post-head">@Altair· 昨天</div>
-        <p>最近在把旧demo重新编排，挺有意思。</p>
-        <div class="post-stats"><span>转发 1.1w</span><span>赞 3.2w</span><span>评论 1,945</span></div>
-        
-      </article>
-      <article class="post">
-        <div class="post-head">@Altair· 2 天前</div>
-        <p>每次上台都还是会紧张。</p>
-        <div class="post-stats"><span>转发 7,804</span><span>赞 2.4w</span><span>评论 1,103</span></div>
-        
-      </article>
-      <article class="post">
-        <div class="post-head">@Altair· 1 个月前</div>
-        <p>谢谢大家一直以来的支持！《Zig-Zag》能走到现在，真的离不开每一位在听歌和转发的你们🤍</p>
-        <img
-          class="report-image zoomable"
-          src="../../assets/altair-zigzag-report.png"
-          data-fallback-srcs="./assets/altair-zigzag-report.png|assets/altair-zigzag-report.png|../../assets/altair-zigzag-report.png"
-          alt="Altair《Zig-Zag》22个日榜冠军战报图"
-        >
-        <div class="post-stats"><span>转发 2.7w</span><span>赞 9.4w</span><span>评论 8,231</span></div>
-        <div class="comments">
-          <p class="comment"><strong>小星球7712：</strong>这是目前为止最好的成绩了！！我们Altair以后都走花路啊啊啊🌸</p>
-          <p class="comment"><strong>小星球3021：</strong>真的太争气了呜呜呜，22个日冠太能打了！Altair一定一路开花✨</p>
-        </div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Altair· 1 年前</div>
-        <p>Rasal哥生日快乐！希望你想做事情都能实现。</p>
-        <img
-          class="report-image zoomable"
-          src="../../assets/starnet-altair-birthday-post.png"
-          data-fallback-srcs="./assets/starnet-altair-birthday-post.png|assets/starnet-altair-birthday-post.png|../../assets/starnet-altair-birthday-post.png"
-          alt="Altair 祝贺 Rasal 生日动态配图"
-        >
-        <div class="post-stats"><span>转发 3.9w</span><span>赞 12.2w</span><span>评论 4,806</span></div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Altair· 1 年前</div>
-        <p>Regulus哥生日快乐，希望我新的一年不会再让你生气了哈哈哈哈哈哈</p>
-        <img
-          class="report-image zoomable"
-          src="../../assets/starnet-altair-regulus-birthday-post.png"
-          data-fallback-srcs="./assets/starnet-altair-regulus-birthday-post.png|assets/starnet-altair-regulus-birthday-post.png|../../assets/starnet-altair-regulus-birthday-post.png"
-          alt="Altair 祝贺 Regulus 生日动态配图"
-        >
-        <div class="post-stats"><span>转发 3.6w</span><span>赞 11.5w</span><span>评论 2</span></div>
-        <div class="comments">
-          <p class="comment"><strong>StarNet4208：</strong>哈哈哈哈哈哈哈哈</p>
-          <p class="comment"><strong>StarNet7931：</strong>Altair！你最近又干了什么！！！</p>
-        </div>
-      </article>
-      <article class="post">
-        <div class="post-head">@Altair· 1 年前</div>
-        <p>入驻 StarNet，之后在这里和大家见面。<a href="../starnet-home.html">starnet.social</a></p>
-        <div class="post-stats"><span>转发 5.2w</span><span>赞 18.6w</span><span>评论 2.1w</span></div>
-      </article>
-    </section>
-  </main>
-  <div class="modal" id="unfollowConfirmModal">
-    <div class="modal-card">
-      <p class="modal-title">取消关注确认</p>
-      <p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
-      <div class="modal-actions">
-        <button class="btn-cancel" type="button" id="unfollowCancelBtn">取消</button>
-        <button class="btn-ok" type="button" id="unfollowConfirmBtn">确认</button>
-      </div>
-    </div>
-  </div>
-  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
-    <img id="lightboxImage" alt="查看大图">
-  </div>
-  <script>
+<main class="app">
+<section class="panel">
+<div class="site-head">
+<div class="brand-wrap">
+<img alt="StarNet logo" class="brand-logo" src="../../assets/starnet-logo.png"/>
+</div>
+<p class="url">https://starnet.social/constellaltair</p>
+</div>
+<div class="cover"><div class="avatar">A</div></div>
+<div class="profile">
+<h2 class="name">CONSTELL-Altair</h2>
+<p class="id">@constellaltair</p>
+<p class="bio">CONSTELL成员 Altair</p>
+<button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>360</strong> 关注</span><span><strong>4521万</strong> 粉丝</span><span><strong>1,812</strong> 动态</span></div>
+</div>
+<article class="post post-public"><div class="post-head">@CONSTELL-Altair· 1周前</div><p>这次的舞台真的很用心了哈哈 <span class="tag">#归辰</span></p><div class="post-stats"><span>转发 2.9万</span><span>赞 15万</span><span>评论 6.7万</span></div><div class="comments"><p class="comment"><strong>StarNet9926：</strong>哥哥要好好休息呀～期待演唱会～</p><p class="comment"><strong>StarNet8354：</strong>Altair快出来营业！你们去那了</p><p class="comment"><strong>StarNet7561：</strong>你们没有出事吧？？？</p><p class="comment"><strong>StarNet1747：</strong>快出来报个平安呀宝宝</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 2周前</div><p>哇，感觉自己越来越能吃辣了！</p><div class="post-stats"><span>转发 4.7万</span><span>赞 19.3万</span><span>评论 6.5万</span></div><div class="comments"><p class="comment"><strong>StarNet4211：</strong>我也爱吃！！！</p><p class="comment"><strong>StarNet3083：</strong>注意嗓子啊～</p><p class="comment"><strong>StarNet1095：</strong>你真的还喜欢唱歌吗……</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 1个月前</div><p>终于有空把Rasal哥的新节目看完了，感觉自己是个笨蛋……</p><div class="post-stats"><span>转发 16.8万</span><span>赞 17.4万</span><span>评论 3.8万</span></div><div class="comments"><p class="comment"><strong>StarNet5929：</strong>Altair不笨！！！</p><p class="comment"><strong>StarNet7394：</strong>你哥在迷雾侦探社里真的好圈粉哈哈哈哈</p><p class="comment"><strong>StarNet0304：</strong>两个人友谊长长久久</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 2个月前</div><p>谢谢大家的祝福！生日蛋糕是Regulus哥买的，非常好吃！</p><div class="post-stats"><span>转发 3.7万</span><span>赞 19.6万</span><span>评论 7.8万</span></div><div class="comments"><p class="comment"><strong>StarNet8374：</strong>#Altair0611生日快乐#生日快乐宝宝！</p><p class="comment"><strong>StarNet1463：</strong>可不可以永远不要长大……</p><p class="comment"><strong>StarNet8260：</strong>偏轨组稳稳的幸福</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 4个月前</div><p>谢谢大家一直以来的支持！《Zig-Zag》能走到现在，真的离不开每一位在听歌和转发的你们🤍</p><img alt="Altair《Zig-Zag》Music Daily Report 战报配图" class="post-image zoomable" src="../../assets/altair-zigzag-report.png"/><div class="post-stats"><span>转发 16.6万</span><span>赞 11.5万</span><span>评论 4.9万</span></div><div class="comments"><p class="comment"><strong>StarNet5332：</strong>这是目前为止最好的成绩了！！我们Altair以后都走花路啊啊啊🌸</p><p class="comment"><strong>StarNet7948：</strong>真的太争气了呜呜呜，22个日冠太能打了！Altair一定一路开花✨</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 半年前</div><p>Orion生日快乐哈哈哈哈，下次继续哈哈哈哈哈哈</p><div class="post-stats"><span>转发 7.9万</span><span>赞 10.8万</span><span>评论 2.7万</span></div><div class="comments"><p class="comment"><strong>StarNet1756：</strong>Altair你开心最重要！</p><p class="comment"><strong>StarNet3155：</strong>年下不叫哥，心思有点多……</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 半年前</div><p>Rasal哥生日快乐！希望你想做事情都能实现。</p><div class="post-stats"><span>转发 3.2万</span><span>赞 8万</span><span>评论 3.1万</span></div><div class="comments"><p class="comment"><strong>StarNet0807：</strong>Altair人美心善，每次队友生日都很真诚祝福</p><p class="comment"><strong>StarNet0148：</strong>是最疼爱你的哥哥呀～</p><p class="comment"><strong>StarNet6243：</strong>你想做的事情也要实现！</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 1 年前</div><p>Regulus哥生日快乐，希望我新的一年不会再让你生气了哈哈哈哈哈哈</p><div class="post-stats"><span>转发 4.5万</span><span>赞 13万</span><span>评论 2.9万</span></div><div class="comments"><p class="comment"><strong>StarNet4208：</strong>哈哈哈哈哈哈哈哈</p><p class="comment"><strong>StarNet7931：</strong>Altair！你最近又干了什么！！！</p><p class="comment"><strong>StarNet1764：</strong>耳机组又有什么小秘密～</p></div></article><article class="post post-public"><div class="post-head">@CONSTELL-Altair· 1 年前</div><p>入驻 StarNet，之后在这里和大家见面。<br/><a href="../starnet-home.html">starnet.social</a></p><div class="post-stats"><span>转发 5.6万</span><span>赞 14.7万</span><span>评论 5.5万</span></div></article></section>
+</main>
+<div class="modal" id="unfollowConfirmModal">
+<div class="modal-card">
+<p class="modal-title">取消关注确认</p>
+<p class="modal-question" id="unfollowConfirmText">是否取消关注@该用户</p>
+<div class="modal-actions">
+<button class="btn-cancel" id="unfollowCancelBtn" type="button">取消</button>
+<button class="btn-ok" id="unfollowConfirmBtn" type="button">确认</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="image-lightbox" id="imageLightbox">
+<img alt="查看大图" id="lightboxImage"/>
+</div>
+<script>
     (function () {
       function setupImageZoom() {
         var lightbox = document.getElementById("imageLightbox");
