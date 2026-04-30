@@ -32,14 +32,35 @@
     .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
     .btn-cancel { background:#eef2fb; color:#5f6f89; }
     .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
+  
+    /* starnet-fan-chrome */
+    .tag { color:var(--brand); }
+    .post-stats { align-items:center; flex-wrap:wrap; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+    .comment-media { max-width:240px; margin-top:8px; border-radius:12px; border:1px solid #d8e1ee; display:block; cursor:zoom-in; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:min(560px,80vh); border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/orionhater</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">欧日昂世狗一</h2><p class="id">@orionhater</p><p class="bio">哥哥我允许任何人辱骂你，允许任何人贬低你，允许任何人厌恶你，允许任何人忤逆你，允许任何人责骂你，允许任何人反对你，允许任何人欺凌你，允许任何人批判你，允许任何人急慢你，允许任何人疏忽你。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">欧日昂世狗一</h2><p class="id">@orionhater</p><p class="bio">哥哥我允许任何人辱骂你，允许任何人贬低你，允许任何人厌恶你，允许任何人忤逆你，允许任何人责骂你，允许任何人反对你，允许任何人欺凌你，允许任何人批判你，允许任何人急慢你，允许任何人疏忽你。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>148</strong> 关注</span><span><strong>1089</strong> 粉丝</span><span><strong>32</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@欧日昂世狗一· 最近</div><p>靠，耍我。</p><div class="post-stats"><span>转发 3345</span><span>赞 27933</span><span>评论 2853</span></div><div class="comments"><p class="comment"><strong>StarNet2494：</strong>呵呵你猩平等戏耍所有人……</p><p class="comment"><strong>StarNet7056：</strong>人死哪去了？？？</p></div></article><article class="post post-public"><div class="post-head">@欧日昂世狗一· 1周前</div><p>接机有人一起吗。</p><div class="post-stats"><span>转发 3480</span><span>赞 34375</span><span>评论 2323</span></div><div class="comments"><p class="comment"><strong>StarNet2576：</strong>我</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 2个月前</div><p>你o这么分不清好赖的人我第一次见到，又让我撞见他在那里伺候傻逼队友。</p><div class="post-stats"><span>转发 239</span><span>赞 1319</span><span>评论 332</span></div><div class="comments"><p class="comment"><strong>StarNet6924：</strong>吐了，我真的要变黑粉了</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 4个月前</div><p>oym你清醒一点行不行？？你全家都在吸你的血你看不见吗？！房子是你买的，车是你掏的，债是你一个人扛的，你弟拿你的东西出去装逼显摆的时候，你妈在背后说过你一句好话吗？！他们私下里怎么给你甩我看得一清二楚。我忍了多久你知道吗？我舍不得吃舍不得喝给你花了多少钱，不是让你拿去养那群白眼狼的！我说这些有错吗？你倒好，反过来训粉？？你是不是疯了？没有粉丝你算个屁啊！你就是烂好人，讨好型人格，谁对你好你记不住，谁踩你你还心疼，你贱不贱啊？</p><div class="post-stats"><span>转发 167</span><span>赞 1370</span><span>评论 145</span></div><div class="comments"><p class="comment"><strong>StarNet2801：</strong>真受不了了</p><p class="comment"><strong>StarNet9126：</strong>被骗进坑的时候还说是什么有主见的酷盖</p><p class="comment"><strong>StarNet7380：</strong>我真是越来越烦他了，哎</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 1年前</div><p>为啥黑洞不开放注册了？之前一直懒得弄验证，谁来个号。</p><div class="post-stats"><span>转发 81</span><span>赞 735</span><span>评论 688</span></div><div class="comments"><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p></div></article>
+    <article class="post post-public"><div class="post-head">@欧日昂世狗一· 最近</div><p>靠，耍我。</p><div class="post-stats"><span>转发 0</span><span>赞 71</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet4677：</strong>呵呵你猩平等戏耍所有人……</p><p class="comment"><strong>StarNet4462：</strong>人死哪去了？？？</p></div></article><article class="post post-public"><div class="post-head">@欧日昂世狗一· 1周前</div><p>接机有人一起吗。</p><div class="post-stats"><span>转发 2</span><span>赞 49</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet2585：</strong>我</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 2个月前</div><p>你o这么分不清好赖的人我第一次见到，又让我撞见他在那里伺候傻逼队友。</p><div class="post-stats"><span>转发 0</span><span>赞 95</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet0919：</strong>吐了，我真的要变黑粉了</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 4个月前</div><p>oym你清醒一点行不行？？你全家都在吸你的血你看不见吗？！房子是你买的，车是你掏的，债是你一个人扛的，你弟拿你的东西出去装逼显摆的时候，你妈在背后说过你一句好话吗？！他们私下里怎么给你甩我看得一清二楚。我忍了多久你知道吗？我舍不得吃舍不得喝给你花了多少钱，不是让你拿去养那群白眼狼的！我说这些有错吗？你倒好，反过来训粉？？你是不是疯了？没有粉丝你算个屁啊！你就是烂好人，讨好型人格，谁对你好你记不住，谁踩你你还心疼，你贱不贱啊？</p><div class="post-stats"><span>转发 4</span><span>赞 60</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet6094：</strong>真受不了了</p><p class="comment"><strong>StarNet1112：</strong>被骗进坑的时候还说是什么有主见的酷盖</p><p class="comment"><strong>StarNet9515：</strong>我真是越来越烦他了，哎</p></div></article><article class="post post-followers" hidden><div class="post-head">@欧日昂世狗一· 1年前</div><p>为啥黑洞不开放注册了？之前一直懒得弄验证，谁来个号。</p><div class="post-stats"><span>转发 3</span><span>赞 67</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p></div></article>
+    <!-- starnet-fan-chrome -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -54,8 +75,62 @@
   </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img, .comments img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+          comments.hidden = true;
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
+      /* starnet-follow-modal-portal */
+      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {
+        document.body.appendChild(followModal);
+      }
       var answerInput = document.getElementById("answerInput");
       var answerError = document.getElementById("answerError");
       var btnCancel = document.getElementById("btnCancel");
@@ -67,7 +142,7 @@
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
       var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
-      var followStorageKey = "starnet_follow_state::" + profileId;
+      var followStorageKey = "starnet_follow_state::hater_v2::" + profileId;
 
       function persistFollowState() {
         try {
@@ -128,7 +203,9 @@
       });
       loadFollowState();
       render();
-    
+      setupCommentToggles();
+      setupImageZoom();
+    })();
   </script>
 </body>
 </html>

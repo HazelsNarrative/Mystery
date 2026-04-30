@@ -58,9 +58,9 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/jinliezu</p></div><div class="cover"><div class="avatar" aria-label="ROmantic头像"></div></div>
-    <div class="profile"><h2 class="name">soROmantic</h2><p class="id">@jinliezu</p><p class="bio">我产今天打架了吗？</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>46</strong> 关注</span><span><strong>611</strong> 粉丝</span><span><strong>30</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">soROmantic</h2><p class="id">@jinliezu</p><p class="bio">我产今天打架了吗？</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>154</strong> 关注</span><span><strong>1751</strong> 粉丝</span><span><strong>16</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@soROmantic· 1 周前</div><p>支持这个O老师的商务！！！</p><div class="post-stats"><span>转发 1</span><span>赞 62</span><span>评论 7</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 2 周前</div><p>没人觉得O是队长才是最好的风味吗，为什么我总看到有同人文里把Re写成队长然后搞训诫啊，明明年下管年上最香了！！！同意请点赞！</p><div class="post-stats"><span>转发 2</span><span>赞 82</span><span>评论 2</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 1 个月前</div><p>又重温了惹哥名场面啊啊啊啊，实话实说刚出道的时候欧小狗看起来真的有点土土的，但惹哥已经完全是完成时了。</p><div class="post-stats"><span>转发 0</span><span>赞 90</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet7710：</strong>刚出道的时候最先出圈的就惹惹惹</p><img class="comment-media zoomable" style="max-width:240px;display:block;margin-top:8px;border-radius:12px;border:1px solid #d8e1ee;cursor:zoom-in" src="../../../assets/starnet-comment-ridiculous.gif" alt="ridiculous 表情包"><p class="comment"><strong>StarNet2142：</strong>你这句话三个惹hhhh</p></div></article><article class="post post-public"><div class="post-head">@soROmantic· 1 个月前</div><p>我产真是一对纯恨的小夫夫，但我真的很讨厌她们说他俩吵架是在为另一位争风吃醋。</p><div class="post-stats"><span>转发 3</span><span>赞 53</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet5521：</strong>点了</p><p class="comment"><strong>StarNet8840：</strong>美帝粉真的很KY</p></div></article>
+    <article class="post post-public"><div class="post-head">@soROmantic· 1 周前</div><p>支持这个O老师的商务！！！</p><div class="post-stats"><span>转发 1</span><span>赞 48</span><span>评论 3</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 2 周前</div><p>没人觉得O是队长才是最好的风味吗，为什么我总看到有同人文里把Re写成队长然后搞训诫啊，明明年下管年上最香了！！！同意请点赞！</p><div class="post-stats"><span>转发 0</span><span>赞 40</span><span>评论 7</span></div></article><article class="post post-followers" hidden><div class="post-head">@soROmantic· 1 个月前</div><p>又重温了惹哥名场面啊啊啊啊，实话实说刚出道的时候欧小狗看起来真的有点土土的，但惹哥已经完全是完成时了。</p><div class="post-stats"><span>转发 6</span><span>赞 42</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet7710：</strong>刚出道的时候最先出圈的就惹惹惹</p><img class="comment-media zoomable" style="max-width:240px;display:block;margin-top:8px;border-radius:12px;border:1px solid #d8e1ee;cursor:zoom-in" src="../../../assets/starnet-comment-ridiculous.gif" alt="ridiculous 表情包"><p class="comment"><strong>StarNet2142：</strong>你这句话三个惹hhhh</p></div></article><article class="post post-public"><div class="post-head">@soROmantic· 1 个月前</div><p>我产真是一对纯恨的小夫夫，但我真的很讨厌她们说他俩吵架是在为另一位争风吃醋。</p><div class="post-stats"><span>转发 0</span><span>赞 8</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet5521：</strong>点了</p><p class="comment"><strong>StarNet8840：</strong>美帝粉真的很KY</p></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -128,6 +128,10 @@
       }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
+      /* starnet-follow-modal-portal */
+      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {
+        document.body.appendChild(followModal);
+      }
       var answerInput = document.getElementById("answerInput");
       var answerError = document.getElementById("answerError");
       var btnCancel = document.getElementById("btnCancel");

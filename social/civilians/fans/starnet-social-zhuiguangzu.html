@@ -54,9 +54,9 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/zhuiguangzu</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">RR大法好</h2><p class="id">@zhuiguangzu</p><p class="bio">你星最美霸总娇妻，雷对家，别来</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">RR大法好</h2><p class="id">@zhuiguangzu</p><p class="bio">你星最美霸总娇妻，雷对家，别来</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>99</strong> 关注</span><span><strong>2842</strong> 粉丝</span><span><strong>32</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@RR大法好· 最近</div><p>人呢……我哭了……</p><div class="post-stats"><span>转发 3</span><span>赞 85</span><span>评论 4</span></div><div class="comments"><p class="comment"><strong>StarNet6876：</strong>好烦啊，这几天觉都没睡好</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 2个月前</div><p>抢到票了！也期待这一次的见面～</p><div class="post-stats"><span>转发 1</span><span>赞 54</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet6535：</strong>哇，姐妹，你全勤哎！！！</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 2个月前</div><p>希望俺家小陆和小孟都要好好的。</p><div class="post-stats"><span>转发 1</span><span>赞 22</span><span>评论 7</span></div><div class="comments"><p class="comment"><strong>StarNet2728：</strong>会一直守护他们的</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 半年前</div><p>我有点在重温经典公主抱了kswlkswlkswl</p><div class="post-stats"><span>转发 5</span><span>赞 4</span><span>评论 9</span></div></article>
+    <article class="post post-public"><div class="post-head">@RR大法好· 最近</div><p>人呢……我哭了……</p><div class="post-stats"><span>转发 5</span><span>赞 84</span><span>评论 5</span></div><div class="comments"><p class="comment"><strong>StarNet6013：</strong>好烦啊，这几天觉都没睡好</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 2个月前</div><p>抢到票了！晒下之前的票根，也期待这一次的见面～</p><img class="post-image zoomable" src="../../../assets/starnet-zhuiguangzu-constell-ticket-stubs.png" alt="CONSTELL 一至三场演唱会票根（启明星／遨游／临界点）"><div class="post-stats"><span>转发 3</span><span>赞 55</span><span>评论 5</span></div><div class="comments"><p class="comment"><strong>StarNet8442：</strong>哇，姐妹，你全勤哎！！！</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 2个月前</div><p>希望俺家小陆和小孟都要好好的。</p><div class="post-stats"><span>转发 2</span><span>赞 97</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet3288：</strong>会一直守护他们的</p></div></article><article class="post post-followers" hidden><div class="post-head">@RR大法好· 半年前</div><p>我有点在重温经典公主抱了kswlkswlkswl</p><div class="post-stats"><span>转发 6</span><span>赞 74</span><span>评论 7</span></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -127,6 +127,10 @@
       }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
+      /* starnet-follow-modal-portal */
+      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {
+        document.body.appendChild(followModal);
+      }
       var answerInput = document.getElementById("answerInput");
       var answerError = document.getElementById("answerError");
       var btnCancel = document.getElementById("btnCancel");

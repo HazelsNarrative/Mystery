@@ -401,7 +401,8 @@ def build_stats(
     is_followers_post,
     comment_count,
     is_artist=False,
-    civilian_fans=False,
+    civilian_fans_style=False,
+    civilian_constell_hater_heavy=False,
 ):
     seed = f"{profile_id}:{post_order}:{1 if is_followers_post else 0}"
     if is_artist:
@@ -420,8 +421,16 @@ def build_stats(
             format_artist_engagement(comments_raw),
         )
 
-    # 粉丝小号：转发几乎可忽略，点赞多为个位～十位，评论个位（且不压过真实评论条数）
-    if civilian_fans:
+    # @constellhater：大号黑粉体感，四五万粉；转发偏少，赞评明显更高（仍非艺人量级）
+    if civilian_fans_style and civilian_constell_hater_heavy:
+        reposts = stable_num(seed + ":r", 28, 180)
+        likes = stable_num(seed + ":l", 8200, 38800)
+        floor = stable_num(seed + ":c0", comment_count + 180, comment_count + 980)
+        comments = max(floor, comment_count + stable_num(seed + ":cx", 620, 4200))
+        return str(reposts), str(likes), str(comments)
+
+    # 素人小号（粉丝/黑粉主页）：转发几乎可忽略，点赞多位数以内，评论与真实楼层一致量级
+    if civilian_fans_style:
         reposts = stable_num(seed + ":r", 0, 6)
         likes = stable_num(seed + ":l", 3, 99)
         comment_extra = stable_num(seed + ":c", 0, 9)
@@ -455,6 +464,44 @@ def linkify_onboarding_starnet_portal(fragment_html: str, file_path: str) -> str
     return fragment_html.replace("starnet.social", anchor, 1)
 
 
+def patch_civilian_profile_stats_bar(content: str, profile_id: str, feed_count: int, file_path: str) -> str:
+    """素人主页顶栏「关注／粉丝／动态」：小号量级，与同目录粉丝页观感一致。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/fans/" not in norm and "/civilians/haters/" not in norm:
+        return content
+    seed = f"{profile_id}::civilian_profile_banner"
+    following = stable_num(seed + ":following", 28, 198)
+    if "/civilians/haters/" in norm:
+        if "constellhater" in norm:
+            followers = stable_num(seed + ":followers", 40_500, 50_900)
+        else:
+            followers = stable_num(seed + ":followers", 320, 1680)
+    else:
+        followers = stable_num(seed + ":followers", 320, 5200)
+    if "/civilians/haters/" in norm and "constellhater" in norm:
+        # 与稿号【20011】等叙事一致：bot 累计动态至少已过两万
+        dyn_lo = 20011 + stable_num(seed + ":d_lo", 0, 3200)
+        dyn_hi = dyn_lo + stable_num(seed + ":d_hi", 600, 7800)
+        dynamics = stable_num(seed + ":dyn", dyn_lo, dyn_hi)
+    else:
+        dyn_lo = max(12, feed_count + stable_num(seed + ":d_lo", 2, 18))
+        dyn_hi = max(dyn_lo + 8, feed_count + stable_num(seed + ":d_hi", 24, 120))
+        dynamics = stable_num(seed + ":dyn", dyn_lo, dyn_hi)
+
+    stats_html = (
+        f'<div class="stats"><span><strong>{following}</strong> 关注</span>'
+        f'<span><strong>{followers}</strong> 粉丝</span>'
+        f'<span><strong>{dynamics}</strong> 动态</span></div>'
+    )
+    return replace_or_fail(
+        r"<div\s+class=\"stats\">[\s\S]*?</div>",
+        stats_html,
+        content,
+        "未找到首页统计栏 .stats（素人）",
+        count=1,
+    )
+
+
 def patch_artist_profile_stats_bar(content: str, profile_id: str, feed_count: int) -> str:
     seed = f"{profile_id}::banner"
     following = stable_num(seed + ":following", 56, 412)
@@ -485,7 +532,10 @@ def build_post_html(profile_id, display_name, post_row):
     file_ref = post_row.get("file") or ""
     norm_ref = file_ref.replace("\\", "/")
     is_artist = "/social/artists/" in norm_ref or "/artists/" in norm_ref
-    civilian_fans = "/civilians/fans/" in norm_ref
+    civilian_fans_style = "/civilians/fans/" in norm_ref or "/civilians/haters/" in norm_ref
+    civilian_constell_hater_heavy = (
+        civilian_fans_style and "constellhater" in norm_ref
+    )
     followers_only = (post_row.get("followers_only") or "").strip()
     is_followers_post = followers_only == "1"
     classes = "post post-followers" if is_followers_post else "post post-public"
@@ -501,7 +551,8 @@ def build_post_html(profile_id, display_name, post_row):
         is_followers_post=is_followers_post,
         comment_count=len(comments),
         is_artist=is_artist,
-        civilian_fans=civilian_fans,
+        civilian_fans_style=civilian_fans_style,
+        civilian_constell_hater_heavy=civilian_constell_hater_heavy,
     )
 
     parts = [
@@ -650,9 +701,9 @@ _FAN_SETUP_HOOK = """      function setupImageZoom() {
 
 
 def ensure_fan_page_chrome(html: str, file_path: str) -> str:
-    """简版 civilians/fans：补 hashtag、配图、评论区折叠与 lightbox（与其它粉丝主页一致）。"""
+    """civilians 下的粉丝/黑粉主页：评论区折叠、统计栏上的「评论 ▾」、配图 lightbox（与现有粉丝页一致）。"""
     norm = file_path.replace("\\", "/")
-    if "/civilians/fans/" not in norm:
+    if "/civilians/fans/" not in norm and "/civilians/haters/" not in norm:
         return html
 
     def _inject_image_lightbox(s: str) -> str:
@@ -707,26 +758,35 @@ def ensure_fan_page_chrome(html: str, file_path: str) -> str:
     return html
 
 
-_FOLLOW_LOCAL_STORAGE_SNIPPET = """
+_HATER_FOLLOW_STORAGE_PREFIX = "starnet_follow_state::hater_v2::"
+_FAN_FOLLOW_STORAGE_PREFIX = "starnet_follow_state::"
+
+
+def _follow_local_storage_snippet(storage_prefix_inside: str) -> str:
+    return f"""
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
       var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
-      var followStorageKey = "starnet_follow_state::" + profileId;
+      var followStorageKey = "{storage_prefix_inside}" + profileId;
 
-      function persistFollowState() {
-        try {
+      function persistFollowState() {{
+        try {{
           localStorage.setItem(followStorageKey, isFollowing ? "1" : "0");
-        } catch (e) {}
-      }
+        }} catch (e) {{}}
+      }}
 
-      function loadFollowState() {
-        try {
+      function loadFollowState() {{
+        try {{
           isFollowing = localStorage.getItem(followStorageKey) === "1";
-        } catch (e) {
+        }} catch (e) {{
           isFollowing = false;
-        }
-      }
+        }}
+      }}
 """
+
+
+_FOLLOW_LOCAL_STORAGE_SNIPPET = _follow_local_storage_snippet(_FAN_FOLLOW_STORAGE_PREFIX)
+_FOLLOW_LOCAL_STORAGE_SNIPPET_HATER = _follow_local_storage_snippet(_HATER_FOLLOW_STORAGE_PREFIX)
 
 
 def ensure_follow_local_storage(html: str, file_path: str) -> str:
@@ -739,10 +799,14 @@ def ensure_follow_local_storage(html: str, file_path: str) -> str:
     if 'id="followModal"' not in html or not re.search(r"var\s+isFollowing\s*=", html):
         return html
 
+    inj_snippet = (
+        _FOLLOW_LOCAL_STORAGE_SNIPPET_HATER if "/haters/" in norm else _FOLLOW_LOCAL_STORAGE_SNIPPET
+    )
+
     def _inj_storage_block(s: str) -> str:
         return re.sub(
             r"(var\s+isFollowing\s*=\s*false\s*;)",
-            r"\1" + _FOLLOW_LOCAL_STORAGE_SNIPPET,
+            r"\1" + inj_snippet,
             s,
             count=1,
         )
@@ -784,6 +848,58 @@ def ensure_follow_local_storage(html: str, file_path: str) -> str:
     return html
 
 
+def ensure_follow_script_iife_closed(html: str, file_path: str) -> str:
+    """黑粉页等若 IIFE 未以 })(); 结尾，整块脚本会变成语法错误，关注按钮无任何响应。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/" not in norm:
+        return html
+    if 'id="followModal"' not in html or "(function () {" not in html:
+        return html
+    if re.search(r"\}\)\s*\(\)\s*;\s*\r?\n\s*</script>", html):
+        return html
+    new_html, n = re.subn(
+        r"(loadFollowState\(\);\s*\r?\n\s*render\(\);\s*\r?\n)(\s*</script>)",
+        r"\1    })();\n\2",
+        html,
+        count=1,
+    )
+    return new_html if n else html
+
+
+def bump_haters_follow_storage_namespace(html: str, file_path: str) -> str:
+    """黑粉沿用旧前缀时可能与粉丝共用键；升级到独立前缀并让旧条目失效（等同清空黑粉侧的已关注缓存）。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/haters/" not in norm:
+        return html
+    old = 'var followStorageKey = "starnet_follow_state::" + profileId;'
+    new = f'var followStorageKey = "{_HATER_FOLLOW_STORAGE_PREFIX}" + profileId;'
+    if old in html:
+        return html.replace(old, new, 1)
+    return html
+
+
+def ensure_follow_modal_portal_to_body(html: str, file_path: str) -> str:
+    """`.panel` 用了 overflow:hidden，会裁剪内部的 fixed 遮罩；把 #followModal 挂到 body 上再显示。"""
+    norm = file_path.replace("\\", "/")
+    if "/civilians/" not in norm or 'id="followModal"' not in html:
+        return html
+    if "starnet-follow-modal-portal" in html:
+        return html
+    snippet = (
+        "      /* starnet-follow-modal-portal */\n"
+        "      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {\n"
+        "        document.body.appendChild(followModal);\n"
+        "      }\n"
+    )
+    new_html, n = re.subn(
+        r"(var\s+followModal\s*=\s*document\.getElementById\(\"followModal\"\);\s*\r?\n)",
+        r"\1" + snippet,
+        html,
+        count=1,
+    )
+    return new_html if n == 1 else html
+
+
 def update_single_file(profile_id, file_path, profile_row, feed_rows):
     abs_path = ROOT / file_path
     ensure_profile_file(profile_id, file_path, profile_row)
@@ -806,8 +922,12 @@ def update_single_file(profile_id, file_path, profile_row, feed_rows):
             f"未找到 name 区块: {file_path}",
         )
 
-    if "/artists/" in file_path.replace("\\", "/"):
+    norm_fp = file_path.replace("\\", "/")
+
+    if "/artists/" in norm_fp:
         content = patch_artist_profile_stats_bar(content, profile_id, len(feed_rows))
+    elif "/civilians/fans/" in norm_fp or "/civilians/haters/" in norm_fp:
+        content = patch_civilian_profile_stats_bar(content, profile_id, len(feed_rows), file_path)
 
     if bio:
         content = replace_or_fail(
@@ -895,10 +1015,14 @@ def update_single_file(profile_id, file_path, profile_row, feed_rows):
         else:
             content = merge_artist_feed_panel(content, rebuilt)
 
-    if "/civilians/fans/" in file_path.replace("\\", "/"):
+    _norm_path = file_path.replace("\\", "/")
+    if "/civilians/fans/" in _norm_path or "/civilians/haters/" in _norm_path:
         content = ensure_fan_page_chrome(content, file_path)
     if "/civilians/" in file_path.replace("\\", "/"):
         content = ensure_follow_local_storage(content, file_path)
+        content = bump_haters_follow_storage_namespace(content, file_path)
+        content = ensure_follow_modal_portal_to_body(content, file_path)
+        content = ensure_follow_script_iife_closed(content, file_path)
 
     abs_path.write_text(content, encoding="utf-8")
 

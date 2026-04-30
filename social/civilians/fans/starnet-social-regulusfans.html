@@ -54,9 +54,9 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/regulusfans</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">惹惹太萌惹</h2><p class="id">@regulusfans</p><p class="bio">想老公爱老公</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">惹惹太萌惹</h2><p class="id">@regulusfans</p><p class="bio">想老公爱老公</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>95</strong> 关注</span><span><strong>3077</strong> 粉丝</span><span><strong>19</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@惹惹太萌惹· 最近</div><p>有人知道Regulus现在在哪吗，之前不是出了航班消息吗，为什么没接到人？</p><div class="post-stats"><span>转发 6</span><span>赞 45</span><span>评论 9</span></div><div class="comments"><p class="comment"><strong>StarNet0567：</strong>四个人有四个地方的航班，不知道星河在搞什么，但是好像都没出现</p><p class="comment"><strong>StarNet4911：</strong>没人知道他们去哪了……</p></div></article><article class="post post-followers" hidden><div class="post-head">@惹惹太萌惹· 1 个月前</div><p>跟很多人一样，第一次喜欢上你是因为“ridiculous”的killing part，也总是喜欢你在舞台上发光发热的样子，但是现在我只希望你健康快乐就好，不要给自己太大压力，不用做到完美。</p><div class="post-stats"><span>转发 5</span><span>赞 16</span><span>评论 1</span></div></article><article class="post post-followers" hidden><div class="post-head">@惹惹太萌惹· 2个月前</div><p>好难过啊，星河真的死了，你们到底做了什么把他pua成这样，希望我们陆老师能早点好起来。</p><div class="post-stats"><span>转发 6</span><span>赞 96</span><span>评论 3</span></div><div class="comments"><p class="comment"><strong>StarNet0237：</strong>他真的去看心理医生了吗？</p><p class="comment"><strong>StarNet8101：</strong>但是连看病都要被私生蹲，感觉对他更不好了……</p><p class="comment"><strong>StarNet6921：</strong>一想到Regulus在镜头前只给我们展现好的那一面我就想哭</p></div></article><article class="post post-public"><div class="post-head">@惹惹太萌惹· 半年前</div><p>今天去和老师们面基了！真开心！</p><div class="post-stats"><span>转发 1</span><span>赞 67</span><span>评论 4</span></div></article>
+    <article class="post post-public"><div class="post-head">@惹惹太萌惹· 最近</div><p>有人知道Regulus现在在哪吗，之前不是出了航班消息吗，为什么没接到人？</p><div class="post-stats"><span>转发 3</span><span>赞 83</span><span>评论 6</span></div><div class="comments"><p class="comment"><strong>StarNet5058：</strong>四个人有四个地方的航班，不知道星河在搞什么，但是好像都没出现</p><p class="comment"><strong>StarNet2688：</strong>没人知道他们去哪了……</p></div></article><article class="post post-followers" hidden><div class="post-head">@惹惹太萌惹· 1 个月前</div><p>跟很多人一样，第一次喜欢上你是因为“ridiculous”的killing part，也总是喜欢你在舞台上发光发热的样子，但是现在我只希望你健康快乐就好，不要给自己太大压力，不用做到完美。</p><div class="post-stats"><span>转发 2</span><span>赞 10</span><span>评论 1</span></div></article><article class="post post-followers" hidden><div class="post-head">@惹惹太萌惹· 2个月前</div><p>好难过啊，星河真的死了，你们到底做了什么把他pua成这样，希望我们陆老师能早点好起来。</p><div class="post-stats"><span>转发 5</span><span>赞 93</span><span>评论 8</span></div><div class="comments"><p class="comment"><strong>StarNet1760：</strong>他真的去看心理医生了吗？</p><p class="comment"><strong>StarNet3737：</strong>但是连看病都要被私生蹲，感觉对他更不好了……</p><p class="comment"><strong>StarNet4664：</strong>一想到Regulus在镜头前只给我们展现好的那一面我就想哭</p></div></article><article class="post post-public"><div class="post-head">@惹惹太萌惹· 半年前</div><p>今天去和老师们面基了！真开心！</p><div class="post-stats"><span>转发 6</span><span>赞 34</span><span>评论 4</span></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -127,6 +127,10 @@
       }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
+      /* starnet-follow-modal-portal */
+      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {
+        document.body.appendChild(followModal);
+      }
       var answerInput = document.getElementById("answerInput");
       var answerError = document.getElementById("answerError");
       var btnCancel = document.getElementById("btnCancel");

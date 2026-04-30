@@ -32,14 +32,35 @@
     .modal-actions button { border:none; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; }
     .btn-cancel { background:#eef2fb; color:#5f6f89; }
     .btn-ok { background:linear-gradient(90deg,#8a6dff,#4f81df); color:#fff; }
+  
+    /* starnet-fan-chrome */
+    .tag { color:var(--brand); }
+    .post-stats { align-items:center; flex-wrap:wrap; }
+    .comments { margin-top:10px; border-top:1px dashed #d8e1ee; padding-top:8px; }
+    .comments[hidden] { display:none; }
+    .comment { margin:0 0 6px; font-size:12px; color:#4c5e78; line-height:1.6; }
+    .comment strong { color:#2a426a; }
+    .comment-toggle { margin-left:auto; border:none; background:transparent; color:#74839a; font-size:12px; line-height:1.4; padding:0; cursor:pointer; }
+    .comment-toggle:hover { color:#5c6d86; }
+    .comment-toggle:focus-visible { outline:1px solid #c8d4e7; outline-offset:2px; border-radius:6px; }
+    .comment-media { max-width:240px; margin-top:8px; border-radius:12px; border:1px solid #d8e1ee; display:block; cursor:zoom-in; }
+    .post-image { margin:10px auto 0; width:auto; height:auto; max-width:280px; max-height:min(560px,80vh); border:1px solid #d4ddee; border-radius:12px; display:block; cursor:zoom-in; }
+    .image-lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(12,16,28,.82); z-index:260; padding:24px; }
+    .image-lightbox.show { display:flex; }
+    .image-lightbox img { max-width:min(1100px,92vw); max-height:88vh; border-radius:12px; border:1px solid rgba(255,255,255,.35); box-shadow:0 20px 45px rgba(0,0,0,.45); background:#111827; }
+
   </style>
 </head>
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/regulushater</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">到底在拽什么</h2><p class="id">@regulushater</p><p class="bio">我的哥哥 不发自拍 不爱粉 不营业 不好惹 不善良 不聪明 不良心 不卖腐 不是人</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>0</strong> 粉丝</span><span><strong>0</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">到底在拽什么</h2><p class="id">@regulushater</p><p class="bio">我的哥哥 不发自拍 不爱粉 不营业 不好惹 不善良 不聪明 不良心 不卖腐 不是人</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>119</strong> 关注</span><span><strong>418</strong> 粉丝</span><span><strong>78</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-public"><div class="post-head">@到底在拽什么· 最近</div><p>……我的机票钱啊！！！！</p><div class="post-stats"><span>转发 1000</span><span>赞 12310</span><span>评论 1125</span></div><div class="comments"><p class="comment"><strong>StarNet6882：</strong>他没来？</p><p class="comment"><strong>StarNet2768：</strong>你是不是还选了他旁边的位置</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 2个月前</div><p>买到票了，骂归骂，但我还是要像鬼一样缠着你。</p><div class="post-stats"><span>转发 274</span><span>赞 1033</span><span>评论 509</span></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 3个月前</div><p>lt我操你大爷。你把我基友给你的礼物给扔了？呵呵，接下来一个礼拜我将去你家门口蹲点。</p><div class="post-stats"><span>转发 81</span><span>赞 1519</span><span>评论 780</span></div><div class="comments"><p class="comment"><strong>StarNet5902：</strong>来个地址，我也想去</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 半年前</div><p>越想越觉得lt这人挺恶心的。粉丝私下见他，永远没个好脸，去剧组从白天等到晚上就等来一句“你们怎么知道的通告单”说他热爱舞台？他疯狂练舞根本不是为了粉丝，就是那种诡异的自虐心理，怪不得隔三差五去看心理医生。还有他能不能少给队友摆脸色啊，在外面还要天天给他洗地说他只是高冷，其实就是他自己孤立全团，跑这么多次线下体验一次比一次烂，也就那个经纪人态度不错，要不我直接粉经纪人得了。</p><div class="post-stats"><span>转发 239</span><span>赞 939</span><span>评论 485</span></div><div class="comments"><p class="comment"><strong>StarNet0412：</strong>笑死，粉经纪人得了</p><p class="comment"><strong>StarNet4985：</strong>他对粉丝真的很坏吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 1年前</div><p>黑洞邀请码谁发我一个呗？</p><div class="post-stats"><span>转发 242</span><span>赞 1339</span><span>评论 875</span></div><div class="comments"><p class="comment"><strong>StarNet8538：</strong>现在要一对一邀请了</p><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p></div></article>
+    <article class="post post-public"><div class="post-head">@到底在拽什么· 最近</div><p>……我的机票钱啊！！！！</p><div class="post-stats"><span>转发 3</span><span>赞 37</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet3567：</strong>他没来？</p><p class="comment"><strong>StarNet7539：</strong>你是不是还选了他旁边的位置</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 2个月前</div><p>买到票了，骂归骂，但我还是要像鬼一样缠着你。</p><div class="post-stats"><span>转发 1</span><span>赞 77</span><span>评论 8</span></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 3个月前</div><p>lt我操你大爷。你把我基友给你的礼物给扔了？呵呵，接下来一个礼拜我将去你家门口蹲点。</p><div class="post-stats"><span>转发 1</span><span>赞 45</span><span>评论 1</span></div><div class="comments"><p class="comment"><strong>StarNet9600：</strong>来个地址，我也想去</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 半年前</div><p>越想越觉得lt这人挺恶心的。粉丝私下见他，永远没个好脸，去剧组从白天等到晚上就等来一句“你们怎么知道的通告单”说他热爱舞台？他疯狂练舞根本不是为了粉丝，就是那种诡异的自虐心理，怪不得隔三差五去看心理医生。还有他能不能少给队友摆脸色啊，在外面还要天天给他洗地说他只是高冷，其实就是他自己孤立全团，跑这么多次线下体验一次比一次烂，也就那个经纪人态度不错，要不我直接粉经纪人得了。</p><div class="post-stats"><span>转发 3</span><span>赞 80</span><span>评论 2</span></div><div class="comments"><p class="comment"><strong>StarNet7243：</strong>笑死，粉经纪人得了</p><p class="comment"><strong>StarNet1993：</strong>他对粉丝真的很坏吧</p></div></article><article class="post post-followers" hidden><div class="post-head">@到底在拽什么· 1年前</div><p>黑洞邀请码谁发我一个呗？</p><div class="post-stats"><span>转发 0</span><span>赞 48</span><span>评论 5</span></div><div class="comments"><p class="comment"><strong>StarNet4497：</strong>现在要一对一邀请了</p><p class="comment"><strong>全都是骗子：</strong>加我 728391546</p></div></article>
+    <!-- starnet-fan-chrome -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <img id="lightboxImage" alt="查看大图">
+  </div>
   <div class="modal" id="followModal">
     <div class="modal-card">
       <p class="modal-title">关注验证</p>
@@ -54,8 +75,62 @@
   </div>
   <script>
     (function () {
+      function setupImageZoom() {
+        var lightbox = document.getElementById("imageLightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+        if (!lightbox || !lightboxImage) return;
+        document.querySelectorAll(".post img, .comments img").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || "查看大图";
+            lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
+          });
+        });
+        lightbox.addEventListener("click", function (e) {
+          if (e.target !== lightbox && e.target !== lightboxImage) return;
+          lightbox.classList.remove("show");
+          lightboxImage.removeAttribute("src");
+          lightbox.setAttribute("aria-hidden", "true");
+        });
+      }
+      function setupCommentToggles() {
+        document.querySelectorAll(".post").forEach(function (post) {
+          var comments = post.querySelector(".comments");
+          if (!comments || !comments.querySelector(".comment")) return;
+          comments.hidden = true;
+          var toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "comment-toggle";
+          function syncToggleLabel() {
+            var isExpanded = !comments.hidden;
+            toggleBtn.textContent = isExpanded ? "收起评论 ▴" : "评论 ▾";
+            toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+          }
+          toggleBtn.addEventListener("click", function () {
+            comments.hidden = !comments.hidden;
+            syncToggleLabel();
+          });
+          syncToggleLabel();
+          var stats = post.querySelector(".post-stats");
+          if (stats) {
+            stats.appendChild(toggleBtn);
+            return;
+          }
+          var postBody = post.querySelector("p");
+          if (postBody) {
+            postBody.insertAdjacentElement("afterend", toggleBtn);
+          } else {
+            post.appendChild(toggleBtn);
+          }
+        });
+      }
       var followBtn = document.getElementById("followBtn");
       var followModal = document.getElementById("followModal");
+      /* starnet-follow-modal-portal */
+      if (followModal && followModal.parentElement && followModal.parentElement !== document.body) {
+        document.body.appendChild(followModal);
+      }
       var answerInput = document.getElementById("answerInput");
       var answerError = document.getElementById("answerError");
       var btnCancel = document.getElementById("btnCancel");
@@ -67,7 +142,7 @@
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
       var profileId = (profileIdEl && String(profileIdEl.textContent || "").trim()) || (urlEl && String(urlEl.textContent || "").trim()) || String(location.pathname || location.href);
-      var followStorageKey = "starnet_follow_state::" + profileId;
+      var followStorageKey = "starnet_follow_state::hater_v2::" + profileId;
 
       function persistFollowState() {
         try {
@@ -128,7 +203,9 @@
       });
       loadFollowState();
       render();
-    
+      setupCommentToggles();
+      setupImageZoom();
+    })();
   </script>
 </body>
 </html>
