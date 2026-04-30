@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黑洞 | blackhole</title>
+  <style>
+    :root {
+      --bg: #040608;
+      --panel: #0a0f12;
+      --panel-2: #0f1519;
+      --line: #1c262d;
+      --text: #d6dee4;
+      --muted: #7f929f;
+      --accent: #42ff8c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(66, 255, 140, 0.08), transparent 34%),
+        radial-gradient(circle at 100% 0%, rgba(66, 255, 140, 0.04), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(980px, 94vw);
+      margin: 24px auto;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .signal {
+      color: var(--accent);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(66, 255, 140, 0.45);
+    }
+    .head {
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .title {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.12em;
+      color: #f1f7fb;
+    }
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--accent);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
+    .bbs {
+      padding: 14px 16px 20px;
+    }
+    .bbs-head, .bbs-row {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px;
+      gap: 8px;
+      padding: 10px;
+      font-size: 13px;
+    }
+    .bbs-head {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.01);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .bbs-row {
+      margin-top: 8px;
+      border: 1px solid #22313a;
+      color: #c7d5de;
+      background: rgba(0, 0, 0, 0.18);
+    }
+    .topic {
+      color: #e5eef4;
+      text-decoration: none;
+    }
+    .topic:hover { color: #89ffbb; }
+    .pinned {
+      color: #78f7af;
+      font-size: 11px;
+      margin-right: 6px;
+      border: 1px solid rgba(120, 247, 175, 0.45);
+      border-radius: 999px;
+      padding: 1px 6px;
+    }
+    .footer-tip {
+      margin-top: 14px;
+      border: 1px solid rgba(66, 255, 140, 0.2);
+      background: rgba(66, 255, 140, 0.05);
+      color: #c7f8dc;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <span>Blackhole</span>
+      <span class="signal">ACCESS: VERIFIED</span>
+    </div>
+    <header class="head">
+      <h1 class="title">黑洞</h1>
+      <p class="subtitle">恨猩你就来</p>
+    </header>
+    <section class="bbs">
+      <div class="bbs-head">
+        <span>主题</span><span>回复</span><span>最后更新</span>
+      </div>
+      <div class="bbs-row">
+        <span><span class="pinned">置顶</span><a class="topic" href="javascript:void(0)">【新规】开盒内容集中贴，禁发未打码证件</a></span>
+        <span>582</span><span>1分钟前</span>
+      </div>
+      <div class="bbs-row">
+        <span><a class="topic" href="javascript:void(0)">四人演唱会后台时间线（持续更新）</a></span>
+        <span>1463</span><span>3分钟前</span>
+      </div>
+      <div class="bbs-row">
+        <span><a class="topic" href="javascript:void(0)">星河公司保姆车轨迹汇总 4.30</a></span>
+        <span>928</span><span>8分钟前</span>
+      </div>
+      <div class="bbs-row">
+        <span><a class="topic" href="javascript:void(0)">谁有 Re 今早机场未公开图，私我</a></span>
+        <span>307</span><span>12分钟前</span>
+      </div>
+      <div class="bbs-row">
+        <span><a class="topic" href="javascript:void(0)">黑洞邀请码互换（已实名担保楼）</a></span>
+        <span>2199</span><span>刚刚</span>
+      </div>
+      <p class="footer-tip">
+        你已通过邀请验证，可正常浏览黑洞论坛内容。
+      </p>
+    </section>
+  </main>
+</body>
+</html>

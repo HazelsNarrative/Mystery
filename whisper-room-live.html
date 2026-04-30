@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whisper Room 私聊窗口</title>
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --panel: #141a2a;
+      --panel-soft: #1a2235;
+      --line: #2a3550;
+      --text: #deebff;
+      --muted: #9caed2;
+      --accent: #7ea7ff;
+      --accent-2: #a889ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% -10%, rgba(126, 167, 255, 0.2), transparent 34%),
+        radial-gradient(circle at 100% 0%, rgba(168, 137, 255, 0.16), transparent 30%),
+        var(--bg);
+    }
+    .app {
+      width: min(1040px, 94vw);
+      margin: 22px auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 46px rgba(6, 9, 18, 0.6);
+      background: linear-gradient(180deg, #11182a, var(--panel));
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .topbar .brand { color: #f2f6ff; font-weight: 700; letter-spacing: 0.04em; }
+    .main { display: flex; flex-direction: column; min-height: 72vh; }
+    .chat-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-soft);
+      font-size: 13px;
+      color: #d4e1ff;
+    }
+    .messages {
+      flex: 1;
+      overflow: auto;
+      padding: 14px;
+    }
+    .msg {
+      margin-bottom: 10px;
+      border: 1px solid #30405f;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #dce8ff;
+    }
+    .msg .meta {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 12px;
+      color: #a7b8db;
+    }
+    .msg.sys {
+      border-color: #5872ac;
+      background: rgba(126, 167, 255, 0.14);
+    }
+    .composer {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      background: #0f1628;
+    }
+    .composer input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid #3b4b6e;
+      background: #141f35;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    .composer button {
+      border: none;
+      border-radius: 999px;
+      padding: 0 16px;
+      color: #0a1330;
+      font-weight: 700;
+      font-size: 13px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      cursor: pointer;
+    }
+    .msg.me {
+      border-color: #4f6698;
+      background: rgba(126, 167, 255, 0.11);
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <span class="brand">Whisper Room</span>
+      <span>加密私聊</span>
+      <span>@con_s_tell</span>
+    </div>
+      <section class="main">
+        <div class="chat-head">你 与 @con_s_tell 的私聊窗口</div>
+        <div class="messages" id="messages">
+          <div class="msg sys"><span class="meta">System 13:21</span>端到端加密已启用，仅你和对方可见。</div>
+          <div class="msg"><span class="meta">@con_s_tell 13:22</span>你是从帖子里的链接进来的？</div>
+          <div class="msg me"><span class="meta">你 13:22</span>嗯，想问下你说的那条失踪线索。</div>
+          <div class="msg"><span class="meta">@con_s_tell 13:23</span>别在公开区聊，之后都在这里说。</div>
+        </div>
+        <form class="composer" id="composer">
+          <input id="input" type="text" maxlength="180" placeholder="发送给 @con_s_tell（本地演示）">
+          <button type="submit">发送</button>
+        </form>
+      </section>
+  </main>
+  <script>
+    (function () {
+      var form = document.getElementById("composer");
+      var input = document.getElementById("input");
+      var messages = document.getElementById("messages");
+      var myName = "你";
+      function now() {
+        var d = new Date();
+        return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+      }
+      function escapeText(t) {
+        return t.replace(/[&<>]/g, function (ch) {
+          return ch === "&" ? "&amp;" : (ch === "<" ? "&lt;" : "&gt;");
+        });
+      }
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var text = String(input.value || "").trim();
+        if (!text) return;
+        var row = document.createElement("div");
+        row.className = "msg";
+        row.innerHTML = '<span class="meta">' + myName + " " + now() + "</span>" + escapeText(text);
+        messages.appendChild(row);
+        messages.scrollTop = messages.scrollHeight;
+        input.value = "";
+      });
+    })();
+  </script>
+</body>
+</html>
