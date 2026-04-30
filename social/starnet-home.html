@@ -210,7 +210,8 @@
         { name: "Orion", id: "@constellorion", bio: "CONSTELL成员 Orion", href: "./artists/starnet-social-constellorion.html", avatar: "O", color: "linear-gradient(135deg,#65b6ff,#6d79ff)" },
         { name: "Rasal", id: "@constellrasal", bio: "CONSTELL成员 Rasal", href: "./artists/starnet-social-constellrasal.html", avatar: "V", color: "linear-gradient(135deg,#9a8bff,#7ac1ff)" },
         { name: "Altair", id: "@constellaltair", bio: "CONSTELL成员 Altair", href: "./artists/starnet-social-constellaltair.html", avatar: "A", color: "linear-gradient(135deg,#72d4ff,#5b8eff)" },
-        { name: "Regulus", id: "@constellregulus", bio: "CONSTELL成员 Regulus", href: "./artists/starnet-social-constellregulus.html", avatar: "R", color: "linear-gradient(135deg,#ffbe75,#ff8c65)" }
+        { name: "Regulus", id: "@constellregulus", bio: "CONSTELL成员 Regulus", href: "./artists/starnet-social-constellregulus.html", avatar: "R", color: "linear-gradient(135deg,#ffbe75,#ff8c65)" },
+        { name: "用户72519726", id: "@daydayup", bio: "她要好起来，我要找到真相。", href: "./civilians/fans/starnet-social-daydayup.html", avatar: "星", color: "linear-gradient(135deg,#89a9d8,#6f86bc)" }
       ];
 
       var news = [
@@ -328,7 +329,7 @@
         if (userMatched.length) {
           html += '<h2 class="section-title">用户</h2>';
           userMatched.forEach(function (u) {
-            html += '<a class="card-link" href="' + u.href + '">';
+            html += '<a class="card-link" href="' + u.href + '" target="_blank" rel="noopener noreferrer">';
             html += '<span class="avatar" style="background:' + u.color + '">' + u.avatar + "</span>";
             html += '<span><p class="name">' + u.name + '</p><p class="id">' + u.id + '</p><p class="bio">' + u.bio + "</p></span>";
             html += "</a>";

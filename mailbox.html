@@ -136,6 +136,89 @@
       cursor: pointer;
     }
     .close-btn:hover { background: #34495e; }
+
+    .verify-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: rgba(35, 54, 86, 0.42);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .verify-modal.show {
+      display: flex;
+    }
+    .verify-card {
+      width: min(460px, 94vw);
+      background: linear-gradient(180deg, #fffdf9, #f6fbff);
+      border: 1px solid #dbe8f4;
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(44, 77, 118, 0.2);
+      padding: 18px 16px;
+    }
+    .verify-card h3 {
+      margin: 0 0 8px;
+      color: #38516f;
+      font-size: 18px;
+    }
+    .verify-card p {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #58708c;
+    }
+    .verify-field {
+      margin-bottom: 10px;
+    }
+    .verify-field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4d6784;
+    }
+    .verify-field input {
+      width: 100%;
+      border: 1px solid #cfdeef;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 14px;
+      color: #243b56;
+      box-sizing: border-box;
+      font-family: inherit;
+      background: #fff;
+    }
+    .verify-error {
+      min-height: 1.2em;
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #cf496e;
+    }
+    .verify-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .verify-actions button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .verify-cancel {
+      background: #edf2fa;
+      color: #5b6f86;
+    }
+    .verify-ok {
+      background: linear-gradient(90deg, #8fb8e6, #7aa6d9);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -162,10 +245,42 @@
     </div>
   </div>
 
+  <div class="verify-modal" id="externalVerifyModal" aria-hidden="true">
+    <div class="verify-card">
+      <h3>疗养院 · 外网访问认证</h3>
+      <p>检测到你当前使用的是院内网络。根据安全策略，访问外部站点前需要先完成一次身份认证。</p>
+      <div class="verify-field">
+        <label for="verifyNickname">昵称</label>
+        <input id="verifyNickname" type="text" maxlength="8" placeholder="4-8位小写字母">
+      </div>
+      <div class="verify-field">
+        <label for="verifyBirthday">生日（MMDD）</label>
+        <input id="verifyBirthday" type="text" inputmode="numeric" maxlength="4" placeholder="MMDD四位数字">
+      </div>
+      <p class="verify-error" id="verifyError"></p>
+      <div class="verify-actions">
+        <button type="button" class="verify-cancel" id="verifyCancelBtn">稍后再说</button>
+        <button type="button" class="verify-ok" id="verifySubmitBtn">确认并访问</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function initMail() {
+      var EXTERNAL_AUTH_KEY = "qianan_external_auth_v1";
+      var EXTERNAL_NICK_KEY = "qianan_external_nickname";
+      var EXTERNAL_BIRTHDAY_KEY = "qianan_external_birthday";
+      var EXTERNAL_MAIL_ADDED_KEY = "qianan_external_mail_added_v1";
       var mailList = document.getElementById("mailList");
       var folderItems = document.querySelectorAll(".folder-item");
+      var verifyModal = document.getElementById("externalVerifyModal");
+      var verifyNicknameInput = document.getElementById("verifyNickname");
+      var verifyBirthdayInput = document.getElementById("verifyBirthday");
+      var verifyError = document.getElementById("verifyError");
+      var verifyCancelBtn = document.getElementById("verifyCancelBtn");
+      var verifySubmitBtn = document.getElementById("verifySubmitBtn");
+      var pendingExternalUrl = "";
+      var activeFolder = "inbox";
       var mails = [
         {
           from: "哥哥",
@@ -184,6 +299,7 @@
           body: [
             "最近发奖金了，又可以给你花钱啦，哈哈。",
             "他们知道我的情况之后，其实都挺照顾我的，人也都很好。这次出的新周边，我也一起放在里面寄给你了，你穿穿看？质量还挺好的，平时大家都会穿。",
+            "我还给你在“启岸心理”约了一个阶段的咨询疗程，听说那边口碑特别好、咨询师也很靠谱，你先去试试，不合适我们再换。",
             "小小抱怨一下，最近工作好累啊啊啊，哎，这个圈子真的……很复杂，麻烦事也很多，不过哥哥都会想办法处理好的，你不用担心。",
             "也不知道这样说能不能让你安心一点，但不管发生什么，哥哥都会在你这边的。",
             "要天天开心啦！"
@@ -229,7 +345,89 @@
         trash: []
       };
 
+      function hasExternalAccess() {
+        return localStorage.getItem(EXTERNAL_AUTH_KEY) === "1";
+      }
+
+      function isValidNickname(v) {
+        return /^[a-z]{4,8}$/.test(String(v || "").trim());
+      }
+
+      function isValidBirthday(v) {
+        var s = String(v || "").trim();
+        if (!/^\d{4}$/.test(s)) return false;
+        var month = Number(s.slice(0, 2));
+        var day = Number(s.slice(2, 4));
+        if (month < 1 || month > 12) return false;
+        var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        return day >= 1 && day <= monthDays[month - 1];
+      }
+
+      function addRehabCredentialMail(nickname, birthday) {
+        var exists = localStorage.getItem(EXTERNAL_MAIL_ADDED_KEY) === "1";
+        if (exists) return;
+        folders.inbox.unshift({
+          from: "疗养院 · 网络服务中心",
+          date: "刚刚",
+          subject: "外网认证信息回执（请妥善保存）",
+          body: [
+            "你好，已完成院内网络外网访问认证。",
+            "以下为你本次提交的信息回执：",
+            "账号（昵称）：" + nickname,
+            "认证口令（生日）：" + birthday,
+            "如需再次访问外网站点，请使用以上信息进行身份确认。"
+          ]
+        });
+        localStorage.setItem(EXTERNAL_MAIL_ADDED_KEY, "1");
+      }
+
+      function openVerifyModal(targetUrl) {
+        pendingExternalUrl = String(targetUrl || "");
+        verifyError.textContent = "";
+        verifyNicknameInput.value = localStorage.getItem(EXTERNAL_NICK_KEY) || "";
+        verifyBirthdayInput.value = localStorage.getItem(EXTERNAL_BIRTHDAY_KEY) || "";
+        verifyModal.classList.add("show");
+        verifyModal.setAttribute("aria-hidden", "false");
+        verifyNicknameInput.focus();
+      }
+
+      function closeVerifyModal() {
+        verifyModal.classList.remove("show");
+        verifyModal.setAttribute("aria-hidden", "true");
+        pendingExternalUrl = "";
+      }
+
+      function completeVerifyAndOpen() {
+        var nickname = String(verifyNicknameInput.value || "").trim();
+        var birthday = String(verifyBirthdayInput.value || "").trim();
+        if (!isValidNickname(nickname)) {
+          verifyError.textContent = "昵称格式错误：需为 4-8 位小写字母。";
+          return;
+        }
+        if (!isValidBirthday(birthday)) {
+          verifyError.textContent = "生日格式错误：请输入有效 MMDD 日期（如 0101）。";
+          return;
+        }
+        localStorage.setItem(EXTERNAL_AUTH_KEY, "1");
+        localStorage.setItem(EXTERNAL_NICK_KEY, nickname);
+        localStorage.setItem(EXTERNAL_BIRTHDAY_KEY, birthday);
+        addRehabCredentialMail(nickname, birthday);
+        renderMailList(activeFolder);
+        var url = pendingExternalUrl;
+        closeVerifyModal();
+        if (url) window.open(url, "_blank");
+      }
+
+      function requestExternalAccess(url) {
+        if (hasExternalAccess()) {
+          window.open(url, "_blank");
+          return;
+        }
+        openVerifyModal(url);
+      }
+
       function renderMailList(folderKey) {
+        activeFolder = folderKey;
         var list = folders[folderKey] || [];
         mailList.innerHTML = "";
 
@@ -269,6 +467,9 @@
       });
 
       setActiveFolder("inbox");
+      window.requestExternalAccess = requestExternalAccess;
+      window.completeVerifyAndOpen = completeVerifyAndOpen;
+      window.closeExternalVerifyModal = closeVerifyModal;
     })();
 
     function openMailDetail(mail) {
@@ -278,6 +479,18 @@
       document.getElementById("detailBody").innerHTML = mail.body
         .map(function (line) { return "<p>" + line + "</p>"; })
         .join("");
+      Array.prototype.forEach.call(document.querySelectorAll("#detailBody a"), function (a) {
+        var href = a.getAttribute("href") || "";
+        if (
+          href.indexOf("constell-official.com") >= 0 ||
+          href.indexOf("./site/constell-official.html") >= 0
+        ) {
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            requestExternalAccess(href);
+          });
+        }
+      });
       document.getElementById("mailDetail").style.display = "flex";
     }
 
@@ -288,6 +501,18 @@
     function logoutMailbox() {
       window.location.href = "./mailbox-login.html";
     }
+
+    document.getElementById("verifyCancelBtn").addEventListener("click", function () {
+      if (window.closeExternalVerifyModal) window.closeExternalVerifyModal();
+    });
+    document.getElementById("verifySubmitBtn").addEventListener("click", function () {
+      if (window.completeVerifyAndOpen) window.completeVerifyAndOpen();
+    });
+    document.getElementById("externalVerifyModal").addEventListener("click", function (e) {
+      if (e.target === this) {
+        if (window.closeExternalVerifyModal) window.closeExternalVerifyModal();
+      }
+    });
   </script>
 </body>
 </html>

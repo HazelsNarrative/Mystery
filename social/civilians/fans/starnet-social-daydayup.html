@@ -63,9 +63,9 @@
 <body>
   <main class="app"><section class="panel">
     <div class="site-head"><img class="brand-logo" src="../../../assets/starnet-logo.png" alt="StarNet logo"><p class="url">https://starnet.social/daydayup</p></div><div class="cover"><div class="avatar">星</div></div>
-    <div class="profile"><h2 class="name">用户72519726</h2><p class="id">@daydayup</p><p class="bio">她要好起来，我要找到真相。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>96</strong> 关注</span><span><strong>4314</strong> 粉丝</span><span><strong>56</strong> 动态</span></div></div>
+    <div class="profile"><h2 class="name">用户72519726</h2><p class="id">@daydayup</p><p class="bio">她要好起来，我要找到真相。</p><button class="follow-btn" id="followBtn" type="button">关注</button><div class="stats"><span><strong>0</strong> 关注</span><span><strong>37</strong> 粉丝</span><span><strong>5</strong> 动态</span></div></div>
     <p class="locked-tip" id="lockedTip">该账号已开启访问权限，关注并通过验证后可查看全部动态。</p>
-    <article class="post post-followers" hidden><div class="post-head">@用户72519726· 最近</div><p>接下来有的要忙了……</p><div class="post-stats"><span>转发 4</span><span>赞 17</span><span>评论 5</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2周前</div><p>真的要这么做吗，其实我还是不太确定。<br>但是，眼下好像也没有别的办法了。</p><div class="post-stats"><span>转发 6</span><span>赞 76</span><span>评论 5</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2个月前</div><p>关于那件事的真相，我总觉得背后还有别的原因。<br>但是他对他的感情也不比我少，我们俩的目的是一致的。</p><div class="post-stats"><span>转发 0</span><span>赞 29</span><span>评论 4</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2个月前</div><p>太过分了，我的号也被盗了，果然不能总用一套密码，把最后面四位数字改成妹妹的生日好了。</p><div class="post-stats"><span>转发 2</span><span>赞 51</span><span>评论 3</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 4个月前</div><p>原来这件事也是大家的心结……<br>哎，他真的是一个很好的人。</p><div class="post-stats"><span>转发 6</span><span>赞 19</span><span>评论 7</span></div></article>
+    <article class="post post-followers" hidden><div class="post-head">@用户72519726· 最近</div><p>接下来有的要忙了……</p><div class="post-stats"><span>转发 0</span><span>赞 0</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2周前</div><p>真的要这么做吗，其实我还是不太确定。<br>但是，眼下好像也没有别的办法了。</p><div class="post-stats"><span>转发 0</span><span>赞 0</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2个月前</div><p>关于那件事的真相，我总觉得背后还有别的原因。<br>但是他对他的感情也不比我少，我们俩的目的是一致的。</p><div class="post-stats"><span>转发 0</span><span>赞 0</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 2个月前</div><p>太过分了，我的号也被盗了，果然不能总用一套密码，把最后面四位数字改成妹妹的生日好了。</p><div class="post-stats"><span>转发 0</span><span>赞 0</span><span>评论 0</span></div></article><article class="post post-followers" hidden><div class="post-head">@用户72519726· 4个月前</div><p>原来这件事也是大家的心结……<br>哎，他真的是一个很好的人。</p><div class="post-stats"><span>转发 0</span><span>赞 0</span><span>评论 0</span></div></article>
     <!-- starnet-fan-chrome -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <img id="lightboxImage" alt="查看大图">
@@ -167,7 +167,15 @@
         setTimeout(function () { toast.classList.add("leave"); }, 980);
         setTimeout(function () { toast.remove(); }, 1300);
       }
-      var expected = "1234";
+      var expected = (function () {
+        try {
+          var fromMailbox = localStorage.getItem("qianan_external_nickname");
+          if (/^[a-z]{4,8}$/.test(String(fromMailbox || "").trim())) {
+            return String(fromMailbox).trim();
+          }
+        } catch (e) {}
+        return "1234";
+      })();
       var isFollowing = false;
       var profileIdEl = document.querySelector(".profile .id");
       var urlEl = document.querySelector(".url");
