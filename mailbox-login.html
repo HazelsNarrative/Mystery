@@ -110,7 +110,7 @@
     <section class="card">
       <h1>邮箱登录</h1>
       <p class="desc">你已退出当前邮箱。你可以尝试输入其他账号查看不同邮箱记录。</p>
-      <p class="hint">目前你手上还没有可验证的账号线索，先回到“我的邮箱”继续调查也许更稳妥。</p>
+      <p class="hint">若你手上还没有可验证的账号线索，可先返回继续调查。</p>
       <div class="field">
         <label for="mailUser">邮箱账号</label>
         <input id="mailUser" type="text" placeholder="请输入邮箱账号">
@@ -128,10 +128,48 @@
   </main>
 
   <script>
+    var MAILBOX_LOGIN_USER_KEY = "mailbox_login_user";
+    var EXTERNAL_BIRTHDAY_KEY = "qianan_external_birthday";
+    var TARGET_USER = "constell.manager@stargalaxy-ent.com";
+
     function attemptLogin() {
       var feedback = document.getElementById("loginFeedback");
-      feedback.textContent = "登录失败：账号或密码无效（暂未获得可用邮箱线索）。";
+      var user = String(document.getElementById("mailUser").value || "").trim();
+      var pass = String(document.getElementById("mailPass").value || "").trim();
+      var birthday = "";
+      try {
+        birthday = String(localStorage.getItem(EXTERNAL_BIRTHDAY_KEY) || "").trim();
+      } catch (e) {}
+
+      if (!birthday || !/^\d{4}$/.test(birthday)) {
+        feedback.textContent = "登录失败：请先在邮箱内完成院内网络身份认证，再返回此处登录。";
+        return;
+      }
+
+      var expectedPass = "xc" + birthday;
+      if (user === TARGET_USER && pass === expectedPass) {
+        try {
+          sessionStorage.setItem(MAILBOX_LOGIN_USER_KEY, TARGET_USER);
+        } catch (e) {}
+        feedback.textContent = "登录成功，正在进入邮箱…";
+        setTimeout(function () {
+          window.location.href = "./mailbox-manager.html";
+        }, 350);
+        return;
+      }
+      feedback.textContent = "登录失败：账号或密码无效。";
     }
+
+    document.getElementById("mailPass").addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      attemptLogin();
+    });
+    document.getElementById("mailUser").addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      attemptLogin();
+    });
   </script>
 </body>
 </html>

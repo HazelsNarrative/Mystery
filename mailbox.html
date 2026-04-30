@@ -267,6 +267,7 @@
 
   <script>
     (function initMail() {
+      var MAILBOX_LOGIN_USER_KEY = "mailbox_login_user";
       var EXTERNAL_AUTH_KEY = "qianan_external_auth_v1";
       var EXTERNAL_NICK_KEY = "qianan_external_nickname";
       var EXTERNAL_BIRTHDAY_KEY = "qianan_external_birthday";
@@ -470,6 +471,14 @@
       window.requestExternalAccess = requestExternalAccess;
       window.completeVerifyAndOpen = completeVerifyAndOpen;
       window.closeExternalVerifyModal = closeVerifyModal;
+
+      try {
+        var loginUser = sessionStorage.getItem(MAILBOX_LOGIN_USER_KEY);
+        var headerTitle = document.querySelector(".header-title");
+        if (loginUser && headerTitle) {
+          headerTitle.textContent = "我的邮箱（" + loginUser + "）";
+        }
+      } catch (e) {}
     })();
 
     function openMailDetail(mail) {
@@ -499,6 +508,9 @@
     }
 
     function logoutMailbox() {
+      try {
+        sessionStorage.removeItem("mailbox_login_user");
+      } catch (e) {}
       window.location.href = "./mailbox-login.html";
     }
 
