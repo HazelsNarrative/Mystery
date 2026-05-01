@@ -196,7 +196,7 @@
         <input id="searchInput" type="search" placeholder="搜索用户或关键词" autocomplete="off">
         <button id="searchBtn" type="button">搜索</button>
       </div>
-      <p class="search-tip">艺人新闻请使用“名字 + 关键词”进行搜索，例如：CONSTELL 演唱会。</p>
+      <p class="search-tip">艺人新闻请使用“名字 + 关键词”进行搜索；组合英文名部分不限大小写（如 CONSTELL、cOnStElL、constell 均可）。例如：CONSTELL 归辰。</p>
       <section class="results-wrap" id="results"></section>
     </section>
   </main>
@@ -228,12 +228,6 @@
           body: "最近有人私信问我有没有合集，就简单列一下最近写的RO（Regulus × Orion），都在StarNet上，感兴趣可以自己翻一下。\n\n基本都是随手写的，篇幅不太固定，也没怎么修，轻拍🙏\n📄《禁区》｜短篇｜约1.8w\n📄《夜行偏差》｜短篇｜约3w\n📄《RE：O 从零开始的寰宇猎手生活》｜长篇｜23.5w\n📄《恒星失序》｜短篇｜约9k\n📄《界外》｜一发完｜约5k"
         },
         {
-          keys: ["constell 演唱会", "CONSTELL 演唱会", "constell", "演唱会", "xiaojiang_tai", "我们八月见"],
-          id: "@CONSTELL-Official",
-          body: "我们八月见。",
-          postImage: "../assets/concert-poster.png"
-        },
-        {
           keys: ["altair 夜店"],
           matchMode: "exact",
           id: "@Altair520",
@@ -244,6 +238,49 @@
           matchMode: "exact",
           id: "@独家星闻",
           body: "劲爆！当红男团人气成员 Altair 被曝深夜流连夜店，更有粉丝翻出其在官方物料中疑似出现抽烟、饮酒画面，相关争议持续发酵中……更多内容请见>>>"
+        },
+        {
+          keys: ["constell 启明星", "constell 启明星演唱会"],
+          id: "@独家星闻",
+          body:
+            "CONSTELL五周年纪念巡演首站《启明星》正式官宣。本场演出以\"诞生与觉醒\"为主题，舞美设计融入大量星云与轨道元素，试图呈现组合从出道至今的成长轨迹。\n\n" +
+            "据悉，本场将首次公开全新编排的团体舞台，并结合成员个人概念，打造多段沉浸式舞台体验。粉丝普遍期待的经典曲目也将进行全新版本改编。\n\n" +
+            "本场演唱会由生活方式品牌 ASTRA LIVING 倾情赞助。"
+        },
+        {
+          keys: ["constell 遨游", "constell 遨游演唱会"],
+          id: "@独家星闻",
+          body:
+            "CONSTELL巡演第二站《遨游》近日释出概念信息。本场将围绕\"离开既定轨道\"的主题展开，强调自由、探索与未知，舞台设计预计将在视觉与灯光层面进行大幅升级。\n\n" +
+            "业内人士透露，《遨游》场次将加入更多双人及小分队舞台，进一步强化成员之间的关系表达。此外，制作团队也尝试引入更多互动式演出形式，以增强现场参与感。\n\n" +
+            "本场演唱会由曜宙资本联合赞助。"
+        },
+        {
+          keys: ["constell 临界点", "constell 临界点演唱会"],
+          id: "@独家星闻",
+          body:
+            "巡演第三站《临界点》主题正式公布。本场演出将围绕\"失序与边界\"展开，整体风格较前两站更为冷峻与克制。\n\n" +
+            "从目前公开的信息来看，《临界点》或将成为整轮巡演叙事的转折节点。舞台呈现上，制作团队将通过光影与空间的变化，强化\"临界状态\"的视觉表达。\n\n" +
+            "部分粉丝猜测，本场可能涉及更深层的世界观延展。\n\n" +
+            "本场演唱会由科技品牌 NEBULA SYSTEMS 提供特别支持。"
+        },
+        {
+          keys: ["constell 归辰", "constell 归辰演唱会"],
+          id: "@独家星闻",
+          body:
+            "CONSTELL五周年纪念演唱会《归辰》即将开启。本场演出被视为整轮巡演的收束与回应，主题围绕\"回归与重构\"展开。\n\n" +
+            "制作团队表示，《归辰》将在情感表达与舞台完成度上达到最高规格，同时也会对前几场埋下的元素进行集中呈现。\n\n" +
+            "对于粉丝而言，这不仅是一场演唱会，也是一段完整叙事的终点。\n\n" +
+            "本场演唱会由高端成衣及珠宝品牌 LUMIÈRE 独家赞助。"
+        },
+        {
+          keys: ["曜宙资本"],
+          id: "@财经速递",
+          body:
+            "据权威渠道消息，曜宙资本创始人庄暮诚因涉嫌多项经济犯罪，目前已被依法逮捕并进入司法程序。\n\n" +
+            "公开资料显示，曜宙资本曾活跃于文化娱乐及投资领域，近年参与多个大型项目。但自去年起，该集团内部出现异常资金流动，引发监管关注。\n\n" +
+            "目前案件仍在进一步调查中，相关细节尚未完全披露。\n\n" +
+            "业内人士表示，此事件或将对相关合作项目产生一定影响。"
         },
         {
           keys: ["禁猎组"],
@@ -278,7 +315,10 @@
       ];
 
       function norm(s) {
-        return String(s || "").trim().toLowerCase();
+        return String(s || "")
+          .trim()
+          .toLowerCase()
+          .replace(/\s+/g, " ");
       }
 
       function normIdLike(s) {
@@ -324,6 +364,20 @@
           }
           return q && p.keys.some(function (k) { return norm(k).indexOf(q) !== -1 || q.indexOf(norm(k)) !== -1; });
         });
+
+        if (q === "constell") {
+          var memberOnlyHandles = {
+            constellorion: true,
+            constellrasal: true,
+            constellaltair: true,
+            constellregulus: true
+          };
+          userMatched = users.filter(function (u) {
+            return memberOnlyHandles[normIdLike(u.id)];
+          });
+          newsMatched = [];
+          postsMatched = [];
+        }
 
         var html = "";
         if (userMatched.length) {
