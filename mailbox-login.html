@@ -147,7 +147,7 @@
       }
 
       var expectedPass = "xc" + birthday;
-      if (user === TARGET_USER && pass === expectedPass) {
+      if (user === TARGET_USER && pass.toLowerCase() === expectedPass.toLowerCase()) {
         try {
           sessionStorage.setItem(MAILBOX_LOGIN_USER_KEY, TARGET_USER);
         } catch (e) {}

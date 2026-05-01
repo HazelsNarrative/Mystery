@@ -170,8 +170,9 @@
       var expected = (function () {
         try {
           var fromMailbox = localStorage.getItem("qianan_external_nickname");
-          if (/^[a-z]{4,8}$/.test(String(fromMailbox || "").trim())) {
-            return String(fromMailbox).trim();
+          var nick = String(fromMailbox || "").trim().toLowerCase();
+          if (/^[a-z]{4,8}$/.test(nick)) {
+            return nick;
           }
         } catch (e) {}
         return "1234";
@@ -227,7 +228,11 @@
       });
       btnCancel.addEventListener("click", closeModal);
       btnSubmit.addEventListener("click", function () {
-        if (String(answerInput.value || "").trim() !== expected) {
+        if (
+          String(answerInput.value || "")
+            .trim()
+            .toLowerCase() !== expected
+        ) {
           answerError.textContent = "答案错误，请重试。";
           return;
         }
@@ -235,7 +240,6 @@
         persistFollowState();
         closeModal();
         render();
-        showFollowSuccessFx();
         showFollowSuccessFx();
       });
       followModal.addEventListener("click", function (e) {
