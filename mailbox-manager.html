@@ -106,6 +106,45 @@
       color: white;
       cursor: pointer;
     }
+    .attachments-block {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e8eef5;
+    }
+    .attachments-label {
+      margin: 0 0 8px;
+      font-size: 12px;
+      color: #73839c;
+      font-weight: 600;
+    }
+    .attachment-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border: 1px solid #dde4ee;
+      border-radius: 8px;
+      background: #f9fafb;
+      color: #2c3e50;
+      font-size: 13px;
+    }
+    .attachment-chip .file-badge {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #b71c1c;
+      padding: 3px 5px;
+      border: 1px solid rgba(183, 28, 28, 0.35);
+      border-radius: 3px;
+      background: #fff;
+    }
+    .attachment-chip .fname {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -137,28 +176,53 @@
   </div>
 
   <script>
+    function escHtml(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
     (function initManagerMail() {
       var listEl = document.getElementById("mailList");
       var folderItems = document.querySelectorAll(".folder-item");
       var mails = [
         {
-          from: "艺人管理中心",
-          date: "今天 09:12",
-          subject: "演唱会首场执行清单（最终版）",
+          from: "站内通知",
+          date: "",
+          subject: "【进度提示】你已体验到当前版本的全部内容",
           body: [
-            "首场演唱会执行清单已更新，请于今晚前确认。",
-            "1. 艺人出发时间与接送安排",
-            "2. 彩排场地与媒体通道管控",
-            "3. 紧急公关预案与舆情值班"
+            "感谢你的游玩。",
+            "",
+            "你已体验到本作在当前版本中开放的全部内容。",
+            "",
+            "你可以返回站内其他页面重新梳理线索，也许会有新的发现。",
+            "",
+            "后续内容将在后续更新中逐步开放，敬请期待。"
           ]
         },
         {
-          from: "品牌合作组",
-          date: "昨天 22:40",
-          subject: "8月品牌行程变更确认",
+          from: "Eric Qi <eric.qi@stargalaxy-ent.com>",
+          date: "今天 09:40",
+          subject: "？？？？？？？？？",
           body: [
-            "品牌方临时调整档期，原定站台活动暂停。",
-            "请确认是否改为线上物料联动。"
+            "你现在在哪里？",
+            "",
+            "CONSTELL的人现在在哪？",
+            "",
+            "你提交的所谓“四城同步出现”的预热活动，今天一个人都没有到场。",
+            "所有城市全部空场，现场人员已经在问责。",
+            "",
+            "你带着他们四个去了哪里？",
+            "",
+            "这是你所谓的宣传计划？",
+            "",
+            "现在外面已经在传“集体失踪”，你有没有意识到这件事情的严重性？",
+            "",
+            "马上给我一个解释。",
+            "",
+            "如果这件事和你有关，我需要你立刻回复我。"
           ]
         },
         {
@@ -172,7 +236,35 @@
         }
       ];
 
-      var folders = { inbox: mails, sent: [], trash: [] };
+      var sentMails = [
+        {
+          isOutgoing: true,
+          recipient: "Eric Qi <eric.qi@stargalaxy-ent.com>",
+          subject: "【项目提案】CONSTELL五周年巡演预热传播方案",
+          body: [
+            "Eric，您好：",
+            "",
+            "关于CONSTELL五周年巡演《归辰》整体宣传节奏，我这边整理了一版阶段性预热方案，供您审核。",
+            "",
+            "考虑到目前常规营业模式（物料发布、社交互动）已趋于同质化，本次计划尝试进行一次“反向曝光”的造势方式：",
+            "",
+            "在演唱会预热期内，成员将统一进入短期“低曝光状态”，暂停日常营业与内容更新，以制造信息真空与外部关注度积累。",
+            "",
+            "随后在节点时间，通过“四城同步出现”的形式进行集中释放，使讨论在短时间内达到峰值，从而形成更具冲击力的传播效果。",
+            "",
+            "该方式的核心在于通过“缺席”强化“出现”的关注度，同时结合线下目击与社交平台发酵，形成自发传播链路。",
+            "",
+            "具体执行细节及时间安排已整理至附件企划书中，如无问题，我这边会继续推进后续落地。",
+            "",
+            "辛苦您抽空看一下，有需要调整的地方我可以再补充。",
+            "",
+            "顺祝工作顺利。"
+          ],
+          fakeAttachment: "《CONSTELL五周年巡演预热传播方案》.pdf"
+        }
+      ];
+
+      var folders = { inbox: mails, sent: sentMails, trash: [] };
 
       function render(folder) {
         var arr = folders[folder] || [];
@@ -184,10 +276,15 @@
         arr.forEach(function (item) {
           var card = document.createElement("div");
           card.className = "mail-item";
+          var metaLine = item.isOutgoing
+            ? "发送给：" + escHtml(item.recipient)
+            : "来自：" + escHtml(item.from);
+          var timeHtml =
+            item.isOutgoing || !item.date ? "" : '<p class="mail-time">' + escHtml(item.date) + "</p>";
           card.innerHTML =
-            '<p class="mail-from">来自：' + item.from + '</p>' +
-            '<p class="mail-subject">主题：' + item.subject + '</p>' +
-            '<p class="mail-time">' + item.date + "</p>";
+            '<p class="mail-from">' + metaLine + "</p>" +
+            '<p class="mail-subject">主题：' + escHtml(item.subject) + "</p>" +
+            timeHtml;
           card.addEventListener("click", function () { openMailDetail(item); });
           listEl.appendChild(card);
         });
@@ -206,11 +303,37 @@
 
     function openMailDetail(mail) {
       document.getElementById("detailSubject").textContent = mail.subject;
-      document.getElementById("detailFrom").textContent = "来自：" + mail.from;
-      document.getElementById("detailDate").textContent = "时间：" + mail.date;
-      document.getElementById("detailBody").innerHTML = (mail.body || [])
-        .map(function (line) { return "<p>" + line + "</p>"; })
-        .join("");
+      var fromEl = document.getElementById("detailFrom");
+      var dateEl = document.getElementById("detailDate");
+      if (mail.isOutgoing) {
+        fromEl.textContent = "发送给：" + mail.recipient;
+        dateEl.textContent = "";
+        dateEl.style.display = "none";
+      } else {
+        fromEl.textContent = "来自：" + mail.from;
+        if (mail.date) {
+          dateEl.style.display = "";
+          dateEl.textContent = "时间：" + mail.date;
+        } else {
+          dateEl.textContent = "";
+          dateEl.style.display = "none";
+        }
+      }
+      var paras = (mail.body || []).map(function (line) {
+        return "<p>" + escHtml(line) + "</p>";
+      });
+      var attachHtml = "";
+      if (mail.fakeAttachment) {
+        attachHtml =
+          '<div class="attachments-block">' +
+          '<p class="attachments-label">附件</p>' +
+          '<div class="attachment-chip">' +
+          '<span class="file-badge" aria-hidden="true">PDF</span>' +
+          '<p class="fname">' +
+          escHtml(mail.fakeAttachment) +
+          "</p></div></div>";
+      }
+      document.getElementById("detailBody").innerHTML = paras.join("") + attachHtml;
       document.getElementById("mailDetail").style.display = "flex";
     }
 
